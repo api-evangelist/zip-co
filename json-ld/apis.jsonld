@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zip",
+  "url": "https://zip.co",
+  "description": "Zip is a global BNPL (Buy Now Pay Later) and digital wallet platform that enables merchants to offer flexible payment plans to consumers at checkout.",
+  "sameAs": [
+    "https://zip.co",
+    "https://developers.zip.co",
+    "https://github.com/zipMoney",
+    "https://www.linkedin.com/company/zip-co",
+    "https://twitter.com/zipmoney"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "developer support",
+    "url": "https://help.zip.co/hc/en-au"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Zip APIs",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Zip Global Merchant API",
+        "description": "Checkout, charge, capture, refund, and cancellation operations for merchants integrating Zip BNPL payments.",
+        "url": "https://developers.zip.co/reference/api-docs",
+        "category": "BNPL Payments"
+      },
+      {
+        "@type": "Offer",
+        "name": "Zip US Gateway API",
+        "description": "North American merchant API for authorize, capture, refund, void, and confirm order operations.",
+        "url": "https://docs.us.zip.co/docs/api-implementation",
+        "category": "Payments"
+      },
+      {
+        "@type": "Offer",
+        "name": "Zip NZ In-Store API",
+        "description": "Point-of-sale API for New Zealand merchants to create, commit, cancel, rollback, and query orders.",
+        "url": "https://developers.zip.co/v4/docs/instore-api-specification",
+        "category": "In-Store Payments"
+      }
+    ]
+  }
+}
