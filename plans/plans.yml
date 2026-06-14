@@ -1,0 +1,54 @@
+name: Zip API Access Plans
+description: >
+  Zip does not publish self-serve tiered API pricing plans. Access to the Zip
+  merchant API requires a merchant account established through Zip's onboarding
+  process. Merchants are provided separate sandbox and production credentials
+  following account approval. Transaction fees and revenue-share terms are
+  negotiated commercially and vary by region (AU/NZ/US/CA) and merchant
+  volume. There is no free public API tier; all integration access is
+  gated behind merchant agreement.
+plans:
+  - name: Sandbox (Development)
+    description: >
+      Free testing environment available to approved merchants and partners
+      during the integration and certification phase. Provides full API
+      functionality against simulated payment flows with no real money movement.
+    price: 0.00
+    currency: USD
+    unit: month
+    features:
+      - Full API access to all endpoints in sandbox environment
+      - Sandbox credentials provided upon merchant onboarding request
+      - Test consumer accounts for checkout simulation
+      - Webhook callback testing
+      - No transaction fees in sandbox
+    limits:
+      - type: Access
+        description: Available after contacting Zip integrations team at integrations@us.zip.co
+    contact:
+      url: https://docs.us.zip.co/docs/introduction
+      email: ''
+
+  - name: Production (Merchant Agreement)
+    description: >
+      Full production API access granted after successful sandbox certification.
+      Transaction-based pricing with fees negotiated per merchant agreement.
+      Merchants receive production credentials upon go-live approval.
+    price: negotiated
+    currency: USD
+    unit: transaction
+    features:
+      - All API operations (authorize, capture, refund, void, confirm)
+      - Webhook callbacks for all payment events
+      - Merchant disputes API
+      - Transaction reporting and payment list endpoints
+      - Consumer payment plan management
+      - Multi-region support (AU, NZ, US, CA)
+      - Tokenisation for subscriptions (AU only)
+      - Platform integrations (Shopify, Magento, WooCommerce, BigCommerce, Salesforce)
+    limits:
+      - type: Access
+        description: Requires signed merchant agreement and successful certification
+    contact:
+      url: https://zip.co/au/business/payments
+      email: ''

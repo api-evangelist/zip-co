@@ -1,0 +1,140 @@
+name: Zip
+description: >
+  Zip is a global BNPL (Buy Now Pay Later) and digital wallet platform that
+  enables merchants to offer flexible payment plans to consumers at checkout.
+  Zip provides REST APIs for checkout integration, order creation, payment
+  capture, refunds, voids, merchant management, disputes, and consumer payment
+  plan verification. The platform supports in-store, online, and ecommerce
+  plugin integrations across Australia, New Zealand, the United States, Canada,
+  and other markets.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - BNPL
+  - Buy Now Pay Later
+  - Digital Wallet
+  - Payments
+  - Fintech
+  - Checkout
+  - Merchant Services
+created: '2026-06-13'
+modified: '2026-06-13'
+url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - name: Zip Global Merchant API
+    description: >
+      The Zip Global Merchant API provides checkout, charge, capture, refund,
+      and cancellation operations for merchants integrating Zip BNPL payments
+      into their online storefront. It uses Bearer token authentication and
+      supports idempotent requests.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.zip.co/reference/api-docs
+    baseURL: https://sand.merchant-api.com
+    tags:
+      - Checkout
+      - Charges
+      - Refunds
+      - BNPL
+    properties:
+      - type: Documentation
+        url: https://developers.zip.co/reference/api-docs
+      - type: GettingStarted
+        url: https://developers.zip.co/v2/docs/getting-started
+      - type: Sandbox
+        url: https://developers.zip.co/v2/docs/sandbox
+      - type: Authentication
+        url: https://developers.zip.co/v2/reference/authentication
+      - type: OpenAPI
+        url: https://developers.zip.co/llms.txt
+    contact:
+      - FN: Zip Developer Support
+        url: https://help.zip.co/hc/en-au
+        email: ''
+
+  - name: Zip US Gateway API
+    description: >
+      The Zip US Gateway API enables North American merchants to authorize,
+      capture, refund, void, and confirm orders. It uses HMAC-SHA256 signature
+      authentication via the X-QP-Signature header and supports both
+      synchronous and asynchronous response modes with webhook callbacks.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.us.zip.co/docs/api-implementation
+    baseURL: https://gateway.us.zip.co
+    tags:
+      - Orders
+      - Payments
+      - Refunds
+      - Webhooks
+      - North America
+    properties:
+      - type: Documentation
+        url: https://docs.us.zip.co/docs/api-implementation
+      - type: GettingStarted
+        url: https://docs.us.zip.co/docs/introduction
+      - type: CustomIntegration
+        url: https://docs.us.zip.co/docs/custom-integration-guide
+      - type: Callbacks
+        url: https://developers.zip.co/v9-US/docs/callbacks
+    contact:
+      - FN: Zip US Integrations Team
+        url: https://docs.us.zip.co/docs/introduction
+        email: ''
+
+  - name: Zip NZ In-Store API
+    description: >
+      The Zip New Zealand In-Store API enables point-of-sale merchants to
+      create, commit, cancel, rollback, and query orders in physical retail
+      environments. It uses Bearer token authentication derived from OAuth
+      client credentials and supports both merchant-level and store-level
+      authentication scopes.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.zip.co/v4/docs/instore-api-specification
+    baseURL: https://zip.co/nz/api
+    tags:
+      - In-Store
+      - Point of Sale
+      - Orders
+      - New Zealand
+    properties:
+      - type: Documentation
+        url: https://developers.zip.co/v4/docs/instore-api-specification
+      - type: Sandbox
+        url: https://sandbox.zip.co/nz/api
+    contact:
+      - FN: Zip NZ Partner Support
+        url: https://zip.co/nz/business
+        email: ''
+
+common:
+  - type: Portal
+    url: https://developers.zip.co
+  - type: Website
+    url: https://zip.co
+  - type: MerchantPortal
+    url: https://merchant.us.zip.co
+  - type: GitHubOrg
+    url: https://github.com/zipMoney
+  - type: SDKs
+    url: https://github.com/zipMoney
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/finops/finops.yml
+  - type: Security
+    url: https://zip.co/security
+  - type: PrivacyPolicy
+    url: https://zip.co/au/privacy
+  - type: TermsOfService
+    url: https://zip.co/au/terms
+  - type: Help
+    url: https://help.zip.co
+  - type: Blog
+    url: https://zip.co/au/blog
+  - type: Status
+    url: https://status.zip.co
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/zip-co
+  - type: Twitter
+    url: https://twitter.com/zipmoney

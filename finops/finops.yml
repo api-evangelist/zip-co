@@ -1,0 +1,72 @@
+name: Zip API FinOps
+description: >
+  Zip operates as a BNPL payment network where merchant costs are primarily
+  driven by transaction fees rather than API subscription fees. The API itself
+  has no separate licensing or usage-based cost; however, every payment
+  transaction processed through Zip's merchant API incurs a commercial fee
+  agreed upon in the merchant contract. Zip absorbs consumer credit risk;
+  merchants receive full payment minus the agreed merchant service fee (MSF).
+  Detailed fee structures are region-specific and negotiated privately.
+costs:
+  - name: API Access Cost
+    type: included
+    description: >
+      No direct cost for API access. Access is bundled with the merchant
+      agreement. Sandbox/testing access is free during integration.
+    price: 0.00
+    currency: USD
+
+  - name: Merchant Service Fee (MSF)
+    type: per-transaction
+    description: >
+      A percentage of each transaction value charged to the merchant as a
+      processing fee. Zip bears the consumer credit risk in exchange for this
+      fee. Rates vary by region, merchant category, transaction volume, and
+      commercial negotiation. Publicly disclosed rates are not available.
+    price: negotiated
+    currency: varies
+    regions:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+
+  - name: Transaction Reporting
+    type: included
+    description: >
+      Transaction and payment reporting endpoints are included at no extra
+      cost. Merchants can retrieve transaction history in JSON or CSV format
+      via the reporting endpoints.
+    endpoints:
+      - GET /transactions/{merchantId}/v3
+      - GET /transactions/{merchantId}/v3/csv
+      - GET /payments/{merchantId}/json
+      - GET /payments/{merchantId}/csv
+
+  - name: Dispute Management
+    type: included
+    description: >
+      Merchant dispute search, retrieval, evidence submission, and closure
+      are included as part of the merchant API access at no additional charge.
+    endpoints:
+      - POST /merchant-disputes/search
+      - GET /merchant-disputes
+      - POST /merchant-disputes/submit-evidence
+      - POST /merchant-disputes/file
+      - POST /merchant-disputes/close
+
+visibility:
+  pricePublished: false
+  rateLimitsPublished: false
+  contactRequired: true
+  onboardingURL: https://zip.co/au/business/payments
+  developerPortal: https://developers.zip.co
+  helpCenter: https://help.zip.co/hc/en-au
+
+notes: >
+  Zip's payment economics are structured as a merchant service fee model
+  similar to credit card processing. Merchants should request a commercial
+  proposal from their regional Zip sales team to obtain applicable MSF rates.
+  Sandbox access can be requested by emailing the integrations team referenced
+  in the developer documentation.

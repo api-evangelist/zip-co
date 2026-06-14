@@ -1,0 +1,64 @@
+name: Zip API Rate Limits
+description: >
+  Zip does not publicly document specific numeric rate limits for their merchant
+  API. Rate limiting details are provided to merchants as part of onboarding
+  and through the merchant agreement. The API uses HMAC-SHA256 signature
+  authentication (X-QP-Signature header for the US Gateway API) and Bearer
+  token authentication (Authorization: Bearer for the Global Merchant API) to
+  control access. Idempotency keys are supported to prevent duplicate
+  processing of requests.
+rateLimits:
+  - name: API Request Limits
+    description: >
+      Specific rate limits are not published publicly. Merchants should contact
+      the Zip integrations team for details applicable to their account tier.
+    type: undisclosed
+    contact:
+      url: https://help.zip.co/hc/en-au
+      email: ''
+
+  - name: Idempotency
+    description: >
+      The Zip API supports idempotent requests via the Idempotency-Key header.
+      This allows safe retry of failed requests without risk of duplicate
+      charges or operations.
+    type: header
+    header: Idempotency-Key
+    scope:
+      - POST /merchant/checkouts
+      - POST /merchant/charges
+      - POST /merchant/refunds
+      - POST /orders/authorize
+      - POST /orders/{orderId}/capture
+      - POST /orders/{orderId}/refund
+      - POST /orders/{orderId}/void
+
+  - name: Authentication Enforcement
+    description: >
+      All API requests must include a valid authentication credential. Requests
+      missing or carrying an invalid signature or Bearer token are rejected
+      with standard HTTP 4xx error responses before rate limit evaluation.
+    type: authentication
+    methods:
+      - name: HMAC-SHA256 Signature (US Gateway)
+        header: X-QP-Signature
+        description: >
+          HMAC-SHA256 signature over the request body (JSON) or
+          alphabetically sorted key-value pairs (form/GET), using a shared
+          secret provided during merchant onboarding.
+      - name: Bearer Token (Global Merchant API)
+        header: Authorization
+        format: 'Bearer {API_KEY}'
+        description: >
+          API key provided as a Bearer token in the Authorization header.
+          Sandbox and production use separate credentials.
+
+environments:
+  sandbox:
+    globalMerchantAPI: https://sand.merchant-api.com
+    usGateway: https://gateway.sand.us.zip.co
+    nzInstore: https://sandbox.zip.co/nz/api
+  production:
+    globalMerchantAPI: https://merchant-api.zip.co
+    usGateway: https://gateway.us.zip.co
+    nzInstore: https://zip.co/nz/api
