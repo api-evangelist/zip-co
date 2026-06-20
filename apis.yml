@@ -7,7 +7,7 @@ description: >
   plan verification. The platform supports in-store, online, and ecommerce
   plugin integrations across Australia, New Zealand, the United States, Canada,
   and other markets.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - BNPL
   - Buy Now Pay Later
@@ -27,7 +27,7 @@ apis:
       and cancellation operations for merchants integrating Zip BNPL payments
       into their online storefront. It uses Bearer token authentication and
       supports idempotent requests.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.zip.co/reference/api-docs
     baseURL: https://sand.merchant-api.com
     tags:
@@ -57,7 +57,7 @@ apis:
       capture, refund, void, and confirm orders. It uses HMAC-SHA256 signature
       authentication via the X-QP-Signature header and supports both
       synchronous and asynchronous response modes with webhook callbacks.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.us.zip.co/docs/api-implementation
     baseURL: https://gateway.us.zip.co
     tags:
@@ -87,7 +87,7 @@ apis:
       environments. It uses Bearer token authentication derived from OAuth
       client credentials and supports both merchant-level and store-level
       authentication scopes.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.zip.co/v4/docs/instore-api-specification
     baseURL: https://zip.co/nz/api
     tags:
