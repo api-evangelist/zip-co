@@ -1,83 +1,12 @@
 {
-  "meta": {
-    "provider": "zip-co",
-    "source": "https://zip.co/blog",
-    "fetched": "2026-06-13",
-    "note": "Blog feed not publicly accessible via HTTP; entries sourced from developer portal documentation references"
-  },
-  "blogs": [
-    {
-      "title": "Getting Started with Zip Developer APIs",
-      "url": "https://developers.zip.co/v2/docs/getting-started",
-      "description": "Introduction to Zip's developer platform and BNPL payment integration APIs for online merchants.",
-      "tags": [
-        "BNPL",
-        "Payments",
-        "Integration",
-        "Getting Started"
-      ]
-    },
-    {
-      "title": "Zip Sandbox Testing Environment",
-      "url": "https://developers.zip.co/v2/docs/sandbox",
-      "description": "Guide to using Zip's sandbox environment for testing payment integrations without affecting live data.",
-      "tags": [
-        "Sandbox",
-        "Testing",
-        "Development"
-      ]
-    },
-    {
-      "title": "Zip US Gateway API Implementation Guide",
-      "url": "https://docs.us.zip.co/docs/api-implementation",
-      "description": "Detailed implementation guide for North American merchants integrating the Zip Gateway API with HMAC-SHA256 authentication.",
-      "tags": [
-        "Gateway",
-        "North America",
-        "Integration",
-        "Authentication"
-      ]
-    },
-    {
-      "title": "Zip Custom Integration Guide",
-      "url": "https://docs.us.zip.co/docs/custom-integration-guide",
-      "description": "Step-by-step guide for custom Zip payment integration including order authorization, capture, refund, and void flows.",
-      "tags": [
-        "Custom Integration",
-        "Orders",
-        "Payments"
-      ]
-    },
-    {
-      "title": "Zip NZ In-Store API Specification",
-      "url": "https://developers.zip.co/v4/docs/instore-api-specification",
-      "description": "Technical specification for Zip New Zealand point-of-sale in-store payment API with Bearer token authentication.",
-      "tags": [
-        "In-Store",
-        "POS",
-        "New Zealand",
-        "OAuth"
-      ]
-    },
-    {
-      "title": "Zip Webhook Callbacks Reference",
-      "url": "https://developers.zip.co/v9-US/docs/callbacks",
-      "description": "Reference documentation for Zip webhook callbacks and asynchronous payment notification events.",
-      "tags": [
-        "Webhooks",
-        "Callbacks",
-        "Events",
-        "Async"
-      ]
-    }
-  ],
   "repo": "zip-co",
   "feeds": [
     {
-      "source": "https://help.zip.co",
-      "error": "HTTPError"
+      "source": "https://zip.co/au/blog",
+      "saved": 0,
+      "error": "HTTP 404 Not Found"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:23:20Z"
 }
