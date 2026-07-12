@@ -106,6 +106,8 @@ apis:
         email: ''
 
 common:
+  - type: DomainSecurity
+    url: security/zip-co-domain-security.yml
   - type: Portal
     url: https://developers.zip.co
   - type: Website
