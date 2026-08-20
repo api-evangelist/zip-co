@@ -73,6 +73,12 @@ apis:
     humanURL: https://docs.us.zip.co/docs/api-implementation
     baseURL: https://gateway.us.zip.co
     tags:
+      - Order
+      - Payments
+      - Refunds
+      - Webhook
+      - North America
+    tags_raw:
       - Orders
       - Payments
       - Refunds
@@ -103,6 +109,11 @@ apis:
     humanURL: https://developers.zip.co/v4/docs/instore-api-specification
     baseURL: https://zip.co/nz/api
     tags:
+      - In-Store
+      - Point-of-Sale
+      - Order
+      - New Zealand
+    tags_raw:
       - In-Store
       - Point of Sale
       - Orders
