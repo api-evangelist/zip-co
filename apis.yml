@@ -7,6 +7,17 @@ description: >
   plan verification. The platform supports in-store, online, and ecommerce
   plugin integrations across Australia, New Zealand, the United States, Canada,
   and other markets.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
