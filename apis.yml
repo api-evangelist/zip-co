@@ -32,6 +32,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zip-co.png
 tags:
+  - Buy Now Pay Later
+  - Digital Wallet
+  - Payments
+  - Fintech
+  - Checkout
+  - Merchant Services
+tags_raw:
   - BNPL
   - Buy Now Pay Later
   - Digital Wallet
@@ -54,6 +61,11 @@ apis:
     humanURL: https://developers.zip.co/reference/api-docs
     baseURL: https://sand.merchant-api.com
     tags:
+      - Checkout
+      - Charges
+      - Refunds
+      - Buy Now Pay Later
+    tags_raw:
       - Checkout
       - Charges
       - Refunds
