@@ -38,6 +38,7 @@ tags:
   - Fintech
   - Checkout
   - Merchant Services
+  - Australia
 tags_raw:
   - BNPL
   - Buy Now Pay Later
@@ -46,6 +47,7 @@ tags_raw:
   - Fintech
   - Checkout
   - Merchant Services
+  - Australia
 created: '2026-06-13'
 modified: '2026-06-13'
 url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/apis.yml
