@@ -56,3 +56,27 @@ plans:
     contact:
       url: https://zip.co/au/business/payments
       email: ''
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units:
+  - period
+  - transaction
+  plans:
+  - name: Sandbox (Development)
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - period
+    periods: []
+  - name: Production (Merchant Agreement)
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - transaction
+    periods: []
