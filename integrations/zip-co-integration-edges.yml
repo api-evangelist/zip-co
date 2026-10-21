@@ -1,0 +1,174 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://zapier.com/apps/zip-co/integrations
+- https://zapier.com/apps/zip/integrations
+- https://n8n.io/integrations/zip-co/
+- https://composio.dev/toolkits/zip-co
+- https://monid.ai/tools/zip-co
+- https://docs.us.zip.co/docs/payment-platforms
+- https://docs.us.zip.co/docs/ecommerce-platforms
+- https://developers.zip.co/docs/payment-gateways
+- https://developers.zip.co/docs/other-platforms
+checked:
+- https://composio.dev/toolkits/zip-co
+- https://developers.zip.co/docs/other-platforms
+- https://developers.zip.co/docs/payment-gateways
+- https://docs.adyen.com/payment-methods/zip/
+- https://docs.stripe.com/payments/zip
+- https://docs.us.zip.co/docs/ecommerce-platforms
+- https://docs.us.zip.co/docs/payment-platforms
+- https://monid.ai/tools/zip-co
+- https://n8n.io/integrations/zip-co/
+- https://zapier.com/apps/zip-co/integrations
+- https://zapier.com/apps/zip/integrations
+- salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: Adyen
+  partner: adyen
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/payment-platforms
+  direction: unknown
+  channel: docs
+- partner_name: Stripe
+  partner: stripe
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/payment-platforms
+  direction: unknown
+  channel: docs
+- partner_name: Shopify
+  partner: shopify
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/shopify
+  direction: provider-built
+  channel: docs
+- partner_name: BigCommerce
+  partner: bigcommerce
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/bigcommerce
+  direction: provider-built
+  channel: docs
+- partner_name: Magento 2 (Adobe Commerce)
+  partner: magento
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/magento-2
+  direction: provider-built
+  channel: docs
+- partner_name: Salesforce Commerce Cloud
+  partner: salesforce
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/salesforce
+  direction: provider-built
+  channel: docs
+- partner_name: WooCommerce
+  partner: woocommerce
+  type: claimed
+  evidence: https://docs.us.zip.co/docs/woocommerce
+  direction: provider-built
+  channel: docs
+- partner_name: OpenCart
+  partner: opencart
+  type: claimed
+  evidence: https://developers.zip.co/docs/opencart
+  direction: provider-built
+  channel: docs
+- partner_name: PrestaShop
+  partner: prestashop
+  type: claimed
+  evidence: https://developers.zip.co/docs/prestashop
+  direction: provider-built
+  channel: docs
+- partner_name: Neto (Maropost)
+  partner: null
+  type: claimed
+  evidence: https://developers.zip.co/docs/neto-create-a-zip-landing-page
+  direction: provider-built
+  channel: docs
+- partner_name: Ecwid
+  partner: ecwid
+  type: claimed
+  evidence: https://developers.zip.co/docs/other-platforms
+  direction: unknown
+  channel: docs
+- partner_name: Stripe
+  partner: stripe
+  type: docs
+  evidence: https://docs.stripe.com/payments/zip
+  direction: partner-built
+  note: Zip offered as a payment method in Stripe's own docs
+- partner_name: Adyen
+  partner: adyen
+  type: docs
+  evidence: https://docs.adyen.com/payment-methods/zip/
+  direction: partner-built
+  note: Zip offered as a payment method in Adyen's own docs
+- partner_name: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=b9483af6-6885-4d28-b162-17ef4e90cf20
+  mirror_of: salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+  apps:
+  - Zip Payments Cartridge for B2C Commerce
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: paymentsProcessing
+templates: []
+skips:
+- label: zapier/n8n marketplace
+  cause: catalog
+  why: 'Sweep found name collision: Zapier "zip" app is ziphq.com, a different company; no Zip Co marketplace listing
+    found.'
+- label: Adyen
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: Stripe
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: Shopify
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: BigCommerce
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: Magento 2 (Adobe Commerce)
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: Salesforce Commerce Cloud
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: WooCommerce
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: OpenCart
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
+- label: Ecwid
+  cause: catalog
+  why: 'Arazzo not authored this run: ~/.claude/skills/provider-integrations-arazzo (SKILL.md and validate_integrations.py)
+    is not readable from the docs-module sandbox (Operation not permitted), so a workflow could not be validated.
+    Pending generation in a later pass.'
