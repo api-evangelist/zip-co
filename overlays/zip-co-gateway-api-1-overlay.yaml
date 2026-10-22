@@ -1,0 +1,46 @@
+overlay: 1.0.0
+info:
+  title: Zip gateway-api-1 enhancements
+  version: 1.0.0
+extends: openapi/zip-co-gateway-api-1-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Zip
+    x-apisjson: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/apis.yml
+    x-llms-txt: https://docs.us.zip.co/llms.txt
+    x-docs: https://docs.us.zip.co/
+  description: API Evangelist provenance and discovery links
+- target: $.paths['/configuration/{merchantId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/merchant-disputes'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/merchant-disputes/file'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/merchant-disputes/search'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/orders/{orderId}/status'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/payments/{merchantId}/csv'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/payments/{merchantId}/json'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/settlements/invoices'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/settlements/report'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/transactions/{merchantId}/v3'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/transactions/{merchantId}/v3/csv'].get
+  update:
+    x-agent-safe: true

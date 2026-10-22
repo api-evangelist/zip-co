@@ -11,7 +11,7 @@ description: >
   token authentication (Authorization: Bearer for the Global Merchant API) to
   control access. Idempotency keys are supported to prevent duplicate
   processing of requests.
-rateLimits:
+limits:
   - name: API Request Limits
     description: >
       Specific rate limits are not published publicly. Merchants should contact
@@ -28,7 +28,7 @@ rateLimits:
       charges or operations.
     type: header
     header: Idempotency-Key
-    scope:
+    operations:
       - POST /merchant/checkouts
       - POST /merchant/charges
       - POST /merchant/refunds

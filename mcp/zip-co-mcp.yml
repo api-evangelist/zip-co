@@ -1,0 +1,334 @@
+name: Zip MCP Server (candidate)
+description: 'Candidate MCP tool list DERIVED from the public operations of the Zip Gateway Api OpenAPI (gateway.sand.us.zip.co swagger). Zip
+  does not publish an MCP server for its merchant APIs: a web search found none (results were unrelated "Zip" products: a ZIP-archive MCP and
+  the Zip procurement platform), and the provider llms.txt indexes name no MCP. Observed, not called: docs.us.zip.co/mcp and developers.zip.co/mcp
+  answer GET 200 with the ReadMe platform message "This URL can only be accessed with a MCP client.", but the docs project config embedded in
+  the pages has "mcp":{"state":"disabled"}, so it is not treated as an advertised endpoint and no JSON-RPC was sent.'
+type: MCPServer
+status: candidate
+generated: '2026-10-20'
+method: derived
+source:
+- openapi/zip-co-gateway-api-openapi.yml
+- https://docs.us.zip.co/llms.txt
+- https://developers.zip.co/llms.txt
+deployment:
+  mode: none
+  auth: api-key
+  verified: derived
+  note: Underlying REST API uses Bearer auth (securityScheme Bearer). No MCP server is shipped by Zip.
+observed:
+- url: https://docs.us.zip.co/mcp
+  status: 200
+  method: GET
+  body: This URL can only be accessed with a MCP client.
+  note: ReadMe docs-platform route; project config mcp.state=disabled; not called with JSON-RPC
+- url: https://developers.zip.co/mcp
+  status: 200
+  method: GET
+  body: This URL can only be accessed with a MCP client.
+  note: same ReadMe platform route; not called with JSON-RPC
+excluded: Operations under /internal, /stripe-direct, /edge, /google, /api/v1, Shopify tester and *testing* paths are partner/internal and are
+  not offered as candidate tools.
+tools:
+- name: create_charge
+  operationId: CreateCharge
+  method: POST
+  path: /global/v1/charges
+  description: Creates or captures a charge on an existing checkout.
+  readOnly: false
+- name: capture_charge
+  operationId: CaptureCharge
+  method: POST
+  path: /global/v1/charges/{chargeId}/capture
+  description: Captures an existing charge. Idempotency-Key header is optional; when omitted, the request is not idempotent.
+  readOnly: false
+- name: get_charge
+  operationId: GetCharge
+  method: GET
+  path: /global/v1/charges/{chargeId}
+  description: Retrieves a charge by ID.
+  readOnly: true
+- name: refund_charge
+  operationId: RefundCharge
+  method: POST
+  path: /global/v1/charges/{chargeId}/refund
+  description: Refunds an existing charge. Idempotency-Key header is optional; when omitted, the request is not idempotent.
+  readOnly: false
+- name: void_charge
+  operationId: VoidCharge
+  method: POST
+  path: /global/v1/charges/{chargeId}/cancel
+  description: Voids (cancels) an existing charge. Idempotency-Key header is optional; when omitted, the request is not idempotent.
+  readOnly: false
+- name: create_checkout
+  operationId: CreateCheckout
+  method: POST
+  path: /global/v1/checkouts
+  description: Creates a checkout session for a merchant.
+  readOnly: false
+- name: get_checkout
+  operationId: GetCheckout
+  method: GET
+  path: /global/v1/checkouts/{checkoutId}
+  description: Retrieves a checkout session by ID.
+  readOnly: true
+- name: list_disputes
+  operationId: ListDisputes
+  method: GET
+  path: /global/v1/disputes
+  description: Lists disputes for a merchant, with optional filters for date range, status, and cursor-based pagination.
+  readOnly: true
+- name: get_dispute
+  operationId: GetDispute
+  method: GET
+  path: /global/v1/disputes/{disputeId}
+  description: Retrieves a single dispute by its identifier.
+  readOnly: true
+- name: accept_dispute
+  operationId: AcceptDispute
+  method: POST
+  path: /global/v1/disputes/{disputeId}/accept
+  description: Accepts a dispute, transitioning it to a lost status.
+  readOnly: false
+- name: submit_evidence
+  operationId: SubmitEvidence
+  method: POST
+  path: /global/v1/disputes/{disputeId}/evidence
+  description: Submits evidence for a dispute to support the merchant's case.
+  readOnly: false
+- name: upload_file
+  operationId: UploadFile
+  method: POST
+  path: /global/v1/disputes/{disputeId}/files/{category}
+  description: Uploads an evidence file to a dispute from a blob URL.
+  readOnly: false
+- name: delete_file
+  operationId: DeleteFile
+  method: DELETE
+  path: /global/v1/disputes/{disputeId}/files/{category}
+  description: Deletes an evidence file from a dispute by category.
+  readOnly: false
+- name: download_file
+  operationId: DownloadFile
+  method: GET
+  path: /global/v1/disputes/{disputeId}/files/{categoryOrFileId}
+  description: Downloads an evidence file by category or file ID.
+  readOnly: true
+- name: get_configuration
+  operationId: GetConfiguration
+  method: GET
+  path: /configuration/{merchantId}
+  description: Allows a merchant to see their checkout configuration
+  readOnly: true
+- name: validate_configuration_get
+  operationId: ValidateConfigurationGet
+  method: GET
+  path: /configuration/validate
+  description: Takes a merchant's id and its signed hash and returns the merchant id if valid for GET requests
+  readOnly: true
+- name: validate_configuration_post
+  operationId: ValidateConfigurationPost
+  method: POST
+  path: /configuration/validate
+  description: Takes a merchant's id and its signed hash and returns the merchant id if valid for POST requests
+  readOnly: false
+- name: search_merchant_disputes
+  operationId: SearchMerchantDisputes
+  method: GET
+  path: /merchant-disputes/search
+  description: Search Merchant Disputes.
+  readOnly: true
+- name: get_merchant_dispute_by_id
+  operationId: GetMerchantDisputeById
+  method: GET
+  path: /merchant-disputes
+  description: Get Merchant Dispute by id.
+  readOnly: true
+- name: submit_dispute_evidence
+  operationId: SubmitDisputeEvidence
+  method: POST
+  path: /merchant-disputes/submit-evidence
+  description: Merchant submit all evidence for the dispute. Submissions are final.
+  readOnly: false
+- name: upload_dispute_evidence_file
+  operationId: UploadDisputeEvidenceFile
+  method: POST
+  path: /merchant-disputes/file
+  description: Upload an evidence file using a blob.
+  readOnly: false
+- name: delete_dispute_evidence_file
+  operationId: DeleteDisputeEvidenceFile
+  method: DELETE
+  path: /merchant-disputes/file
+  description: Delete dispute evidence file.
+  readOnly: false
+- name: download_dispute_evidence_file
+  operationId: DownloadDisputeEvidenceFile
+  method: GET
+  path: /merchant-disputes/file
+  description: Downliad dispute evidence file by category or file id.
+  readOnly: true
+- name: upload_dispute_evidence_files
+  operationId: UploadDisputeEvidenceFiles
+  method: POST
+  path: /merchant-disputes/file/bulk
+  description: Upload multiple evidence files using SAS URLs.
+  readOnly: false
+- name: get_payments_export_json
+  operationId: GetPaymentsExportJson
+  method: GET
+  path: /payments/{merchantId}/json
+  description: An abbreviated list of payments in JSON format
+  readOnly: true
+- name: get_payments_export_csv
+  operationId: GetPaymentsExportCsv
+  method: GET
+  path: /payments/{merchantId}/csv
+  description: An abbreviated list of payments in a csv
+  readOnly: true
+- name: get_invoice_transactions_by_date_range
+  operationId: GetInvoiceTransactionsByDateRange
+  method: GET
+  path: /transactions/{merchantId}/v3
+  description: An list of statement transactions in JSON format
+  readOnly: true
+- name: get_invoice_transactions_by_date_range_as_csv
+  operationId: GetInvoiceTransactionsByDateRangeAsCsv
+  method: GET
+  path: /transactions/{merchantId}/v3/csv
+  description: A list of statement transactions, downloaded as a CSV file
+  readOnly: true
+- name: get_settlement_invoices_json
+  operationId: GetSettlementInvoicesJson
+  method: GET
+  path: /settlements/invoices
+  description: A list of invoices for the merchant for settlement reconciliation.
+  readOnly: true
+- name: get_settlement_transactions_json
+  operationId: GetSettlementTransactionsJson
+  method: GET
+  path: /settlements/report
+  description: A list of transactions for the merchant for settlement reconciliation.
+  readOnly: true
+- name: post_authorize_checkout_anywhere_order
+  operationId: PostAuthorizeCheckoutAnywhereOrder
+  method: POST
+  path: /checkoutanywhere/orders/authorize
+  description: Creates a new context for the QPAW rails on Checkout Anywhere via a POST command.
+  readOnly: false
+- name: authorize_order_post
+  operationId: AuthorizeOrderPost
+  method: POST
+  path: /orders/authorize
+  description: Creates a new checkout context and redirects to the checkout website using details from the request body.
+  readOnly: false
+- name: authorize_order_get
+  operationId: AuthorizeOrderGet
+  method: GET
+  path: /orders/authorize
+  description: Creates a new checkout context and redirects to the checkout website using details from the query string parameters.
+  readOnly: true
+- name: authorize_sdk_api_order_post
+  operationId: AuthorizeSdkApiOrderPost
+  method: POST
+  path: /orders/authorize-classic-api-sdk
+  description: Pop-out classic checkout.
+  readOnly: false
+- name: capture_order
+  operationId: CaptureOrder
+  method: POST
+  path: /orders/{orderId}/capture
+  description: Captures funds for the specified order.  Only applicable to pay-on-ship/deferred fund capture merchants.
+  readOnly: false
+- name: refund_order
+  operationId: RefundOrder
+  method: POST
+  path: /orders/{orderId}/refund
+  description: Refunds funds for the specified order and allocates them to the payment plan to apply it to the customer.
+  readOnly: false
+- name: void_order
+  operationId: VoidOrder
+  method: POST
+  path: /orders/{orderId}/void
+  description: Voids uncaptured funds for the specified order and allocates them to the payment plan to apply it to the customer.  Only applicable
+    to pay-on-ship/deferred fund capture merchants.
+  readOnly: false
+- name: confirm_order
+  operationId: ConfirmOrder
+  method: POST
+  path: /orders/{orderId}/confirm
+  description: Confirms the supplied authorized order and initiates the payment plan for the customer.
+  readOnly: false
+- name: associate_merchant_platform_id_to_order
+  operationId: AssociateMerchantPlatformIdToOrder
+  method: POST
+  path: /orders/associate
+  description: Associates a merchant's unique order ID with an order after creation.
+  readOnly: false
+- name: calculate_merchant_fee_for_payment_plan
+  operationId: CalculateMerchantFeeForPaymentPlan
+  method: POST
+  path: /orders/calculate-merchant-fees
+  description: Not supported anymore.
+  readOnly: false
+- name: retrieve_order_status
+  operationId: RetrieveOrderStatus
+  method: GET
+  path: /orders/{orderId}/status
+  description: Returns Status of an order belong to the requesting Merchant.
+  readOnly: true
+- name: retrieve_order_detail
+  operationId: RetrieveOrderDetail
+  method: GET
+  path: /orders/{orderId}/detail
+  description: Returns Detail of an order belong to the requesting Merchant.
+  readOnly: true
+- name: assess_pre_qualification
+  operationId: AssessPreQualification
+  method: POST
+  path: /orders/pre-qualifications/assess
+  description: Assess pre-qualification for the given customer
+  readOnly: false
+- name: initialize_pre_qualification
+  operationId: InitializePreQualification
+  method: POST
+  path: /orders/pre-qualifications/initialize
+  description: Initialize pre-qualification for the given customer
+  readOnly: false
+- name: get_eligible_promotions
+  operationId: GetEligiblePromotions
+  method: GET
+  path: /Promotions/eligible
+  description: GET /Promotions/eligible
+  readOnly: true
+- name: get_eligible_promotions_customer_request
+  operationId: GetEligiblePromotionsCustomerRequest
+  method: POST
+  path: /Promotions/checkout/offers
+  description: POST /Promotions/checkout/offers
+  readOnly: false
+- name: list_reports
+  operationId: ListReports
+  method: GET
+  path: /global/v1/report/{entityType}/{entityId}
+  description: Lists available reports for a merchant or partner.
+  readOnly: true
+- name: download_report
+  operationId: DownloadReport
+  method: GET
+  path: /global/v1/report/{entityType}/{entityId}/{reportName}
+  description: Downloads a specific report file by name. Re-downloadable — the same
+  readOnly: true
+- name: get_checkout_anywhere_session_token
+  operationId: GetCheckoutAnywhereSessionToken
+  method: GET
+  path: /checkoutanywhere/token/{sessionToken}
+  description: Gets the checkout anywhere token from Redis with the session token.
+  readOnly: true
+- name: post_authorize_virtual_order
+  operationId: PostAuthorizeVirtualOrder
+  method: POST
+  path: /virtual/orders
+  description: POST /virtual/orders
+  readOnly: false

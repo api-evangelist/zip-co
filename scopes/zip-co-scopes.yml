@@ -1,0 +1,18 @@
+generated: '2026-10-20'
+method: none
+source: openapi/zip-co-gateway-api-1-api-openapi.yml, openapi/zip-co-gateway-api-openapi.yml
+schemes:
+- name: sec0
+  source: openapi/zip-co-gateway-api-1-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://example.com/oauth2/token
+- name: Bearer
+  source: openapi/zip-co-gateway-api-openapi.yml
+  flows:
+  - flow: implicit
+    authorizationUrl: https://login-dev.quadpay.com/authorize
+  description: Please insert JWT with Bearer into field
+scopes: []
+note: The OAuth2 security scheme(s) in the OpenAPI declare no scopes, and no security requirement
+  references one.

@@ -1,0 +1,151 @@
+openapi: 3.2.0
+info:
+  title: Gateway Merchant Payments API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: MerchantPayments
+paths:
+  /payments/{merchantId}/json:
+    get:
+      tags:
+      - MerchantPayments
+      summary: An abbreviated list of payments in JSON format
+      operationId: GetPaymentsExportJson
+      parameters:
+      - name: merchantId
+        in: path
+        description: The Merchant's ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: MinimumCreateDateTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: MaximumCreateDateTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: OrderBy
+        in: query
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Payments.Queries.GetMerchantPaymentsExport_Query_1_OrderByEnum__System.IO.Stream__System.Private.CoreLib__Version_10.0.0.0__Culture_neutral__PublicKeyToken_7cec85d7bea7798e'
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+  /payments/{merchantId}/csv:
+    get:
+      tags:
+      - MerchantPayments
+      summary: An abbreviated list of payments in a csv
+      operationId: GetPaymentsExportCsv
+      parameters:
+      - name: merchantId
+        in: path
+        description: The Merchant's ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: MinimumCreateDateTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: MaximumCreateDateTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: OrderBy
+        in: query
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Payments.Queries.GetMerchantPaymentsExport_Query_1_OrderByEnum__System.IO.Stream__System.Private.CoreLib__Version_10.0.0.0__Culture_neutral__PublicKeyToken_7cec85d7bea7798e'
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    ? QuadPay.Gateway.Payments.Queries.GetMerchantPaymentsExport_Query_1_OrderByEnum__System.IO.Stream__System.Private.CoreLib__Version_10.0.0.0__Culture_neutral__PublicKeyToken_7cec85d7bea7798e
+    : enum:
+      - dateAsc
+      - dateDesc
+      type: string
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

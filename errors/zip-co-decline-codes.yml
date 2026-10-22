@@ -1,0 +1,20 @@
+generated: '2026-10-20'
+method: searched
+source: https://developers.zip.co/page/charges-error-scenarios
+description: Account-level declines returned on the Zip Global (AU) Auth Charge request. Zip publishes no separate decline-code catalogue; these are the authorization refusals in its Charges Error Scenarios table. The US Gateway API docs publish none.
+docs: https://developers.zip.co/page/charges-error-scenarios
+envelope_field: error type (HTTP 403 / 400)
+mask_as_generic: []
+decline_codes:
+- code: account_locked
+  meaning: Account is temporarily locked as it has payment outstanding at Zip
+  action: "Do not retry (Retry Allowed NO). If the account is in arrears the lock lifts once the customer pays; for other blocked scenarios the customer will have to call Zip to unblock."
+- code: account_unavailable
+  meaning: Account cannot be charged (ie Account or customer could be incorrect, account is no longer active)
+  action: Do not retry; customer should contact Zip.
+- code: account_insufficient_funds
+  meaning: Account has insufficient balance for the Charge request.
+  action: Do not retry.
+- code: exclusive_account
+  meaning: Account is exclusive to a specific merchant only.
+  action: Do not retry.

@@ -1,0 +1,313 @@
+openapi: 3.2.0
+info:
+  title: Gateway Merchant Settlements Reporting V API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: MerchantSettlementsReportingV
+paths:
+  /v2/settlements/invoices:
+    get:
+      tags:
+      - MerchantSettlementsReportingV
+      summary: A list of invoices for the merchant for settlement reconciliation
+      operationId: GetSettlementInvoicesJson
+      parameters:
+      - name: SearchDisbursementDate
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantId
+        in: query
+        description: The Merchants Id Used as a part of the signing
+        schema:
+          type: string
+          format: uuid
+      - name: From
+        in: query
+        description: Search starting date. Note that dates must be UTC midnight.
+        schema:
+          type: string
+          format: date-time
+      - name: To
+        in: query
+        description: Search ending date. Note that dates must be UTC midnight.
+        schema:
+          type: string
+          format: date-time
+      - name: Page
+        in: query
+        description: The page subset of the total results
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        description: The number of records to include in the result set
+        schema:
+          type: integer
+          format: int32
+      - name: SearchCloseDate
+        in: query
+        description: 'By default this searches for transactions that are invoiced and paid out.
+
+          Setting SearchCloseDate to true will search for invoiced transactions
+
+          by the invoice close date instead of the date payment was made.'
+        schema:
+          type: boolean
+      - name: X-QP-Signature
+        in: query
+        description: The signature for merchant validation
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.InvoicesSearchResult'
+  /v2/settlements/report:
+    get:
+      tags:
+      - MerchantSettlementsReportingV
+      summary: A list of transactions for the merchant for settlement reconciliation
+      operationId: GetSettlementTransactionsJson
+      parameters:
+      - name: SearchDisbursementDate
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantId
+        in: query
+        description: The Merchants Id Used as a part of the signing
+        schema:
+          type: string
+          format: uuid
+      - name: From
+        in: query
+        description: Search starting date. Note that dates must be UTC midnight.
+        schema:
+          type: string
+          format: date-time
+      - name: To
+        in: query
+        description: Search ending date. Note that dates must be UTC midnight.
+        schema:
+          type: string
+          format: date-time
+      - name: Page
+        in: query
+        description: The page subset of the total results
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        description: The number of records to include in the result set
+        schema:
+          type: integer
+          format: int32
+      - name: SearchCloseDate
+        in: query
+        description: 'By default this searches for transactions that are invoiced and paid out.
+
+          Setting SearchCloseDate to true will search for invoiced transactions
+
+          by the invoice close date instead of the date payment was made.'
+        schema:
+          type: boolean
+      - name: X-QP-Signature
+        in: query
+        description: The signature for merchant validation
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.TransactionsSearchResult'
+components:
+  schemas:
+    QuadPay.Gateway.MerchantSettlements.Models.SettlementReportTransaction:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        merchantName:
+          type:
+          - string
+          - 'null'
+        transactionType:
+          type:
+          - string
+          - 'null'
+        amountSigned:
+          type: number
+          format: double
+        taxAmountSigned:
+          type: number
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        disbursementDateUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        orderDateTimeUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        merchantOrderReference:
+          type:
+          - string
+          - 'null'
+        orderId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        transactionDateTimeUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        product:
+          type:
+          - string
+          - 'null'
+        merchantTransactionReference:
+          type:
+          - string
+          - 'null'
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.MerchantSettlements.Models.SettlementReportInvoice:
+      type: object
+      properties:
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        openDate:
+          type: string
+          format: date-time
+        closeDate:
+          type: string
+          format: date-time
+        amountSigned:
+          type:
+          - number
+          - 'null'
+          format: double
+        currencyCode:
+          type:
+          - string
+          - 'null'
+        transferStatus:
+          type:
+          - string
+          - 'null'
+        disbursementDateUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        transferReference:
+          type:
+          - string
+          - 'null'
+        transferProcessor:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.MerchantSettlements.Models.InvoicesSearchResult:
+      type: object
+      properties:
+        transactions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.SettlementReportTransaction'
+        totalCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    QuadPay.Gateway.MerchantSettlements.Models.TransactionsSearchResult:
+      type: object
+      properties:
+        invoices:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.SettlementReportInvoice'
+        totalCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

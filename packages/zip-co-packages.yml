@@ -1,0 +1,93 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://docs.us.zip.co/docs/ios-sdk
+- https://docs.us.zip.co/docs/android-sdk
+- https://docs.us.zip.co/docs/react-native-sdk
+- https://docs.us.zip.co/docs/api-javascript-sdk
+- https://github.com/zipMoney
+description: First-party Zip client libraries. The US mobile SDKs still carry the QuadPay name (Zip acquired QuadPay); the PHP/Ruby merchant API
+  clients come from the zipMoney GitHub org (Australian Zip Money brand). Versions read from each registry's metadata endpoint on 2026-10-20.
+packages:
+- name: QuadPaySDK
+  registry: cocoapods
+  url: https://cocoapods.org/pods/QuadPaySDK
+  language: Swift/Objective-C (iOS)
+  official: true
+  version: 1.2.0
+  published: '2023-08-23'
+  evidence: 'docs.us.zip.co/docs/ios-sdk: "Our SDK is currently public, simply add the following to your Podfile and run pod install `pod ''QuadPaySDK''`"'
+- name: com.quadpay:quadpay
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/quadpay/quadpay/
+  language: Kotlin/Java (Android)
+  official: true
+  version: 0.8.6
+  published: '2024-07-26'
+  note: Docs install snippet still pins 0.3.8@aar and says "Consult your account manager about the version you should include!"; Maven Central
+    latest is 0.8.6.
+- name: quadpay-merchant-sdk-react-native
+  registry: npm
+  url: https://www.npmjs.com/package/quadpay-merchant-sdk-react-native
+  language: JavaScript (React Native)
+  official: true
+  version: 2.1.4
+  published: '2024-07-16'
+  note: Docs link to v2.1.0.
+  ownership_audit: metadata names zip.co
+- name: zipmoney/merchantapi-php
+  registry: packagist
+  url: https://packagist.org/packages/zipmoney/merchantapi-php
+  language: PHP
+  official: false
+  version: 1.0.24
+  published: '2026-08-20'
+  repository: https://github.com/zipMoney/merchantapi-php
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: zip_money
+  registry: rubygems
+  url: https://rubygems.org/gems/zip_money
+  language: Ruby
+  official: false
+  version: 1.2.1
+  published: '2020-03-09'
+  repository: https://github.com/zipMoney/merchantapi-ruby
+  note: Homepage is github.com/zipMoney/merchantapi-ruby; last release 2020, stale.
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: zipmoney_merchantapi
+  registry: rubygems
+  url: https://rubygems.org/gems/zipmoney_merchantapi
+  language: Ruby
+  official: false
+  version: 1.0.1
+  published: '2017-06-19'
+  repository: https://github.com/zipMoney/merchantapi-ruby
+  note: Older gem name pointing at the same repo; superseded by zip_money.
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: zipMoney
+  registry: rubygems
+  url: https://rubygems.org/gems/zipMoney
+  language: Ruby
+  official: false
+  version: 1.0.8
+  published: '2018-05-21'
+  repository: https://github.com/zipMoney/zipmoney-ruby-sdk
+  note: Legacy zipMoney Ruby SDK (homepage zipmoney.com.au); repo last pushed 2018-05-21.
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: zip.js (US checkout JavaScript SDK / widget loader)
+  registry: cdn
+  url: https://cdn.us.zip.co/v1/zip.js
+  language: JavaScript (browser)
+  official: true
+  version: null
+  published: null
+  note: CDN-distributed, unpinned beyond the /v1/ major path segment (sandbox build at https://cdn.sand.us.zip.co/v1/zip.js); no metadata endpoint,
+    a consumer cannot tell which build they get.
+- name: zip-widget.min.js (AU Smart Widget)
+  registry: cdn
+  url: https://static.zip.co/lib/js/zm-widget-js/dist/zip-widget.min.js
+  language: JavaScript (browser)
+  official: true
+  version: null
+  published: null
+  note: CDN-distributed, unpinned; documented at https://developers.zip.co/docs/zip-smart-widget.

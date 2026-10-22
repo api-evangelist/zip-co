@@ -1,0 +1,48 @@
+# Zip Documentation
+
+> Zip developer portal | Zip API documentation | Zip API reference | Zip integration | Zip resources
+
+## Guides: Welcome
+- [Getting Started](https://developers.zip.co/docs/getting-started.md)
+
+## Guides: E-commerce Platforms
+- [Shopify](https://developers.zip.co/docs/shopify.md)
+  - [Add On-Site Messaging](https://developers.zip.co/docs/installing-zip-shopify-widgets-app.md)
+  - [Create A Landing Page](https://developers.zip.co/docs/shopify-landing-page.md)
+  - [Add The Payment Icon](https://developers.zip.co/docs/shopify-zip-payment-icon.md)
+- [Woocommerce](https://developers.zip.co/docs/woocommerce.md)
+  - [Install The Plugin](https://developers.zip.co/docs/woocommerce-plugin-install.md)
+  - [Create A Landing Page](https://developers.zip.co/docs/woocommerce-setup-a-zip-landing-page.md)
+- [BigCommerce](https://developers.zip.co/docs/bigcommerce.md)
+  - [Activate The Payment Method](https://developers.zip.co/docs/bigcommerce-add-payment-option.md)
+  - [Create A Landing Page](https://developers.zip.co/docs/bigcommerce-create-a-landing-page.md)
+- [Opencart](https://developers.zip.co/docs/opencart.md)
+  - [Create A Landing Page](https://developers.zip.co/docs/opencart-create-a-landing-page.md)
+- [Prestashop](https://developers.zip.co/docs/prestashop.md)
+  - [Install The Plugin](https://developers.zip.co/docs/prestashop-payment-setup.md)
+  - [Create A Landing Page](https://developers.zip.co/docs/prestashop-create-zip-landing-page.md)
+- [Adobe Commerce Cloud (Magento)](https://developers.zip.co/docs/magento-2.md)
+  - [Install The Plugin - ANZ](https://developers.zip.co/docs/magento-2-install-plugin.md)
+  - [Create A Landing Page](https://developers.zip.co/docs/magento-2-create-a-zip-landing-page.md)
+- [Create A Landing Page](https://developers.zip.co/docs/neto-create-a-zip-landing-page.md)
+- [Other Platforms](https://developers.zip.co/docs/other-platforms.md)
+
+## Guides: Online Payments
+- [Payments Platforms](https://developers.zip.co/docs/payment-gateways.md)
+
+## Guides: Marketing & Messaging
+- [Getting Started](https://developers.zip.co/docs/introducing-zips-smart-messaging.md)
+- [Best Practices](https://developers.zip.co/docs/best-practice-implementation.md)
+- [Widgets, Banners & Icons Overview](https://developers.zip.co/docs/zip-smart-widget.md)
+  - [About The Widgets](https://developers.zip.co/docs/zip-smart-widget-1.md)
+  - [Product & Cart Widget](https://developers.zip.co/docs/product-cart-widget.md)
+  - [Landing Page](https://developers.zip.co/docs/landing-page.md)
+- [Marketing Guidelines & Assets](https://developers.zip.co/docs/zip-marketing-assets.md)
+
+## API Reference: Getting Started
+- [API References](https://developers.zip.co/reference/api-docs.md)
+
+## Pages
+- [Accounts Error Scenarios](https://developers.zip.co/page/accounts-error-scenarios.md)
+- [Charges Error Scenarios](https://developers.zip.co/page/charges-error-scenarios.md)
+- [Shopify On-Site Messaging](https://developers.zip.co/page/shopify-on-site-messaging.md)

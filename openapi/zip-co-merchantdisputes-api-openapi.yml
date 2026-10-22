@@ -1,0 +1,1314 @@
+openapi: 3.2.0
+info:
+  title: Gateway Merchant Disputes API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: MerchantDisputes
+paths:
+  /merchant-disputes/search:
+    get:
+      tags:
+      - MerchantDisputes
+      summary: Search Merchant Disputes
+      operationId: SearchMerchantDisputes
+      parameters:
+      - name: merchantId
+        in: query
+        description: The Merchant's ID
+        schema:
+          type: string
+          format: uuid
+      - name: StartDate
+        in: query
+        description: Return disputes after the given date.
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        description: Return disputes before the given date.
+        schema:
+          type: string
+          format: date-time
+      - name: Status
+        in: query
+        description: 'If set, filter disputes by their status. e.g.
+
+          - WarningNeedsResponse,
+
+          - WarningUnderReview,
+
+          - WarningClosed,
+
+          - NeedsResponse,
+
+          - UnderReview,
+
+          - ChargeRefunded,
+
+          - Won,
+
+          - Lost,'
+        schema:
+          type: string
+      - name: DateColumnFilter
+        in: query
+        description: 'Date Filter - default is dispute date.
+
+          - DisputeDate
+
+          - RespondByDate
+
+          - SettledDate'
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The number of results per page.
+        schema:
+          type: integer
+          format: int32
+      - name: Page
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          format: int32
+      - name: OrderBy
+        in: query
+        description: An ordering specification.
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult'
+  /merchant-disputes:
+    get:
+      tags:
+      - MerchantDisputes
+      summary: Get Merchant Dispute by id
+      operationId: GetMerchantDisputeById
+      parameters:
+      - name: merchantId
+        in: query
+        description: The Merchant's ID
+        schema:
+          type: string
+          format: uuid
+      - name: DisputeId
+        in: query
+        description: The dispute id.
+        schema:
+          type: string
+          format: uuid
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult'
+  /merchant-disputes/close:
+    post:
+      tags:
+      - MerchantDisputes
+      summary: Accept Losing the dispute and Close the dispute
+      operationId: AcceptDispute
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        description: Dispute close request details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.AcceptDispute_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /merchant-disputes/submit-evidence:
+    post:
+      tags:
+      - MerchantDisputes
+      summary: Merchant submit all evidence for the dispute. Submissions are final
+      operationId: SubmitDisputeEvidence
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        description: Merchant and Dispute information and submitted evidence.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /merchant-disputes/file:
+    post:
+      tags:
+      - MerchantDisputes
+      summary: Upload an evidence file using a blob.
+      operationId: UploadDisputeEvidenceFile
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        description: A blob to be submitted
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.MerchantDisputesController_UploadDisputeEvidenceFileRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.MerchantDisputesController_UploadDisputeEvidenceFileRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.MerchantDisputesController_UploadDisputeEvidenceFileRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.MerchantDisputesController_UploadDisputeEvidenceFileRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+    delete:
+      tags:
+      - MerchantDisputes
+      summary: Delete dispute evidence file
+      operationId: DeleteDisputeEvidenceFile
+      parameters:
+      - name: merchantId
+        in: query
+        description: The Merchant's ID
+        schema:
+          type: string
+          format: uuid
+      - name: DisputeId
+        in: query
+        description: The dispute id.
+        schema:
+          type: string
+          format: uuid
+      - name: Category
+        in: query
+        description: 'Receipt,
+
+          RefundPolicy,
+
+          ServiceDocumentation,
+
+          ShippingDocumentation,
+
+          CancellationPolicy,
+
+          CustomerCommunication,
+
+          CustomerSignature,
+
+          DuplicateChargeDocumentation,
+
+          UncategorizedFile,'
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+    get:
+      tags:
+      - MerchantDisputes
+      summary: Downliad dispute evidence file by category or file id
+      operationId: DownloadDisputeEvidenceFile
+      parameters:
+      - name: merchantId
+        in: query
+        description: The Merchant's ID
+        schema:
+          type: string
+          format: uuid
+      - name: DisputeId
+        in: query
+        description: The dispute id.
+        schema:
+          type: string
+          format: uuid
+      - name: Category
+        in: query
+        description: 'Receipt,
+
+          RefundPolicy,
+
+          ServiceDocumentation,
+
+          ShippingDocumentation,
+
+          CancellationPolicy,
+
+          CustomerCommunication,
+
+          CustomerSignature,
+
+          DuplicateChargeDocumentation,
+
+          UncategorizedFile,'
+        schema:
+          type: string
+      - name: FileId
+        in: query
+        description: If specified, we are removing a specific file. Otherwise use QuadPay.Gateway.MerchantDisputes.Queries.DownloadDisputeEvidenceFile.Query.Category.
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+            text/json:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /merchant-disputes/file/bulk:
+    post:
+      tags:
+      - MerchantDisputes
+      summary: Upload multiple evidence files using SAS URLs.
+      operationId: UploadDisputeEvidenceFiles
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        description: A blob to be submitted
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    QuadPay.Gateway.MerchantDisputes.Commands.AcceptDispute_Command:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: The merchant's Id.
+          format: uuid
+        disputeId:
+          type: string
+          description: The dispute id.
+          format: uuid
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command_File:
+      type: object
+      properties:
+        category:
+          type:
+          - string
+          - 'null'
+          description: 'Receipt,
+
+            RefundPolicy,
+
+            ServiceDocumentation,
+
+            ShippingDocumentation,
+
+            CancellationPolicy,
+
+            CustomerCommunication,
+
+            CustomerSignature,
+
+            DuplicateChargeDocumentation,
+
+            UncategorizedFile,'
+        blob:
+          type:
+          - string
+          - 'null'
+          description: A blob with a SAS token. There is no assumption where this is hosted.
+          format: uri
+        fileName:
+          type:
+          - string
+          - 'null'
+          description: Setting a filename if it's not the same as the blob.
+        contentType:
+          type:
+          - string
+          - 'null'
+          description: Indicate the content type of the blob. application/pdf etc.
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult_DisputeItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dispute Id - identifier of this dispute.
+          format: uuid
+        externalDisputeId:
+          type:
+          - string
+          - 'null'
+          description: External Party Dispute Id - informational.
+        customerFirstName:
+          type:
+          - string
+          - 'null'
+        customerLastName:
+          type:
+          - string
+          - 'null'
+        paymentPlanId:
+          type: string
+          format: uuid
+        orderNumber:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'A value like:
+
+            NeedsResponse
+
+            Lost = 0
+
+            Waived = 1 (not returned from merchants.api)
+
+            Won = 2
+
+            UnderReview = 3
+
+            Closed = 4
+
+            WonPartially = 5
+
+            Internal = 6
+
+            BelowThreshold = 7'
+        reason:
+          type:
+          - string
+          - 'null'
+          description: 'A value like:
+
+            BankCannotProcess = 0,
+
+            CheckReturned = 1,
+
+            CreditNotProcessed = 2,
+
+            CustomerInitiated = 3,
+
+            DebitNotAuthorized = 4,
+
+            Duplicate = 5,
+
+            Fraudulent = 6,
+
+            General = 7,
+
+            IncorrectAccountDetails = 8,
+
+            InsufficientFunds = 9,
+
+            ProductNotReceived = 10,
+
+            ProductUnacceptable = 11,
+
+            SubscriptionCanceled = 12,
+
+            Unrecognized = 13,'
+        disputedOn:
+          type: string
+          format: date-time
+        evidenceDueOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        settledOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        disputedAmount:
+          type: number
+          format: double
+        currencyCode:
+          type:
+          - string
+          - 'null'
+        orderAmount:
+          type: number
+          format: double
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.MerchantDisputesController_UploadDisputeEvidenceFileRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: The merchant's Id.
+          format: uuid
+        disputeId:
+          type: string
+          description: The dispute id.
+          format: uuid
+        category:
+          type:
+          - string
+          - 'null'
+          description: 'Receipt,
+
+            RefundPolicy,
+
+            ServiceDocumentation,
+
+            ShippingDocumentation,
+
+            CancellationPolicy,
+
+            CustomerCommunication,
+
+            CustomerSignature,
+
+            DuplicateChargeDocumentation,
+
+            UncategorizedFile,'
+        blob:
+          type:
+          - string
+          - 'null'
+          description: A blob with a SAS token. There is no assumption where this is hosted.
+          format: uri
+        fileName:
+          type:
+          - string
+          - 'null'
+          description: Setting a filename if it's not the same as the blob.
+        contentType:
+          type:
+          - string
+          - 'null'
+          description: Indicate the content type of the blob. application/pdf etc.
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier for the object.
+        created:
+          type: string
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          format: date-time
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          description: The time at which the file expires and is no longer available in epoch seconds.
+          format: date-time
+        filename:
+          type:
+          - string
+          - 'null'
+          description: A filename for the file, suitable for saving to a filesystem.
+        category:
+          type:
+          - string
+          - 'null'
+          description: 'File category for dispute evidence.
+
+            Receipt,
+
+            RefundPolicy,
+
+            ServiceDocumentation,
+
+            ShippingDocumentation,
+
+            CancellationPolicy,
+
+            CustomerCommunication,
+
+            CustomerSignature,
+
+            DuplicateChargeDocumentation,
+
+            UncategorizedFile,'
+        size:
+          type: integer
+          description: The size in bytes of the file object.
+          format: int64
+        title:
+          type:
+          - string
+          - 'null'
+          description: A user friendly title for the document.
+        type:
+          type:
+          - string
+          - 'null'
+          description: The type of the file returned (e.g., csv, pdf, jpg, or png).
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Models.DisputeResult:
+      type: object
+      properties:
+        disputeDetail:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidence:
+      type: object
+      properties:
+        receipt:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        refundPolicy:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        refundPolicyDisclosure:
+          type:
+          - string
+          - 'null'
+          description: 'Documentation demonstrating that the customer was shown your refund policy prior
+
+            to purchase.'
+        refundRefusalExplanation:
+          type:
+          - string
+          - 'null'
+          description: A justification for why the customer is not entitled to a refund.
+        serviceDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date on which the customer received or began receiving the purchased service,
+
+            in a clear human-readable format.'
+        serviceDocumentation:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        shippingAddress:
+          type:
+          - string
+          - 'null'
+          description: 'The address to which a physical product was shipped. You should try to include
+
+            as complete address information as possible.'
+        shippingCarrier:
+          type:
+          - string
+          - 'null'
+          description: 'The delivery service that shipped a physical product, such as Fedex, UPS, USPS,
+
+            etc. If multiple carriers were used for this purchase, please separate them with
+
+            commas.'
+        shippingDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date on which a physical product began its route to the shipping address,
+
+            in a clear human-readable format.'
+        shippingDocumentation:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        shippingTrackingNumber:
+          type:
+          - string
+          - 'null'
+          description: 'The tracking number for a physical product, obtained from the delivery service.
+
+            If multiple tracking numbers were generated for this purchase, please separate
+
+            them with commas.'
+        uncategorizedFile:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        productDescription:
+          type:
+          - string
+          - 'null'
+          description: A description of the product or service that was sold.
+        duplicateChargeExplanation:
+          type:
+          - string
+          - 'null'
+          description: 'An explanation of the difference between the disputed charge versus the prior
+
+            charge that appears to be a duplicate.'
+        accessActivityLog:
+          type:
+          - string
+          - 'null'
+          description: 'Any server or activity logs showing proof that the customer accessed or downloaded
+
+            the purchased digital product. This information should include IP addresses,
+
+            corresponding timestamps, and any detailed recorded activity.'
+        billingAddress:
+          type:
+          - string
+          - 'null'
+          description: The billing address provided by the customer.
+        cancellationPolicy:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        cancellationPolicyDisclosure:
+          type:
+          - string
+          - 'null'
+          description: 'An explanation of how and when the customer was shown your refund policy prior
+
+            to purchase.'
+        cancellationRebuttal:
+          type:
+          - string
+          - 'null'
+          description: A justification for why the customer's subscription was not canceled.
+        customerCommunication:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        customerEmailAddress:
+          type:
+          - string
+          - 'null'
+          description: The email address of the customer.
+        customerName:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer.
+        customerPurchaseIp:
+          type:
+          - string
+          - 'null'
+          description: The IP address that the customer used when making the purchase.
+        customerSignature:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        duplicateChargeDocumentation:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        duplicateChargeId:
+          type:
+          - string
+          - 'null'
+          description: 'The payment ID for the prior charge which appears to be a duplicate of the disputed
+
+            charge.'
+        uncategorizedText:
+          type:
+          - string
+          - 'null'
+          description: Any additional evidence or statements.
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult:
+      type: object
+      properties:
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult_DisputeItem'
+        total:
+          type: integer
+          format: int32
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeIssuerEvidence:
+      type: object
+      properties:
+        evidenceType:
+          type:
+          - string
+          - 'null'
+          description: 'Type of issuer evidence supplied.
+
+            Retrieval,
+
+            Chargeback,
+
+            Response,'
+        textEvidence:
+          type:
+          - string
+          - 'null'
+          description: Free-form, text-based issuer evidence.
+        fileEvidence:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+          description: '(Expanded)
+
+            List of up to 5 (ID of a file upload) File-based issuer evidence.'
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: The merchant's Id.
+          format: uuid
+        disputeId:
+          type: string
+          description: The dispute id.
+          format: uuid
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob_Command_File'
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dispute Id - identifier of this dispute.
+          format: uuid
+        externalDisputeId:
+          type:
+          - string
+          - 'null'
+          description: External Party Dispute Id - informational.
+        disputedAmount:
+          type: number
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        isChargeRefundable:
+          type: boolean
+          description: 'If true, it is still possible to refund the disputed payment. Once the payment
+
+            has been fully refunded, no further funds will be withdrawn from your Stripe
+
+            account as a result of this dispute.'
+        evidenceDueOn:
+          type:
+          - string
+          - 'null'
+          description: 'Date by which evidence must be submitted in order to successfully challenge dispute.
+
+            Will be null if the customer''s bank or credit card company doesn''t allow a response
+
+            for this particular dispute.'
+          format: date-time
+        disputedOn:
+          type: string
+          format: date-time
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'A value like:
+
+            NeedsResponse
+
+            Lost = 0
+
+            Waived = 1 (not returned from merchants.api)
+
+            Won = 2
+
+            UnderReview = 3
+
+            Closed = 4
+
+            WonPartially = 5
+
+            Internal = 6
+
+            BelowThreshold = 7'
+        reason:
+          type:
+          - string
+          - 'null'
+          description: 'A value like:
+
+            BankCannotProcess = 0,
+
+            CheckReturned = 1,
+
+            CreditNotProcessed = 2,
+
+            CustomerInitiated = 3,
+
+            DebitNotAuthorized = 4,
+
+            Duplicate = 5,
+
+            Fraudulent = 6,
+
+            General = 7,
+
+            IncorrectAccountDetails = 8,
+
+            InsufficientFunds = 9,
+
+            ProductNotReceived = 10,
+
+            ProductUnacceptable = 11,
+
+            SubscriptionCanceled = 12,
+
+            Unrecognized = 13,'
+        evidence:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidence'
+        orderId:
+          type: string
+          format: uuid
+        orderNumber:
+          type:
+          - string
+          - 'null'
+        customerFirstName:
+          type:
+          - string
+          - 'null'
+        customerLastName:
+          type:
+          - string
+          - 'null'
+        customerEmail:
+          type:
+          - string
+          - 'null'
+        issuerEvidence:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeIssuerEvidence'
+        orderAmount:
+          type: number
+          format: double
+        orderDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        disputeFeeAmount:
+          type: number
+          format: double
+        reinstatedAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        settledOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        evidenceSubmittedOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        acceptedOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentProcessorUnavailable:
+          type: boolean
+        orderMerchantReference:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence_Command:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: The merchant's Id.
+          format: uuid
+        disputeId:
+          type: string
+          description: The dispute id.
+          format: uuid
+        receipt:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        refundPolicy:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        refundPolicyDisclosure:
+          type:
+          - string
+          - 'null'
+          description: 'Documentation demonstrating that the customer was shown your refund policy prior
+
+            to purchase.'
+        refundRefusalExplanation:
+          type:
+          - string
+          - 'null'
+          description: A justification for why the customer is not entitled to a refund.
+        serviceDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date on which the customer received or began receiving the purchased service,
+
+            in a clear human-readable format.'
+        serviceDocumentation:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        shippingAddress:
+          type:
+          - string
+          - 'null'
+          description: 'The address to which a physical product was shipped. You should try to include
+
+            as complete address information as possible.'
+        shippingCarrier:
+          type:
+          - string
+          - 'null'
+          description: 'The delivery service that shipped a physical product, such as Fedex, UPS, USPS,
+
+            etc. If multiple carriers were used for this purchase, please separate them with
+
+            commas.'
+        shippingDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date on which a physical product began its route to the shipping address,
+
+            in a clear human-readable format.'
+        shippingDocumentation:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        shippingTrackingNumber:
+          type:
+          - string
+          - 'null'
+          description: 'The tracking number for a physical product, obtained from the delivery service.
+
+            If multiple tracking numbers were generated for this purchase, please separate
+
+            them with commas.'
+        uncategorizedFile:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        productDescription:
+          type:
+          - string
+          - 'null'
+          description: A description of the product or service that was sold.
+        duplicateChargeExplanation:
+          type:
+          - string
+          - 'null'
+          description: 'An explanation of the difference between the disputed charge versus the prior
+
+            charge that appears to be a duplicate.'
+        accessActivityLog:
+          type:
+          - string
+          - 'null'
+          description: 'Any server or activity logs showing proof that the customer accessed or downloaded
+
+            the purchased digital product. This information should include IP addresses,
+
+            corresponding timestamps, and any detailed recorded activity.'
+        billingAddress:
+          type:
+          - string
+          - 'null'
+          description: The billing address provided by the customer.
+        cancellationPolicy:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        cancellationPolicyDisclosure:
+          type:
+          - string
+          - 'null'
+          description: 'An explanation of how and when the customer was shown your refund policy prior
+
+            to purchase.'
+        cancellationRebuttal:
+          type:
+          - string
+          - 'null'
+          description: A justification for why the customer's subscription was not canceled.
+        customerCommunication:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        customerEmailAddress:
+          type:
+          - string
+          - 'null'
+          description: The email address of the customer.
+        customerName:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer.
+        customerPurchaseIp:
+          type:
+          - string
+          - 'null'
+          description: The IP address that the customer used when making the purchase.
+        customerSignature:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        duplicateChargeDocumentation:
+          $ref: '#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail_DisputeEvidenceFile'
+        duplicateChargeId:
+          type:
+          - string
+          - 'null'
+          description: 'The payment ID for the prior charge which appears to be a duplicate of the disputed
+
+            charge.'
+        uncategorizedText:
+          type:
+          - string
+          - 'null'
+          description: Any additional evidence or statements.
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

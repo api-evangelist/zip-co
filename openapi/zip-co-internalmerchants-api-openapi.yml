@@ -1,0 +1,180 @@
+openapi: 3.2.0
+info:
+  title: Gateway Internal Merchants API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: InternalMerchants
+paths:
+  /internal/merchants/payment-schedules:
+    post:
+      tags:
+      - InternalMerchants
+      summary: Recomputes payment schedules for the given merchant and order amount without…
+      operationId: GetPaymentSchedules
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Query'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Query'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Query'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Query'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Result'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Result'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Result'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Result:
+      type: object
+      properties:
+        availablePaymentSchedules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.PaymentScheduleSummary'
+          description: The available payment schedules for the merchant.
+        paymentSchedules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.PaymentScheduleSummary'
+          description: The payment schedules that are valid for the order amount.
+        isPi4Configured:
+          type: boolean
+          description: If Pi4 is configured as a payment schedule on Nexus.
+        isLegacyPayIn4Fallback:
+          type: boolean
+          description: True when Pay-in-4 was added because the merchant hasn't configured it.
+      additionalProperties: false
+    QuadPay.Gateway.Checkout.Models.PaymentSchedulePolicy:
+      enum:
+      - legacy
+      - merchantConfigurationIsAuthoritative
+      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules_Query:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        orderAmount:
+          type: number
+          format: double
+        isZeroOrderAmount:
+          type: boolean
+          description: When true, allows QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules.Query.OrderAmount of zero for integrations that support a zero-total checkout.
+        paymentSchedulePolicy:
+          $ref: '#/components/schemas/QuadPay.Gateway.Checkout.Models.PaymentSchedulePolicy'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.PaymentScheduleSummary:
+      type: object
+      properties:
+        installmentCount:
+          type: integer
+          format: int32
+        installmentIntervalDays:
+          type: integer
+          format: int32
+        minimumOrderAmount:
+          type: number
+          format: double
+        maximumOrderAmount:
+          type: number
+          format: double
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

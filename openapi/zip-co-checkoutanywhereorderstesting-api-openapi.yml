@@ -1,0 +1,287 @@
+openapi: 3.2.0
+info:
+  title: Gateway Checkout Anywhere Orders Testing API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: CheckoutAnywhereOrdersTesting
+paths:
+  /checkoutanywhere/testing/orders/authorize:
+    post:
+      tags:
+      - CheckoutAnywhereOrdersTesting
+      operationId: AuthorizeCheckoutAnywhereTestOrder
+      parameters:
+      - name: canLink
+        in: query
+        schema:
+          type: boolean
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+      summary: Authorize checkout anywhere test order
+      x-summary-source: derived
+components:
+  schemas:
+    QuadPay.Gateway.CheckoutAnywhere.Models.Order:
+      type: object
+      properties:
+        amount:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets the order amount (Includes tax + shipping).
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the currency of the order amount (defaults to TerritorySettings).
+        skipEstimate:
+          type:
+          - boolean
+          - 'null'
+          description: 'If this is true and order amount is not null, we will not prompt the customer for an amount in CKOA.
+
+            If this is true and order amount is null, we need to prompt the user for an amount in CKOA.
+
+            If this is false, we need to prompt the user for an amount in CKOA.
+
+            Used by Edge for now / Chrome Autofill will eventually use this.
+
+            Nullable because not all merchants are using this.'
+      additionalProperties: false
+    QuadPay.Gateway.CheckoutAnywhere.Models.Customer:
+      type: object
+      properties:
+        firstName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's first name.
+        lastName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's last name.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's email address.
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's phone number.
+        dateOfBirth:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's date of birth.
+          format: date-time
+        billingAddress:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.Address'
+        canLink:
+          type:
+          - boolean
+          - 'null'
+          description: 'If this property is set to true, Zip will return a refreshToken/expiresIn value to the merchant during the callback
+
+            Used by Edge for now.'
+      additionalProperties: false
+    QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult:
+      type: object
+      properties:
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        redirectTo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters:
+      type: object
+      properties:
+        bypassOTPEmail:
+          type:
+          - string
+          - 'null'
+          description: This to bypass OTP by using the auth-mock token.
+      additionalProperties: false
+    QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere:
+      type: object
+      properties:
+        publicKey:
+          type:
+          - string
+          - 'null'
+        merchantId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the merchant ID.
+          format: uuid
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: 'Gets or sets optional metadata attached to the checkout.
+
+            Possible values
+
+            1) Apk (If the order was initiated from an app)
+
+            2) Url (If the order was initiated from a merchant website)
+
+            3) Id (If google pay order)'
+        order:
+          $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.Order'
+        customer:
+          $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.Customer'
+        redirectCancelUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url that the user will be redirected to if they cancel the checkout.
+        redirectConfirmUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url that the user will be redirected to after they have completed the checkout.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the merchant reference of the checkout.
+        testData:
+          $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters'
+        rememberMeKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets jwtToken RememberMeKey for fetching RefreshToken from FEO.
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.Address:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the first address line.
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the second address line.
+        city:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the city.
+        state:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the state or province.
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the postal code.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the country.
+      additionalProperties: false
+      description: Encapsulates a physical address.
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

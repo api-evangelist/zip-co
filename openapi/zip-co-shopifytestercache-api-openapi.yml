@@ -1,0 +1,59 @@
+openapi: 3.2.0
+info:
+  title: Gateway Shopify Tester Cache API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: ShopifyTesterCache
+paths:
+  /shopifyPayments/testing/{requestType}/{key}:
+    get:
+      tags:
+      - ShopifyTesterCache
+      operationId: GetCallbackRequest
+      parameters:
+      - name: requestType
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.ShopifyPayments.Testing.Models.RequestType'
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+      summary: Get callback request
+      x-summary-source: derived
+components:
+  schemas:
+    QuadPay.Gateway.ShopifyPayments.Testing.Models.RequestType:
+      enum:
+      - authorization
+      - capture
+      - refund
+      - void
+      type: string
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

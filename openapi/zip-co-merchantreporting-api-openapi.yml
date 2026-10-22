@@ -1,0 +1,181 @@
+openapi: 3.2.0
+info:
+  title: Gateway Merchant Reporting API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: MerchantReporting
+paths:
+  /transactions/{merchantId}/v3:
+    get:
+      tags:
+      - MerchantReporting
+      summary: An list of statement transactions in JSON format the same return as csv in json…
+      operationId: GetInvoiceTransactionsByDateRange
+      parameters:
+      - name: merchantId
+        in: path
+        description: The Merchant's ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: TransferId
+        in: query
+        description: The transferId to filter merchant transactions by
+        schema:
+          type: string
+      - name: Page
+        in: query
+        description: The page subset of the total results
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        description: The number of records to include in the result set
+        schema:
+          type: integer
+          format: int32
+      - name: MinimumCreateDateTime
+        in: query
+        description: The begin created transaction date of the query search
+        schema:
+          type: string
+          format: date-time
+      - name: MaximumCreateDateTime
+        in: query
+        description: The ending created transaction date of the query search
+        schema:
+          type: string
+          format: date-time
+      - name: OrderBy
+        in: query
+        description: The order sort of the result set
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Transactions.Queries.BaseSearchMerchantTransactions_BaseQuery_1_OrderByEnum__System.IO.Stream__System.Private.CoreLib__Version_10.0.0.0__Culture_neutral__PublicKeyToken_7cec85d7bea7798e'
+      - name: X-QP-Signature
+        in: query
+        description: The signature for merchant validation
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+  /transactions/{merchantId}/v3/csv:
+    get:
+      tags:
+      - MerchantReporting
+      summary: A list of statement transactions, downloaded as a CSV file
+      operationId: GetInvoiceTransactionsByDateRangeAsCsv
+      parameters:
+      - name: merchantId
+        in: path
+        description: The Merchant's ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: TransferId
+        in: query
+        description: The transferId to filter merchant transactions by
+        schema:
+          type: string
+      - name: Page
+        in: query
+        description: The page subset of the total results
+        schema:
+          type: integer
+          format: int32
+      - name: PageSize
+        in: query
+        description: The number of records to include in the result set
+        schema:
+          type: integer
+          format: int32
+      - name: MinimumCreateDateTime
+        in: query
+        description: The begin created transaction date of the query search
+        schema:
+          type: string
+          format: date-time
+      - name: MaximumCreateDateTime
+        in: query
+        description: The ending created transaction date of the query search
+        schema:
+          type: string
+          format: date-time
+      - name: OrderBy
+        in: query
+        description: The order sort of the result set
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Transactions.Queries.BaseSearchMerchantTransactions_BaseQuery_1_OrderByEnum__System.IO.Stream__System.Private.CoreLib__Version_10.0.0.0__Culture_neutral__PublicKeyToken_7cec85d7bea7798e'
+      - name: X-QP-Signature
+        in: query
+        description: The signature for merchant validation
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    ? QuadPay.Gateway.Transactions.Queries.BaseSearchMerchantTransactions_BaseQuery_1_OrderByEnum__System.IO.Stream__System.Private.CoreLib__Version_10.0.0.0__Culture_neutral__PublicKeyToken_7cec85d7bea7798e
+    : enum:
+      - dateAsc
+      - dateDesc
+      type: string
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

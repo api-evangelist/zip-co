@@ -1,0 +1,33 @@
+name: Zip pricing
+generated: '2026-10-20'
+method: searched
+source: https://zip.co/us/for-business/pricing
+audience: business-product
+pricing_basis: ad-valorem
+published: true
+currency: USD
+delivery:
+  delivery: managed
+note: US merchant pricing for accepting Zip BNPL; API access is included ("Access to platform plugins, developer documentation, and help center"). "No, there are no monthly or annual fees to offer Zip. Our commercial model is transactional".
+plan_count: 2
+plans:
+- name: Standard
+  description: For startups, SMBs, and growing businesses
+  price_text: Starting at 5.9% + 30¢ per transaction
+  features:
+  - Essential reporting and analytics
+  - Fast and easy integration with quick launch
+  - 'Standard support: Monday to Friday, 9:00 a.m. to 5:00 p.m.'
+  - Access to platform plugins, developer documentation, and help center
+  limits: []
+- name: Custom
+  description: For enterprise businesses needing tailored solutions
+  price: Custom pricing
+  price_text: Custom pricing
+  features:
+  - Integration support for complex checkouts
+  - Dedicated account manager
+  - Access to co-marketing, affiliate, and beta testing programs
+  - 24/7 support and SLA options
+  - Custom data & analytics on customer profiles
+  limits: []

@@ -1,0 +1,15 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://docs.us.zip.co/llms.txt
+- https://developers.zip.co/llms.txt
+- openapi/zip-co-gateway-api-openapi.yml
+versioning: No published versioning policy. The Global API versions in the path (/global/v1/); the US Gateway API paths are unversioned and its OpenAPI declares info.version 1.0. Mobile SDKs are semver-released on CocoaPods/Maven/npm (see packages/).
+deprecation: No deprecation policy or Sunset/Deprecation header usage documented. Neither docs index (docs.us.zip.co/llms.txt, developers.zip.co/llms.txt) lists a changelog or deprecation page.
+sla: 'Not published for the API. Pricing page lists "24/7 support and SLA options" on the Custom (enterprise) plan only.'
+sla_source: https://zip.co/us/for-business/pricing
+status_page: https://status.us.zip.co/
+deprecated_operations:
+- operationId: CalculateMerchantFeeForPaymentPlan
+  path: POST /orders/calculate-merchant-fees
+  source: openapi/zip-co-gateway-api-openapi.yml

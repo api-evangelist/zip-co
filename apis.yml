@@ -1,12 +1,11 @@
 name: Zip
-description: >
-  Zip is a global BNPL (Buy Now Pay Later) and digital wallet platform that
-  enables merchants to offer flexible payment plans to consumers at checkout.
-  Zip provides REST APIs for checkout integration, order creation, payment
-  capture, refunds, voids, merchant management, disputes, and consumer payment
-  plan verification. The platform supports in-store, online, and ecommerce
-  plugin integrations across Australia, New Zealand, the United States, Canada,
-  and other markets.
+
+description: Zip (Zip Co Ltd) is a global Buy Now Pay Later (BNPL) and digital wallet platform that enables merchants to offer flexible payment
+  plans to consumers at checkout. Zip provides REST APIs for checkout integration, order creation, payment capture, refunds, voids, merchant management,
+  disputes, and consumer payment plan verification, documented on its developer portal (developers.zip.co) and its US documentation site (docs.us.zip.co).
+  The platform supports in-store, online, and ecommerce plugin integrations across Australia, New Zealand, the United States, Canada, and other
+  markets.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -18,6 +17,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -30,161 +30,1195 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zip-co.png
+
 tags:
-  - Buy Now Pay Later
-  - Digital Wallet
-  - Payments
-  - Fintech
-  - Checkout
-  - Merchant Services
-  - Australia
+- Buy Now Pay Later
+- Digital Wallet
+- Payments
+- Fintech
+- Checkout
+- Merchant Services
+- Australia
+
 tags_raw:
-  - BNPL
-  - Buy Now Pay Later
-  - Digital Wallet
-  - Payments
-  - Fintech
-  - Checkout
-  - Merchant Services
-  - Australia
+- BNPL
+- Buy Now Pay Later
+- Digital Wallet
+- Payments
+- Fintech
+- Checkout
+- Merchant Services
+- Australia
+
 created: '2026-06-13'
-modified: '2026-06-13'
+
+modified: '2026-10-20'
+
 url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/apis.yml
+
 specificationVersion: '0.23'
-apis:
-  - name: Zip Global Merchant API
-    description: >
-      The Zip Global Merchant API provides checkout, charge, capture, refund,
-      and cancellation operations for merchants integrating Zip BNPL payments
-      into their online storefront. It uses Bearer token authentication and
-      supports idempotent requests.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.zip.co/reference/api-docs
-    baseURL: https://sand.merchant-api.com
-    tags:
-      - Checkout
-      - Charges
-      - Refunds
-      - Buy Now Pay Later
-    tags_raw:
-      - Checkout
-      - Charges
-      - Refunds
-      - BNPL
-    properties:
-      - type: Documentation
-        url: https://developers.zip.co/reference/api-docs
-      - type: GettingStarted
-        url: https://developers.zip.co/v2/docs/getting-started
-      - type: Sandbox
-        url: https://developers.zip.co/v2/docs/sandbox
-      - type: Authentication
-        url: https://developers.zip.co/v2/reference/authentication
-      - type: OpenAPI
-        url: https://developers.zip.co/llms.txt
-    contact:
-      - FN: Zip Developer Support
-        url: https://help.zip.co/hc/en-au
-        email: ''
 
-  - name: Zip US Gateway API
-    description: >
-      The Zip US Gateway API enables North American merchants to authorize,
-      capture, refund, void, and confirm orders. It uses HMAC-SHA256 signature
-      authentication via the X-QP-Signature header and supports both
-      synchronous and asynchronous response modes with webhook callbacks.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.us.zip.co/docs/api-implementation
-    baseURL: https://gateway.us.zip.co
-    tags:
-      - Order
-      - Payments
-      - Refunds
-      - Webhook
-      - North America
-    tags_raw:
-      - Orders
-      - Payments
-      - Refunds
-      - Webhooks
-      - North America
-    properties:
-      - type: Documentation
-        url: https://docs.us.zip.co/docs/api-implementation
-      - type: GettingStarted
-        url: https://docs.us.zip.co/docs/introduction
-      - type: CustomIntegration
-        url: https://docs.us.zip.co/docs/custom-integration-guide
-      - type: Callbacks
-        url: https://developers.zip.co/v9-US/docs/callbacks
-    contact:
-      - FN: Zip US Integrations Team
-        url: https://docs.us.zip.co/docs/introduction
-        email: ''
-
-  - name: Zip NZ In-Store API
-    description: >
-      The Zip New Zealand In-Store API enables point-of-sale merchants to
-      create, commit, cancel, rollback, and query orders in physical retail
-      environments. It uses Bearer token authentication derived from OAuth
-      client credentials and supports both merchant-level and store-level
-      authentication scopes.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.zip.co/v4/docs/instore-api-specification
-    baseURL: https://zip.co/nz/api
-    tags:
-      - In-Store
-      - Point-of-Sale
-      - Order
-      - New Zealand
-    tags_raw:
-      - In-Store
-      - Point of Sale
-      - Orders
-      - New Zealand
-    properties:
-      - type: Documentation
-        url: https://developers.zip.co/v4/docs/instore-api-specification
-      - type: Sandbox
-        url: https://sandbox.zip.co/nz/api
-    contact:
-      - FN: Zip NZ Partner Support
-        url: https://zip.co/nz/business
-        email: ''
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
 
 common:
-  - type: DomainSecurity
-    url: security/zip-co-domain-security.yml
-  - type: Portal
-    url: https://developers.zip.co
-  - type: Website
-    url: https://zip.co
-  - type: MerchantPortal
-    url: https://merchant.us.zip.co
-  - type: GitHubOrg
-    url: https://github.com/zipMoney
-  - type: SDKs
-    url: https://github.com/zipMoney
-  - type: Plans
-    url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/plans/plans.yml
-  - type: RateLimits
-    url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/rate-limits/rate-limits.yml
-  - type: FinOps
-    url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/finops/finops.yml
-  - type: Security
-    url: https://zip.co/security
-  - type: PrivacyPolicy
-    url: https://zip.co/au/privacy
-  - type: TermsOfService
-    url: https://zip.co/au/terms
-  - type: Help
-    url: https://help.zip.co
-  - type: Blog
-    url: https://zip.co/au/blog
-  - type: Status
-    url: https://status.zip.co
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/zip-co
-  - type: Twitter
-    url: https://twitter.com/zipmoney
+- type: AgenticAccess
+  url: agentic-access/zip-co-agentic-access.yml
+- type: Plans
+  url: plans/zip-co-plans-pricing.yml
+- type: Spectral
+  url: rules/zip-co-rules.yml
+- type: JSONLD
+  url: json-ld/zip-co-context.jsonld
+- type: Vocabulary
+  url: vocabulary/zip-co-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/zip-co-data-model.yml
+- type: Components
+  url: components/zip-co-components.yml
+- type: Idempotency
+  url: conventions/zip-co-conventions.yml
+- type: Conventions
+  url: conventions/zip-co-conventions.yml
+- type: Sandbox
+  url: sandbox/zip-co-sandbox.yml
+- type: Lifecycle
+  url: lifecycle/zip-co-lifecycle.yml
+- type: DeclineCodes
+  url: errors/zip-co-decline-codes.yml
+- type: ErrorCatalog
+  url: errors/zip-co-problem-types.yml
+- type: Conformance
+  url: conformance/zip-co-conformance.yml
+- type: Overlay
+  url: overlays/zip-co-gateway-api-1-overlay.yaml
+- type: LLMsTxt
+  url: llms/zip-co-llms.txt
+- type: LLMsTxt
+  url: llms/zip-co-developers-llms.txt
+- type: SecurityTxt
+  url: well-known/zip-co-status-security.txt
+- type: WellKnown
+  url: well-known/zip-co-well-known.yml
+- type: Hosts
+  url: hosts/zip-co-hosts.yml
+- type: IntegrationEdges
+  url: integrations/zip-co-integration-edges.yml
+- type: Vendors
+  url: vendors/zip-co-vendors.yml
+- type: Packages
+  url: packages/zip-co-packages.yml
+- type: Authentication
+  url: authentication/zip-co-authentication.yml
+- type: DomainSecurity
+  url: security/zip-co-domain-security.yml
+- type: DeveloperPortal
+  url: https://developers.zip.co
+- type: Website
+  url: https://zip.co
+- type: MerchantPortal
+  url: https://merchant.us.zip.co
+- type: GitHubOrganization
+  url: https://github.com/zipMoney
+- type: SDKs
+  url: https://github.com/zipMoney
+- type: Plans
+  url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/plans/plans.yml
+- type: RateLimits
+  url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/rate-limits/rate-limits.yml
+- type: FinOps
+  url: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/finops/finops.yml
+- type: Security
+  url: https://zip.co/au/security
+- type: PrivacyPolicy
+  url: https://zip.co/au/page/privacy
+- type: TermsOfService
+  url: https://zip.co/au/page/terms-and-conditions
+- type: Support
+  url: https://help.zip.co
+- type: Documentation
+  url: https://docs.us.zip.co/docs
+- type: APIReference
+  url: https://developers.zip.co/reference/api-docs
+- type: GettingStarted
+  url: https://developers.zip.co/docs/getting-started
+- type: StatusPage
+  url: https://status.us.zip.co/
+- type: Pricing
+  url: https://zip.co/us/for-business/pricing
+- type: SignUp
+  url: https://zip.co/us/sign-up
+- type: PrivacyPolicy
+  url: https://zip.co/us/privacy-policy
+- type: Support
+  url: https://help.us.zip.co
+- type: Newsroom
+  url: https://zip.co/investors/news
+- type: Postman
+  url: https://docs.us.zip.co/docs/postman-guide
+- type: LLMsTxt
+  url: https://developers.zip.co/llms.txt
+- type: About
+  url: https://zip.co/about-us
+- type: Careers
+  url: https://zip.co/careers
+- type: Investors
+  url: https://zip.co/investors
+
+apis:
+- name: Zip Global Merchant API
+  description: >
+    The Zip Global Merchant API provides checkout, charge, capture, refund, and cancellation operations
+    for merchants integrating Zip BNPL payments into their online storefront. It uses Bearer token authentication
+    and supports idempotent requests.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Checkout
+  - Charges
+  - Refunds
+  - Buy Now Pay Later
+  tags_raw:
+  - Checkout
+  - Charges
+  - Refunds
+  - BNPL
+  properties:
+  - type: Documentation
+    url: https://developers.zip.co/reference/api-docs
+  - type: GettingStarted
+    url: https://developers.zip.co/v2/docs/getting-started
+  - type: Sandbox
+    url: https://developers.zip.co/v2/docs/sandbox
+  - type: Authentication
+    url: https://developers.zip.co/v2/reference/authentication
+  - type: LLMsTxt
+    url: https://developers.zip.co/llms.txt
+  contact:
+  - FN: Zip Developer Support
+    url: https://help.zip.co/hc/en-au
+    email: ''
+  aid: zip-co:zip-global-merchant-api
+- name: Zip NZ In-Store API
+  description: >
+    The Zip New Zealand In-Store API enables point-of-sale merchants to create, commit, cancel, rollback,
+    and query orders in physical retail environments. It uses Bearer token authentication derived from
+    OAuth client credentials and supports both merchant-level and store-level authentication scopes.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.zip.co/v4/docs/instore-api-specification
+  baseURL: https://zip.co/nz/api
+  tags:
+  - In-Store
+  - Point-of-Sale
+  - Order
+  - New Zealand
+  tags_raw:
+  - In-Store
+  - Point of Sale
+  - Orders
+  - New Zealand
+  properties:
+  - type: Documentation
+    url: https://developers.zip.co/v4/docs/instore-api-specification
+  - type: Sandbox
+    url: https://sandbox.zip.co/
+  contact:
+  - FN: Zip NZ Partner Support
+    url: https://zip.co/nz/business
+    email: ''
+  aid: zip-co:zip-nz-in-store-api
+- aid: zip-co:zip-co-charges-api
+  name: Zip Charges API
+  description: The Charges API from Zip — 5 operation(s) for charges.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Charges
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-charges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-checkoutanywhereorderstesting-api
+  name: Zip Checkout Anywhere Orders Testing API
+  description: >-
+    The CheckoutAnywhereOrdersTesting API from Zip — 1 operation(s) for checkoutanywhereorderstesting.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - CheckoutAnywhereOrdersTesting
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-checkoutanywhereorderstesting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-checkoutinternal-api
+  name: Zip Checkout Internal API
+  description: The CheckoutInternal API from Zip — 2 operation(s) for checkoutinternal.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - CheckoutInternal
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-checkoutinternal-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-checkouts-api
+  name: Zip Checkouts API
+  description: The Checkouts API from Zip — 2 operation(s) for checkouts.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Checkouts
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-checkouts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-disputes-api
+  name: Zip Disputes API
+  description: The Disputes API from Zip — 6 operation(s) for disputes.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Disputes
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-disputes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-echo-api
+  name: Zip Echo API
+  description: The Echo API from Zip — 1 operation(s) for echo.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Echo
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-echo-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-echoconnectivity-api
+  name: Zip Echo Connectivity API
+  description: The EchoConnectivity API from Zip — 1 operation(s) for echoconnectivity.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - EchoConnectivity
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-echoconnectivity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-edgeshop-api
+  name: Zip Edge Shop API
+  description: The EdgeShop API from Zip — 1 operation(s) for edgeshop.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - EdgeShop
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-edgeshop-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-internalmerchants-api
+  name: Zip Internal Merchants API
+  description: The InternalMerchants API from Zip — 1 operation(s) for internalmerchants.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - InternalMerchants
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-internalmerchants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-internalprequalifications-api
+  name: Zip Internal Pre Qualifications API
+  description: >-
+    The InternalPreQualifications API from Zip — 2 operation(s) for internalprequalifications.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - InternalPreQualifications
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-internalprequalifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-merchantconfiguration-api
+  name: Zip Merchant Configuration API
+  description: The MerchantConfiguration API from Zip — 2 operation(s) for merchantconfiguration.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - MerchantConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-merchantconfiguration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-merchantdisputes-api
+  name: Zip Merchant Disputes API
+  description: The MerchantDisputes API from Zip — 6 operation(s) for merchantdisputes.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - MerchantDisputes
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-merchantdisputes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-merchantpayments-api
+  name: Zip Merchant Payments API
+  description: The MerchantPayments API from Zip — 2 operation(s) for merchantpayments.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - MerchantPayments
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-merchantpayments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-merchantreporting-api
+  name: Zip Merchant Reporting API
+  description: The MerchantReporting API from Zip — 2 operation(s) for merchantreporting.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - MerchantReporting
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-merchantreporting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-merchantsettlementsreporting-api
+  name: Zip Merchant Settlements Reporting API
+  description: >-
+    The MerchantSettlementsReporting API from Zip — 2 operation(s) for merchantsettlementsreporting.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - MerchantSettlementsReporting
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-merchantsettlementsreporting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-merchantsettlementsreportingv-api
+  name: Zip Merchant Settlements Reporting V API
+  description: >-
+    The MerchantSettlementsReportingV API from Zip — 2 operation(s) for merchantsettlementsreportingv.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - MerchantSettlementsReportingV
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-merchantsettlementsreportingv-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-orders-api
+  name: Zip Orders API
+  description: The Orders API from Zip — 12 operation(s) for orders.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-orderstesting-api
+  name: Zip Orders Testing API
+  description: The OrdersTesting API from Zip — 1 operation(s) for orderstesting.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - OrdersTesting
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-orderstesting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-prequalifications-api
+  name: Zip Pre Qualifications API
+  description: The PreQualifications API from Zip — 2 operation(s) for prequalifications.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - PreQualifications
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-prequalifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-promotions-api
+  name: Zip Promotions API
+  description: The Promotions API from Zip — 2 operation(s) for promotions.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Promotions
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-promotions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-reports-api
+  name: Zip Reports API
+  description: The Reports API from Zip — 2 operation(s) for reports.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-reports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-shopifycallbacktester-api
+  name: Zip Shopify Callback Tester API
+  description: The ShopifyCallbackTester API from Zip — 1 operation(s) for shopifycallbacktester.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - ShopifyCallbackTester
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-shopifycallbacktester-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-shopifytestercache-api
+  name: Zip Shopify Tester Cache API
+  description: The ShopifyTesterCache API from Zip — 1 operation(s) for shopifytestercache.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - ShopifyTesterCache
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-shopifytestercache-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-stripedirect-api
+  name: Zip Stripe Direct API
+  description: The StripeDirect API from Zip — 7 operation(s) for stripedirect.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - StripeDirect
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-stripedirect-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-token-api
+  name: Zip Token API
+  description: The Token API from Zip — 1 operation(s) for token.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-token-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-transaction-api
+  name: Zip Transaction API
+  description: The Transaction API from Zip — 2 operation(s) for transaction.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-transactions-api
+  name: Zip Transactions API
+  description: The Transactions API from Zip — 2 operation(s) for transactions.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-transactiontesting-api
+  name: Zip Transaction Testing API
+  description: The TransactionTesting API from Zip — 2 operation(s) for transactiontesting.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - TransactionTesting
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-transactiontesting-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+- aid: zip-co:zip-co-virtual-api
+  name: Zip Virtual API
+  description: The Virtual API from Zip — 1 operation(s) for virtual.
+  humanURL: https://developers.zip.co/reference/api-docs
+  baseURL: https://sand.merchant-api.com
+  tags:
+  - Virtual
+  properties:
+  - type: OpenAPI
+    url: openapi/zip-co-virtual-api-openapi.yml
+  - type: Documentation
+    url: https://docs.us.zip.co/docs/api-implementation
+  - type: GettingStarted
+    url: https://docs.us.zip.co/docs/introduction
+  - type: APIReference
+    url: https://docs.us.zip.co/reference
+  - type: Postman
+    url: https://docs.us.zip.co/docs/postman-guide
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-virtual-commands-authorize-virtual-api-command-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json
+  - type: JSONSchema
+    url: json-schema/zip-co-quad-pay-gateway-orders-commands-capture-order-command-schema.json
+x-coverage:
+  state: covered
+  reason: null
+  detail: 'Identity pass 2026-10-20: zip.co serves "Where to Pay Later with Zip" (200) and github.com/zipMoney is "Zip Co Ltd". Removed dead pointers
+    zip.co/au/blog (404), sandbox.zip.co/nz/api (410), docs.us.zip.co/docs/custom-integration-guide (404), developers.zip.co/v9-US/docs/callbacks
+    (404) and status.zip.co (no response); replaced with status.us.zip.co linked from zip.co/us. help.zip.co answers a Cloudflare challenge (403)
+    to our crawler and is kept. No blog page was found on the site.'
+  evidence:
+  - url: https://zip.co
+    status: 200
+  - url: https://github.com/zipMoney
+    status: 200
+  - url: https://developers.zip.co/docs/getting-started
+    status: 200
+  - url: https://status.us.zip.co/
+    status: 200
+  - url: https://zip.co/au/blog
+    status: 404
+  - url: https://sandbox.zip.co/nz/api
+    status: 410
+  - url: https://help.zip.co/hc/en-au
+    status: 403
+x-enrichment:
+  date: '2026-10-20'
+  status: enriched
+  artifacts_added: 47
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

@@ -1,0 +1,43 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://docs.us.zip.co/llms.txt
+- https://docs.us.zip.co/docs/zip-widget
+- https://docs.us.zip.co/docs/api-javascript-sdk
+- https://developers.zip.co/docs/zip-smart-widget
+description: Embeddable client-side Zip surfaces - on-site messaging widgets and in-context/hosted checkout - distinct from the server API and the mobile SDKs (packages/).
+docs: https://docs.us.zip.co/docs/widget-integration-v3
+libraries:
+- name: https://cdn.us.zip.co/v1/zip.js
+  purpose: US widget and JavaScript checkout SDK loader (sandbox https://cdn.sand.us.zip.co/v1/zip.js); widget tag via ?tagname=quadpay-widget
+- name: https://static.zip.co/lib/js/zm-widget-js/dist/zip-widget.min.js
+  purpose: AU Zip Smart Widget loader
+families:
+  messaging_widgets_us:
+  - name: Zip Widget
+    docs: https://docs.us.zip.co/docs/zip-widget
+    detail: Installment messaging on product detail pages, mini cart and cart
+  - name: Payment Widget
+    docs: https://docs.us.zip.co/docs/payment-widget
+    detail: Checkout page payment-method messaging
+  - name: Second Chance Widget
+    docs: https://docs.us.zip.co/docs/second-chance-widget
+  - name: Lightweight JavaScript Widgets (PDP/Cart, Second Chance)
+    docs: https://docs.us.zip.co/docs/lightweight-javascript-widgets
+  messaging_widgets_au:
+  - name: Zip Smart Widget
+    docs: https://developers.zip.co/docs/zip-smart-widget
+  - name: Product/Cart Widget
+    docs: https://developers.zip.co/docs/product-cart-widget
+  - name: Landing page
+    docs: https://developers.zip.co/docs/landing-page
+  hosted_prebuilt:
+  - name: JavaScript SDK in-context checkout (window.quadpay.apiCheckout.openCheckout)
+    docs: https://docs.us.zip.co/docs/api-javascript-sdk
+    detail: Client-side version of the Gateway API that "removes the need for a full-page redirect"; requires a server-side HMAC signature.
+  - name: Virtual Checkout
+    docs: https://docs.us.zip.co/docs/virtual-checkout
+  - name: Express Checkout / Express Virtual Checkout
+    docs: https://docs.us.zip.co/docs/express-checkout
+  - name: Zip hosted checkout redirect (Gateway API /orders/authorize form POST)
+    docs: https://docs.us.zip.co/docs/api-implementation

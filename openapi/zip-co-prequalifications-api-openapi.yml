@@ -1,0 +1,387 @@
+openapi: 3.2.0
+info:
+  title: Gateway Pre Qualifications API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: PreQualifications
+paths:
+  /orders/pre-qualifications/assess:
+    post:
+      tags:
+      - PreQualifications
+      summary: Assess pre-qualification for the given customer
+      operationId: AssessPreQualification
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Command'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Command'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Command'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Command'
+      responses:
+        '429':
+          description: Too Many Requests
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result'
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result'
+  /orders/pre-qualifications/initialize:
+    post:
+      tags:
+      - PreQualifications
+      summary: Initialize pre-qualification for the given customer
+      operationId: InitializePreQualification
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Results.InitializePreQualificationResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Results.InitializePreQualificationResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Results.InitializePreQualificationResult'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    QuadPay.Gateway.Orders.PreQualifications.Results.InitializePreQualificationResult:
+      type: object
+      properties:
+        preQualificationId:
+          type: string
+          format: uuid
+        redirectTo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_InstallmentResult:
+      type: object
+      properties:
+        sequenceNumber:
+          type: integer
+          format: int32
+        amount:
+          type: number
+          format: double
+        date:
+          type: string
+          format: date-time
+        totalAmountIncludingFees:
+          type: number
+          format: double
+        feeAmount:
+          type: number
+          format: double
+      additionalProperties: false
+      description: Represents an installment in a payment plan
+    QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Result:
+      type: object
+      properties:
+        customerPortalUrl:
+          type:
+          - string
+          - 'null'
+        maxApprovedAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        requestedAmount:
+          type: number
+          format: double
+        disclosure:
+          type:
+          - string
+          - 'null'
+        preQualificationStatus:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationStatus'
+        message:
+          type:
+          - string
+          - 'null'
+        availablePaymentPlans:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_PaymentPlanResult'
+          description: Available payment plans details for approved pre-qualifications
+      additionalProperties: false
+    QuadPay.Gateway.Orders.PreQualifications.Models.OrderDetails:
+      type: object
+      properties:
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        currency:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification:
+      type: object
+      properties:
+        preQualificationId:
+          type: string
+          format: uuid
+        merchantId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_Command:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Gets or sets the merchant ID.
+          format: uuid
+        customer:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Models.CustomerDetails'
+        order:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Models.OrderDetails'
+        consentTimestamp:
+          type: string
+          format: date-time
+        forceNewCustomer:
+          type: boolean
+          description: 'Determines whether a new customer id should be created against the phone number
+
+            (For non-production environments only)'
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationStatus:
+      enum:
+      - approved
+      - declined
+      - continue
+      - limitExceeded
+      type: string
+    QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_PaymentPlanResult:
+      type: object
+      properties:
+        installmentCount:
+          type: integer
+          format: int32
+        installmentIntervalDays:
+          type: integer
+          format: int32
+        installments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification_InstallmentResult'
+        downPaymentAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+      description: Represents a payment plan available for the pre-qualification
+    QuadPay.Gateway.Orders.PreQualifications.Models.CustomerDetails:
+      type: object
+      properties:
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        dateOfBirth:
+          type: string
+          format: date-time
+        email:
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+        address:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.Address'
+        ipAddress:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.Orders.Models.Address:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the first address line.
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the second address line.
+        city:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the city.
+        state:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the state or province.
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the postal code.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the country.
+      additionalProperties: false
+      description: Encapsulates a physical address.
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

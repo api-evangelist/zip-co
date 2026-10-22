@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  title: Gateway Promotions API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: Promotions
+paths:
+  /Promotions/eligible:
+    get:
+      tags:
+      - Promotions
+      operationId: GetEligiblePromotions
+      parameters:
+      - name: CustomerId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: OrderAmount
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+      summary: Get eligible promotions
+      x-summary-source: derived
+  /Promotions/checkout/offers:
+    post:
+      tags:
+      - Promotions
+      operationId: GetEligiblePromotionsCustomerRequest
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Query'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Query'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Query'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Query'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Result'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Result'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Result'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+        '403':
+          description: Forbidden
+      security:
+      - Bearer: []
+      summary: Get eligible promotions customer request
+      x-summary-source: derived
+components:
+  schemas:
+    QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Query:
+      type: object
+      properties:
+        checkoutToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.Promotions.Queries.GetEligiblePromotionsCustomerRequest_Result:
+      type: object
+      properties:
+        discountAmount:
+          type: number
+          format: double
+        promotionToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

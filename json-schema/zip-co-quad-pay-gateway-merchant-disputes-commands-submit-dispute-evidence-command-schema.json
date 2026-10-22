@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zip-co/main/json-schema/zip-co-quad-pay-gateway-merchant-disputes-commands-submit-dispute-evidence-command-schema.json",
+  "title": "QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence+Command",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence+Command",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "string",
+      "description": "The merchant's Id.",
+      "format": "uuid"
+    },
+    "disputeId": {
+      "type": "string",
+      "description": "The dispute id.",
+      "format": "uuid"
+    },
+    "receipt": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "refundPolicy": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "refundPolicyDisclosure": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Documentation demonstrating that the customer was shown your refund policy prior\r\nto purchase."
+    },
+    "refundRefusalExplanation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A justification for why the customer is not entitled to a refund."
+    },
+    "serviceDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The date on which the customer received or began receiving the purchased service,\r\nin a clear human-readable format."
+    },
+    "serviceDocumentation": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "shippingAddress": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The address to which a physical product was shipped. You should try to include\r\nas complete address information as possible."
+    },
+    "shippingCarrier": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The delivery service that shipped a physical product, such as Fedex, UPS, USPS,\r\netc. If multiple carriers were used for this purchase, please separate them with\r\ncommas."
+    },
+    "shippingDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The date on which a physical product began its route to the shipping address,\r\nin a clear human-readable format."
+    },
+    "shippingDocumentation": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "shippingTrackingNumber": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The tracking number for a physical product, obtained from the delivery service.\r\nIf multiple tracking numbers were generated for this purchase, please separate\r\nthem with commas."
+    },
+    "uncategorizedFile": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "productDescription": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A description of the product or service that was sold."
+    },
+    "duplicateChargeExplanation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "An explanation of the difference between the disputed charge versus the prior\r\ncharge that appears to be a duplicate."
+    },
+    "accessActivityLog": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Any server or activity logs showing proof that the customer accessed or downloaded\r\nthe purchased digital product. This information should include IP addresses,\r\ncorresponding timestamps, and any detailed recorded activity."
+    },
+    "billingAddress": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The billing address provided by the customer."
+    },
+    "cancellationPolicy": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "cancellationPolicyDisclosure": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "An explanation of how and when the customer was shown your refund policy prior\r\nto purchase."
+    },
+    "cancellationRebuttal": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A justification for why the customer's subscription was not canceled."
+    },
+    "customerCommunication": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "customerEmailAddress": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The email address of the customer."
+    },
+    "customerName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The name of the customer."
+    },
+    "customerPurchaseIp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The IP address that the customer used when making the purchase."
+    },
+    "customerSignature": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "duplicateChargeDocumentation": {
+      "$ref": "#/$defs/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile"
+    },
+    "duplicateChargeId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The payment ID for the prior charge which appears to be a duplicate of the disputed\r\ncharge."
+    },
+    "uncategorizedText": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Any additional evidence or statements."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Unique identifier for the object."
+        },
+        "created": {
+          "type": "string",
+          "description": "Time at which the object was created. Measured in seconds since the Unix epoch.",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The time at which the file expires and is no longer available in epoch seconds.",
+          "format": "date-time"
+        },
+        "filename": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A filename for the file, suitable for saving to a filesystem."
+        },
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "File category for dispute evidence.\r\nReceipt,\r\nRefundPolicy,\r\nServiceDocumentation,\r\nShippingDocumentation,\r\nCancellationPolicy,\r\nCustomerCommunication,\r\nCustomerSignature,\r\nDuplicateChargeDocumentation,\r\nUncategorizedFile,"
+        },
+        "size": {
+          "type": "integer",
+          "description": "The size in bytes of the file object.",
+          "format": "int64"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A user friendly title for the document."
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The type of the file returned (e.g., csv, pdf, jpg, or png)."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

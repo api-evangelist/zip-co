@@ -1,0 +1,64 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://developers.zip.co/page/charges-error-scenarios
+- https://developers.zip.co/page/accounts-error-scenarios
+format: json
+envelope: 'Zip Global (AU) API errors carry an error type string (e.g. validation_error, unauthorised, account_locked) with an HTTP status; not RFC 9457 problem+json. The docs give scenario tables, not a schema.'
+docs: https://developers.zip.co/page/charges-error-scenarios
+problems:
+- status: 400
+  type: validation_error
+  title: Validation error
+  description: Missing mandatory parameters in request (ie amount, currency, account ID...); amount in an invalid format (0, negative amounts or 1.304); currency is not AUD.
+  remediation: Fix the request; Retry Allowed NO.
+- status: 400
+  type: exclusive_account
+  title: Exclusive account
+  description: Account is exclusive to a specific merchant only.
+  remediation: Retry Allowed NO.
+- status: 400
+  type: amount_invalid
+  title: Amount invalid
+  description: Capture amount greater than authorised amount; refund amount greater than the remaining captured total.
+  remediation: Correct the amount; Retry Allowed NO.
+- status: 401
+  type: unauthorised
+  title: Unauthorised
+  description: API key or access token is invalid (the Accounts page spells it `unauthorized`).
+  remediation: Check credentials for the environment; Retry Allowed NO.
+- status: 403
+  type: account_locked
+  title: Account locked
+  description: Account is temporarily locked as it has payment outstanding at Zip.
+  remediation: Retry Allowed NO; the lock lifts automatically once the customer is no longer in arrears.
+- status: 403
+  type: account_unavailable
+  title: Account unavailable
+  description: Account cannot be charged (ie Account or customer could be incorrect, account is no longer active).
+  remediation: Retry Allowed NO.
+- status: 403
+  type: account_insufficient_funds
+  title: Account insufficient funds
+  description: Account has insufficient balance for the Charge request.
+  remediation: Retry Allowed NO.
+- status: 403
+  type: invalid_state
+  title: Invalid state
+  description: The Charge has expired or has been already fully captured / is already fully refunded / is authorised but not captured yet. Docs note some cases currently return amount_invalid or charge_not_found instead.
+  remediation: Retry Allowed NO.
+- status: 404
+  type: not_found
+  title: Not found
+  description: Charge ID not provided.
+  remediation: Retry Allowed NO.
+- status: 404
+  type: charge_not_found
+  title: Charge not found
+  description: Charge ID is invalid or expired.
+  remediation: Retry Allowed NO.
+- status: 500
+  type: server_error
+  title: Server error
+  description: Unexpected error occured.
+  remediation: Not stated.

@@ -1,0 +1,655 @@
+openapi: 3.2.0
+info:
+  title: Gateway Charges API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: Charges
+paths:
+  /global/v1/charges:
+    post:
+      tags:
+      - Charges
+      summary: Creates or captures a charge on an existing checkout.
+      operationId: CreateCharge
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CreateChargeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/charges/{chargeId}/capture:
+    post:
+      tags:
+      - Charges
+      summary: Captures an existing charge.
+      operationId: CaptureCharge
+      parameters:
+      - name: chargeId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CaptureChargeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/charges/{chargeId}:
+    get:
+      tags:
+      - Charges
+      summary: Retrieves a charge by ID
+      operationId: GetCharge
+      parameters:
+      - name: chargeId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.GetChargeResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/charges/{chargeId}/refund:
+    post:
+      tags:
+      - Charges
+      summary: Refunds an existing charge.
+      operationId: RefundCharge
+      parameters:
+      - name: chargeId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.RefundChargeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/charges/{chargeId}/cancel:
+    post:
+      tags:
+      - Charges
+      summary: Voids (cancels) an existing charge.
+      operationId: VoidCharge
+      parameters:
+      - name: chargeId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.VoidChargeRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    Zip.Gateway.USPartnerPlatform.Models.ChargeAddress:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeShopper:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        middle_name:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        birthdate:
+          type:
+          - string
+          - 'null'
+        billing_address:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeBillingAddress'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.CreateChargeRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        authority:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeAuthority'
+        reference:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        capture:
+          type:
+          - boolean
+          - 'null'
+        shopper:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeShopper'
+        order:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeOrder'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeBillingAddress:
+      type: object
+      properties:
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeCustomer:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.RefundChargeRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        reference:
+          type:
+          - string
+          - 'null'
+        reason:
+          type:
+          - string
+          - 'null'
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeOrderItem:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        quantity:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        type:
+          type:
+          - string
+          - 'null'
+        reference:
+          type:
+          - string
+          - 'null'
+        item_uri:
+          type:
+          - string
+          - 'null'
+        image_uri:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.CaptureChargeRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        reference:
+          type:
+          - string
+          - 'null'
+        is_partial_capture:
+          type: boolean
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeOrder:
+      type: object
+      properties:
+        reference:
+          type:
+          - string
+          - 'null'
+        merchant_fee_for_payment_plan:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type: number
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        shipping:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeShipping'
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeOrderItem'
+        platform_reference:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeAuthority:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Zip.Gateway.USPartnerPlatform.Models.VoidChargeRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        reference:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeResponse:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        captured_amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        refunded_amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        created_date:
+          type:
+          - string
+          - 'null'
+        interest_free_months:
+          type:
+          - number
+          - 'null'
+          format: double
+        receipt_number:
+          type:
+          - number
+          - 'null'
+          format: double
+        product:
+          type:
+          - string
+          - 'null'
+        customer:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeCustomer'
+        customer_contribution:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.GetChargeResponse:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        reference:
+          type:
+          - string
+          - 'null'
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        captured_amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        refunded_amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        created_date:
+          type:
+          - string
+          - 'null'
+        customer:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeCustomer'
+        receipt_number:
+          type:
+          - number
+          - 'null'
+          format: double
+        product:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeShipping:
+      type: object
+      properties:
+        pickup:
+          type:
+          - boolean
+          - 'null'
+        address:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeAddress'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

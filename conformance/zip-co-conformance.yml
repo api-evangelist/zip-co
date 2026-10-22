@@ -1,0 +1,30 @@
+generated: '2026-10-20'
+method: searched
+source: https://zip.co/us/for-business/pricing
+standards:
+- id: pci-dss
+  conforms: claimed
+  evidence: https://zip.co/us/for-business/pricing - "Comprehensive security SOC 2, Type 2, PCI DSS compliance, and fraud protection keep your
+    data and transactions secure."
+- id: soc2-type2
+  conforms: claimed
+  evidence: https://zip.co/us/for-business/pricing - "Comprehensive security SOC 2, Type 2, PCI DSS compliance, and fraud protection keep your
+    data and transactions secure."
+- id: rfc9457
+  conforms: false
+  evidence: https://developers.zip.co/page/charges-error-scenarios - errors are bespoke error_type strings, not problem+json.
+- id: idempotency
+  conforms: partial
+  evidence: openapi/zip-co-gateway-api-openapi.yml - Idempotency-Key header on CreateCharge, CaptureCharge, RefundCharge, VoidCharge only.
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.1
+- id: openapi-3.1
+  conforms: true
+  evidence: the document declares 3.1.0
+- id: oauth2
+  conforms: true
+  evidence: 'securitySchemes: Bearer (oauth2), sec0 (oauth2)'
+- id: pagination
+  conforms: true
+  evidence: list operations take limit, page

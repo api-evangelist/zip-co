@@ -1,0 +1,2494 @@
+openapi: 3.2.0
+info:
+  title: Gateway Orders API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: Orders
+paths:
+  /google/orders/authorize:
+    get:
+      tags:
+      - Orders
+      summary: Creates a new context for the QPAW rails on Checkout Anywhere.
+      operationId: AuthorizeGoogleOrder
+      parameters:
+      - name: MerchantId
+        in: query
+        description: Gets or sets the merchant ID.
+        schema:
+          type: string
+          format: uuid
+      - name: Metadata
+        in: query
+        description: 'Gets or sets optional metadata attached to the checkout.
+
+          Possible values
+
+          1) Apk (If the order was initiated from an app)
+
+          2) Url (If the order was initiated from a merchant website)
+
+          3) Id (If google pay order)'
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Order.Amount
+        in: query
+        description: Gets or sets the order amount (Includes tax + shipping).
+        schema:
+          type: number
+          format: double
+      - name: Order.Currency
+        in: query
+        description: Gets or sets the currency of the order amount (defaults to TerritorySettings).
+        schema:
+          type: string
+      - name: Order.SkipEstimate
+        in: query
+        description: 'If this is true and order amount is not null, we will not prompt the customer for an amount in CKOA.
+
+          If this is true and order amount is null, we need to prompt the user for an amount in CKOA.
+
+          If this is false, we need to prompt the user for an amount in CKOA.
+
+          Used by Edge for now / Chrome Autofill will eventually use this.
+
+          Nullable because not all merchants are using this.'
+        schema:
+          type: boolean
+      - name: Customer.FirstName
+        in: query
+        description: Gets or sets the customer's first name.
+        schema:
+          type: string
+      - name: Customer.LastName
+        in: query
+        description: Gets or sets the customer's last name.
+        schema:
+          type: string
+      - name: Customer.Email
+        in: query
+        description: Gets or sets the customer's email address.
+        schema:
+          type: string
+      - name: Customer.Phone
+        in: query
+        description: Gets or sets the customer's phone number.
+        schema:
+          type: string
+      - name: Customer.DateOfBirth
+        in: query
+        description: Gets or sets the customer's date of birth.
+        schema:
+          type: string
+          format: date-time
+      - name: Customer.BillingAddress.Line1
+        in: query
+        description: Gets or sets the first address line.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.Line2
+        in: query
+        description: Gets or sets the second address line.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.City
+        in: query
+        description: Gets or sets the city.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.State
+        in: query
+        description: Gets or sets the state or province.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.PostalCode
+        in: query
+        description: Gets or sets the postal code.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.Country
+        in: query
+        description: Gets or sets the country.
+        schema:
+          type: string
+      - name: Customer.CanLink
+        in: query
+        description: 'If this property is set to true, Zip will return a refreshToken/expiresIn value to the merchant during the callback
+
+          Used by Edge for now.'
+        schema:
+          type: boolean
+      - name: RedirectCancelUrl
+        in: query
+        description: Gets or sets the url that the user will be redirected to if they cancel the checkout.
+        schema:
+          type: string
+      - name: RedirectConfirmUrl
+        in: query
+        description: Gets or sets the url that the user will be redirected to after they have completed the checkout.
+        schema:
+          type: string
+      - name: MerchantReference
+        in: query
+        description: Gets or sets the merchant reference of the checkout.
+        schema:
+          type: string
+      - name: TestData.BypassOTPEmail
+        in: query
+        description: This to bypass OTP by using the auth-mock token.
+        schema:
+          type: string
+      - name: RememberMeKey
+        in: query
+        description: Gets or sets jwtToken RememberMeKey for fetching RefreshToken from FEO.
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /checkoutanywhere/orders/authorize:
+    post:
+      tags:
+      - Orders
+      summary: Creates a new context for the QPAW rails on Checkout Anywhere via a POST…
+      operationId: PostAuthorizeCheckoutAnywhereOrder
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /orders/authorize:
+    post:
+      tags:
+      - Orders
+      summary: Creates a new checkout context and redirects to the checkout website using…
+      operationId: AuthorizeOrderPost
+      parameters:
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.AuthorizeOrder'
+      responses:
+        '302':
+          description: Found
+    get:
+      tags:
+      - Orders
+      summary: Creates a new checkout context and redirects to the checkout website using…
+      operationId: AuthorizeOrderGet
+      parameters:
+      - name: OrderId
+        in: query
+        description: Gets or sets the unique ID to use for order creation
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantId
+        in: query
+        description: Gets or sets the merchant Id.
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantConfiguration.Name
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.ClientId
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.ClientSecret
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.MinimumOrderAmount
+        in: query
+        schema:
+          type: integer
+          format: int32
+          deprecated: true
+      - name: MerchantConfiguration.MaximumOrderAmount
+        in: query
+        schema:
+          type: integer
+          format: int32
+          deprecated: true
+      - name: MerchantConfiguration.ProductScheduleOptions
+        in: query
+        schema:
+          type: object
+          properties:
+            None:
+              $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions'
+            Classic:
+              $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions'
+            PayIn3Months:
+              $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions'
+            PayIn6Months:
+              $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions'
+            PayIn12Months:
+              $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions'
+          additionalProperties: false
+      - name: MerchantConfiguration.NetworkIdRegex
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.NetworkNameRegex
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.SettlementDelaySeconds
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: MerchantConfiguration.IsEnabled
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.IsIntegrationVerified
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.FeeSettings.Currency
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.FeeSettings.Percent
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: MerchantConfiguration.FeeSettings.FlatFee
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: MerchantConfiguration.FeeSettings.Bands
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      - name: MerchantConfiguration.FeeSettings.RequiresMfppCalculation
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.FeeSettings.IsMerchantFeeForPaymentPlanCosmetic
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.DeferredOrderExpirationConfirmation
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: MerchantConfiguration.DeferFundsCapture
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.ExpressOverAuthBuffer
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: MerchantConfiguration.OverAuthBuffer
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: MerchantConfiguration.ShouldVirtualCardRemainOpen
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.IsLongDurationLendingEnabled
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.LongDurationLendingMinimumAmount
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: MerchantConfiguration.LongDurationLendingMaximumAmount
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: MerchantConfiguration.ECommercePlatformAccessToken
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.CanStartCheckout
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.CanDoOrderPurchasingOperations
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.CanDoOrderRefundingOperations
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.CanRetrieveReporting
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.BrandingType
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.BankPartner
+        in: query
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.BankPartner'
+      - name: MerchantConfiguration.MerchantType
+        in: query
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantType'
+      - name: MerchantConfiguration.CallbackDomains
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.CallbackDomain'
+      - name: MerchantConfiguration.CustomerFee.CustomerFeeTiers
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.FeeTier'
+      - name: MerchantConfiguration.IsPreQualificationsEnabled
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.PaymentSchedules
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.PaymentSchedule'
+      - name: MerchantConfiguration.TokenizationConfiguration.IsEnabled
+        in: query
+        schema:
+          type: boolean
+      - name: MerchantConfiguration.TokenizationConfiguration.TokenizationProvider
+        in: query
+        schema:
+          $ref: '#/components/schemas/QuadPay.Domain.Core.Enums.TokenizationProvider'
+      - name: MerchantConfiguration.TokenizationConfiguration.GravyConfiguration.GravyMerchantId
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.TokenizationConfiguration.GravyConfiguration.GravyPaymentServiceId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantConfiguration.ParentMerchantAssociations
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantAssociation'
+      - name: MerchantConfiguration.ChildMerchantAssociations
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantAssociation'
+      - name: MerchantConfiguration.PlatformMerchantMapping.MerchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantConfiguration.PlatformMerchantMapping.Platform
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.PlatformMerchantMapping.PlatformAccountId
+        in: query
+        schema:
+          type: string
+      - name: MerchantConfiguration.Id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantConfiguration.StreamEventNumber
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: MerchantConfiguration.StreamPosition
+        in: query
+        schema:
+          maxLength: 150
+          type: string
+      - name: MerchantConfiguration.HasStreamProcessingFaulted
+        in: query
+        schema:
+          type: boolean
+      - name: Order.AddOns
+        in: query
+        description: Gets or sets the AddOnRequest that are apart of this order
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.AddOnRequest'
+      - name: Order.FirstName
+        in: query
+        description: Gets or sets the customer's first name.
+        schema:
+          type: string
+      - name: Order.LastName
+        in: query
+        description: Gets or sets the customer's last name.
+        schema:
+          type: string
+      - name: Order.Email
+        in: query
+        description: Gets or sets the customer's email address.
+        schema:
+          type: string
+      - name: Order.Phone
+        in: query
+        description: Gets or sets the customer's phone number.
+        schema:
+          type: string
+      - name: Order.ShippingAddress.Line1
+        in: query
+        description: Gets or sets the first address line.
+        schema:
+          type: string
+      - name: Order.ShippingAddress.Line2
+        in: query
+        description: Gets or sets the second address line.
+        schema:
+          type: string
+      - name: Order.ShippingAddress.City
+        in: query
+        description: Gets or sets the city.
+        schema:
+          type: string
+      - name: Order.ShippingAddress.State
+        in: query
+        description: Gets or sets the state or province.
+        schema:
+          type: string
+      - name: Order.ShippingAddress.PostalCode
+        in: query
+        description: Gets or sets the postal code.
+        schema:
+          type: string
+      - name: Order.ShippingAddress.Country
+        in: query
+        description: Gets or sets the country.
+        schema:
+          type: string
+      - name: Order.BillingAddress.Line1
+        in: query
+        description: Gets or sets the first address line.
+        schema:
+          type: string
+      - name: Order.BillingAddress.Line2
+        in: query
+        description: Gets or sets the second address line.
+        schema:
+          type: string
+      - name: Order.BillingAddress.City
+        in: query
+        description: Gets or sets the city.
+        schema:
+          type: string
+      - name: Order.BillingAddress.State
+        in: query
+        description: Gets or sets the state or province.
+        schema:
+          type: string
+      - name: Order.BillingAddress.PostalCode
+        in: query
+        description: Gets or sets the postal code.
+        schema:
+          type: string
+      - name: Order.BillingAddress.Country
+        in: query
+        description: Gets or sets the country.
+        schema:
+          type: string
+      - name: Order.Currency
+        in: query
+        description: Gets or sets the currency the order amount is in (defaults to TerritorySettings).
+        schema:
+          type: string
+      - name: Order.Amount
+        in: query
+        description: Gets or sets the order amount.  This includes the tax and shipping amounts.
+        schema:
+          type: number
+          format: double
+      - name: Order.TaxAmount
+        in: query
+        description: Gets or sets the optional tax amount.
+        schema:
+          type: number
+          format: double
+      - name: Order.ShippingAmount
+        in: query
+        description: Gets or sets the optional shipping amount.
+        schema:
+          type: number
+          format: double
+      - name: Order.LineItems
+        in: query
+        description: Gets or sets the optional line items of what the user is purchasing.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.LineItem'
+      - name: Order.Description
+        in: query
+        description: Gets or sets a description for the order.
+        schema:
+          type: string
+      - name: Order.OrderNumber
+        in: query
+        description: Gets or sets the QuadPay order number.
+        schema:
+          type: string
+      - name: ShippingPreference.AllowedShippingLocations
+        in: query
+        description: List of states/countries the merchant will ship to.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation'
+      - name: ShippingPreference.DeniedShippingLocations
+        in: query
+        description: List of states/countries the merchant will not ship to.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation'
+      - name: ShippingPreference.DeniedPOBoxShippingLocations
+        in: query
+        description: List of states/countries with PO Boxes the merchant will not ship to
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation'
+      - name: Test
+        in: query
+        description: Gets or sets a value indicating whether this is a test order.
+        schema:
+          type: boolean
+      - name: Capture
+        in: query
+        description: Gets or sets a value indicating whether this order should be immediately captured.
+        schema:
+          type: boolean
+      - name: RedirectCancelUrl
+        in: query
+        description: Gets or sets the url that the user will be redirected to if they cancel the checkout.
+        schema:
+          type: string
+      - name: RedirectConfirmUrl
+        in: query
+        description: Gets or sets the url that the user will be redirected to after they have completed the checkout.
+        schema:
+          type: string
+      - name: Metadata
+        in: query
+        description: Gets or sets optional metadata attached to the checkout.
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Origin
+        in: query
+        description: 'Gets or sets the origin of the order. Usually the merchant''s website.
+
+          Can only be set internally.'
+        schema:
+          type: string
+      - name: GatewayHost
+        in: query
+        description: 'Gets or sets the gateway api host.
+
+          Can only be set internally.'
+        schema:
+          type: string
+      - name: CheckoutType
+        in: query
+        description: 'Gets or sets the type of the checkout. Defaults to Standard.
+
+          Can only be set internally.'
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Checkout.Models.CheckoutType'
+      - name: DeferOrderConfirmation
+        in: query
+        description: 'Gets or sets a value indicating whether or not to confirm the order upon customer checkout completion.  If true, the merchant
+
+          must make a secondary API call to confirm the order and begin the payment plan.  Default is false.'
+        schema:
+          type: boolean
+      - name: CheckoutFlow
+        in: query
+        description: Gets or sets the checkout flow for this order. Default is standard
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.CheckoutFlow'
+      - name: EntrySource
+        in: query
+        description: Gets or sets the entry source for this order. Default is EntrySource.Unknown
+        schema:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.EntrySource'
+      - name: Expiration
+        in: query
+        description: Gets or sets a unix timestamp representing the expiration time of the checkout in seconds.
+        schema:
+          type: integer
+          format: int64
+      - name: MerchantUrl
+        in: query
+        description: Gets or sets the merchant's url
+        schema:
+          type: string
+      - name: ReturnToMerchant
+        in: query
+        description: Gets or sets a boolean dictating if the Zip Checkout will redirect back to the merchant checkout on completion
+        schema:
+          type: boolean
+      - name: TokenizerSubdomain
+        in: query
+        description: 'Gets or sets a string assigning the tokenizer subdomain, if applicable. For merchants that use tokenizer gateways, such as CardConnect.com
+
+          will have a custom subdomain, i.e. http://{site}.cardconnect.com, that is used to perform callbacks and/or to tokenize the PAN data for the
+
+          virtual purchase. The tokenizer subdomain is set on the QuadPay button and retained through the callback so that virtual checkout can
+
+          formulate an API URL for the merchants tokenizer gateway.'
+        schema:
+          type: string
+      - name: additionalData.lastTransactionDate
+        in: query
+        description: The date of the customer's last transaction on a merchant's site.
+        schema:
+          type: string
+          format: date-time
+      - name: additionalData.accountCreationDate
+        in: query
+        description: The date the customer's account was created on a merchant's site.
+        schema:
+          type: string
+          format: date-time
+      - name: additionalData.customerLoggedIn
+        in: query
+        description: Indicates whether the customer is currently logged on a merchant's site.
+        schema:
+          type: boolean
+      - name: additionalData.CustomerIsMember
+        in: query
+        description: Indicates whether the customer is a member of the merchant's site.
+        schema:
+          type: boolean
+      - name: additionalData.MerchantRiskAssessment
+        in: query
+        description: The risk assessment score for the merchant.
+        schema:
+          type: string
+      - name: additionalData.SameDevice
+        in: query
+        description: Indicates whether the transaction was performed from the same device.
+        schema:
+          type: boolean
+      - name: additionalData.FulfillmentMethod
+        in: query
+        description: The method used to fulfill the order on a merchant's site.
+        schema:
+          type: string
+      - name: additionalData.CustomerTransactionCount
+        in: query
+        description: The total number of transactions made by the customer on a merchant's site.
+        schema:
+          type: integer
+          format: int32
+      - name: additionalData.CustomerAverageOrderValue
+        in: query
+        description: 'The average order value of the customer''s transactions on a merchant''s site.
+
+          Example format: 123.45 or 123'
+        schema:
+          type: string
+      - name: additionalData.CustomerFraudIncidents
+        in: query
+        description: Indicates whether the customer has previous fraud incidents.
+        schema:
+          type: boolean
+      - name: PublicKey
+        in: query
+        schema:
+          type: string
+      - name: RememberMeKey
+        in: query
+        description: Gets or sets the Remember Me JWE token for fetching a refresh token during checkout (CKO).
+        schema:
+          type: string
+      - name: SdkSource
+        in: query
+        description: Gets or sets the SDK source for this order, used to distinguish traffic origin in telemetry.
+        schema:
+          type: string
+      - name: MerchantReference
+        in: query
+        description: 'Gets or sets the unique merchant reference for this authorization.
+
+          Placed after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null.'
+        schema:
+          type: string
+      - name: BrandName
+        in: query
+        description: 'Gets or sets the brand name of the merchant for this order.
+
+          Placed after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null.'
+        schema:
+          type: string
+      - name: CallbackUrl
+        in: query
+        description: 'Gets or sets the status callback url.
+
+          Placed after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null.'
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '302':
+          description: Found
+  /orders/authorize-classic-api-sdk:
+    post:
+      tags:
+      - Orders
+      summary: Pop-out classic checkout.
+      operationId: AuthorizeSdkApiOrderPost
+      parameters:
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.AuthorizeOrder'
+      responses:
+        '302':
+          description: Found
+  /orders/{orderId}/capture:
+    post:
+      tags:
+      - Orders
+      summary: Captures funds for the specified order.
+      operationId: CaptureOrder
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: sync
+        in: query
+        schema:
+          type: boolean
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.CaptureOrder_Command'
+      responses:
+        '404':
+          description: Not Found
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderOperationResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+  /orders/{orderId}/refund:
+    post:
+      tags:
+      - Orders
+      summary: Refunds funds for the specified order and allocates them to the payment plan to…
+      operationId: RefundOrder
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: sync
+        in: query
+        schema:
+          type: boolean
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.RefundOrder_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderOperationResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /orders/{orderId}/void:
+    post:
+      tags:
+      - Orders
+      summary: Voids uncaptured funds for the specified order and allocates them to the…
+      operationId: VoidOrder
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: sync
+        in: query
+        schema:
+          type: boolean
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.VoidOrder_Command'
+      responses:
+        '204':
+          description: No Content
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderOperationResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /orders/{orderId}/confirm:
+    post:
+      tags:
+      - Orders
+      summary: Confirms the supplied authorized order and initiates the payment plan for the…
+      operationId: ConfirmOrder
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: sync
+        in: query
+        schema:
+          type: boolean
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.ConfirmOrder_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderOperationResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+  /orders/associate:
+    post:
+      tags:
+      - Orders
+      summary: Associates a merchant's unique order ID with an order after creation
+      operationId: AssociateMerchantPlatformIdToOrder
+      parameters:
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.AssociateMerchantPlatformIdToOrder_Command'
+      responses:
+        '204':
+          description: No Content
+  /orders/calculate-merchant-fees:
+    post:
+      tags:
+      - Orders
+      summary: Not supported anymore. Calculates merchant fees for the given order details.
+      operationId: CalculateMerchantFeeForPaymentPlan
+      parameters:
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.CalculateMerchantFees_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Commands.CalculateMerchantFees_Result'
+      deprecated: true
+  /orders/{orderId}/status:
+    get:
+      tags:
+      - Orders
+      summary: Returns Status of an order belong to the requesting Merchant
+      operationId: RetrieveOrderStatus
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: OrderId
+        in: query
+        description: Gets or sets the Id of the Order.
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantId
+        in: query
+        description: Gets or sets the MerchantId.
+        schema:
+          type: string
+          format: uuid
+      - name: Metadata
+        in: query
+        description: Gets or sets optional metadata.
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.RetrieveOrderStatus_Result'
+        '400':
+          description: Bad Request
+  /orders/{orderId}/detail:
+    get:
+      tags:
+      - Orders
+      summary: Returns Detail of an order belong to the requesting Merchant
+      operationId: RetrieveOrderDetail
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: OrderId
+        in: query
+        description: The Id of the Order.
+        schema:
+          type: string
+          format: uuid
+      - name: MerchantId
+        in: query
+        description: The Merchants Id.
+        schema:
+          type: string
+          format: uuid
+      - name: Timestamp
+        in: query
+        description: 'The time in unix format. (Seconds since Epoch).
+
+          <para />
+
+          Links are only valid for 1 hour.'
+        schema:
+          type: integer
+          format: int64
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail'
+        '404':
+          description: Not Found
+        '503':
+          description: Service Unavailable
+        '400':
+          description: Bad Request
+components:
+  schemas:
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantFeeDetails:
+      type: object
+      properties:
+        feeAmount:
+          type: number
+          format: double
+        feePercent:
+          type: number
+          format: double
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.AssociationType:
+      enum:
+      - addOn
+      type: string
+    QuadPay.Gateway.Orders.Models.OrderOperationResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        merchantId:
+          type: string
+          format: uuid
+        orderId:
+          type: string
+          format: uuid
+        currency:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        test:
+          type: boolean
+        success:
+          type: boolean
+        message:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        operation:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.EntrySource:
+      enum:
+      - unknown
+      - secondChance
+      - zipButton
+      - merchantButton
+      - googlePayOnline
+      - googlePayApp
+      - checkoutAnywhereApi
+      - usPartnerPlatform
+      - microsoftEdge
+      - stripeDirect
+      type: string
+    QuadPay.Domain.Core.Enums.TokenizationProvider:
+      enum:
+      - none
+      - gravy
+      type: string
+    QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation:
+      type: object
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      description: Will help us identify if merchants want to ship or not ship to a location.
+    QuadPay.Gateway.Orders.Models.ShippingPreference:
+      type: object
+      properties:
+        allowedShippingLocations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation'
+          description: List of states/countries the merchant will ship to.
+        deniedShippingLocations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation'
+          description: List of states/countries the merchant will not ship to.
+        deniedPOBoxShippingLocations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference_ShippingLocation'
+          description: List of states/countries with PO Boxes the merchant will not ship to
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.AddOnType:
+      enum:
+      - ticketInsurance
+      type: string
+    QuadPay.Gateway.Orders.Commands.CaptureOrder_Command:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the Id of the Order.
+          format: uuid
+        merchantId:
+          type: string
+          description: Gets or sets the MerchantId.
+          format: uuid
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Currency of the capture.
+        amount:
+          type: number
+          description: Gets or sets the Amount of the capture.
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Reference of the capture.
+        merchantPlatformId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Platform ID of the capture.
+        singleCapture:
+          type: boolean
+          description: 'Gets or sets a value indicating whether or not the order will only be captured once.
+
+            In that case if the capture value is less than the order value, the remainder will be voided.'
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url to callback with the capture result.
+        test:
+          type: boolean
+          description: Gets or sets a value indicating whether this is a test order.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Gets or sets optional metadata associated with this capture.
+        isSync:
+          type: boolean
+          description: Get or sets a flag indicating whether or not to invoke this operation synchronously. Set to false by default.
+      additionalProperties: false
+      description: Used to capture the funds on an order that is denoted as deferred fund capture/pay-on-ship.
+    QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere:
+      type: object
+      properties:
+        publicKey:
+          type:
+          - string
+          - 'null'
+        merchantId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the merchant ID.
+          format: uuid
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: 'Gets or sets optional metadata attached to the checkout.
+
+            Possible values
+
+            1) Apk (If the order was initiated from an app)
+
+            2) Url (If the order was initiated from a merchant website)
+
+            3) Id (If google pay order)'
+        order:
+          $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.Order'
+        customer:
+          $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.Customer'
+        redirectCancelUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url that the user will be redirected to if they cancel the checkout.
+        redirectConfirmUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url that the user will be redirected to after they have completed the checkout.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the merchant reference of the checkout.
+        testData:
+          $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters'
+        rememberMeKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets jwtToken RememberMeKey for fetching RefreshToken from FEO.
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Commands.ConfirmOrder_Command:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the Id of the Order.
+          format: uuid
+        merchantId:
+          type: string
+          description: Gets or sets the MerchantId.
+          format: uuid
+        amount:
+          type:
+          - number
+          - 'null'
+          description: 'Gets or sets an optional final amount, including tax and shipping, of the order to be confirmed.
+
+            If not supplied, the original order amount will be used.'
+          format: double
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets the optional shipping amount associated with the order.
+          format: double
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets? the optional tax amount associated with the order.
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Reference of the confirmation.
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url to callback with the confirm result.
+        test:
+          type: boolean
+          description: Gets or sets a value indicating whether this is a test order.
+        capture:
+          type: boolean
+          description: Gets or sets a value indicating whether or not the order should be captured immediately after confirmation
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Gets or sets optional metadata associated with this confirmation.
+        isSync:
+          type: boolean
+          description: Get or sets a flag indicating whether or not to invoke this operation synchronously. Set to false by default.
+      additionalProperties: false
+      description: Used to confirm a previously authorized order and start the payment plan.
+    QuadPay.Gateway.CheckoutAnywhere.Models.Customer:
+      type: object
+      properties:
+        firstName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's first name.
+        lastName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's last name.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's email address.
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's phone number.
+        dateOfBirth:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's date of birth.
+          format: date-time
+        billingAddress:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.Address'
+        canLink:
+          type:
+          - boolean
+          - 'null'
+          description: 'If this property is set to true, Zip will return a refreshToken/expiresIn value to the merchant during the callback
+
+            Used by Edge for now.'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Commands.CalculateMerchantFees_Result:
+      type: object
+      properties:
+        merchantFeeForPaymentPlan:
+          type: number
+          description: Gets or sets the fee to be added for Merchant Fee For Payment Plan
+          format: double
+        adjustedOrderAmount:
+          type: number
+          description: Gets or sets the adjusted order amount after Merchant Fee For Payment Plan
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the currency Merchant Fee For Payment Plan was calculated in
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.CheckoutFlow:
+      enum:
+      - standard
+      - express
+      - longDurationLending
+      type: string
+    QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult:
+      type: object
+      properties:
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        redirectTo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Commands.RefundOrder_Command:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the Id of the Order.
+          format: uuid
+        merchantId:
+          type: string
+          description: Gets or sets the MerchantId.
+          format: uuid
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Currency of the refund.
+        amount:
+          type: number
+          description: Gets or sets the Amount of the refund.
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Reference of the refund.
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url to callback with the refund result.
+        test:
+          type: boolean
+          description: Gets or sets a value indicating whether this is a test order.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Gets or sets optional metadata associated with this refund.
+        isSync:
+          type: boolean
+          description: Get or sets a flag indicating whether or not to invoke this operation synchronously. Set to false by default.
+        merchantPlatformId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Platform ID of the capture.
+      additionalProperties: false
+      description: Used to refund the uncaptured funds on an order that is denoted as deferred fund capture/pay-on-ship.
+    QuadPay.Gateway.Orders.Models.Address:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the first address line.
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the second address line.
+        city:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the city.
+        state:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the state or province.
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the postal code.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the country.
+      additionalProperties: false
+      description: Encapsulates a physical address.
+    QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderStatus:
+          type:
+          - string
+          - 'null'
+        orderNumber:
+          type:
+          - string
+          - 'null'
+        customerAuthorizationStatus:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          format: double
+        currencyCode:
+          type:
+          - string
+          - 'null'
+        customer:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail_OrderCustomer'
+        shippingAddress:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail_OrderAddress'
+        billingAddress:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail_OrderAddress'
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        merchantPlatformId:
+          type:
+          - string
+          - 'null'
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        totalFundsCaptured:
+          type: number
+          format: double
+        totalFundsVoided:
+          type: number
+          format: double
+        totalFundsRefunded:
+          type: number
+          format: double
+        createdDateTime:
+          type: string
+          format: date-time
+        customerContribution:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.FeeTier:
+      type: object
+      properties:
+        feeStartsAt:
+          type: number
+          format: double
+        totalFeePerOrder:
+          type: number
+          format: double
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Commands.VoidOrder_Command:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the Id of the Order.
+          format: uuid
+        merchantId:
+          type: string
+          description: Gets or sets the MerchantId.
+          format: uuid
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Currency of the void.
+        amount:
+          type: number
+          description: Gets or sets the Amount of the void.
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Reference of the void.
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url to callback with the void result.
+        test:
+          type: boolean
+          description: Gets or sets a value indicating whether this is a test order.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Gets or sets optional metadata associated with this void.
+        isSync:
+          type: boolean
+          description: Get or sets a flag indicating whether or not to invoke this operation synchronously. Set to false by default.
+        isAmountInCommand:
+          type: boolean
+          description: 'Gets or sets a flag indicating whether or not the command amount is set and not defaulted. By default, the
+
+            void amount is included in the command.'
+        merchantPlatformId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Merchant Platform ID of the capture.
+      additionalProperties: false
+    QuadPay.Gateway.CheckoutAnywhere.Models.Order:
+      type: object
+      properties:
+        amount:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets the order amount (Includes tax + shipping).
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the currency of the order amount (defaults to TerritorySettings).
+        skipEstimate:
+          type:
+          - boolean
+          - 'null'
+          description: 'If this is true and order amount is not null, we will not prompt the customer for an amount in CKOA.
+
+            If this is true and order amount is null, we need to prompt the user for an amount in CKOA.
+
+            If this is false, we need to prompt the user for an amount in CKOA.
+
+            Used by Edge for now / Chrome Autofill will eventually use this.
+
+            Nullable because not all merchants are using this.'
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantAssociation:
+      type: object
+      properties:
+        parentMerchantId:
+          type: string
+          format: uuid
+        childMerchantId:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.AssociationType'
+        isEnabled:
+          type: boolean
+        lastUpdated:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        streamEventNumber:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        streamPosition:
+          maxLength: 150
+          type:
+          - string
+          - 'null'
+        hasStreamProcessingFaulted:
+          type: boolean
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Queries.RetrieveOrderStatus_Result:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the order ID.
+          format: uuid
+        orderStatus:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Order Status.
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleFeeTier:
+      type: object
+      properties:
+        minimumOrderAmount:
+          type: number
+          format: double
+        maximumOrderAmount:
+          type: number
+          format: double
+        feePerInstallment:
+          type: number
+          format: double
+        feePerOrder:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.LineItem:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets a description about the item being purchased.
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the name of the item being purchased.
+        quantity:
+          type:
+          - integer
+          - 'null'
+          description: Gets or sets the quantity of the items being purchased.
+          format: int32
+        price:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets the price of a single item.
+          format: double
+        sku:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the SKU identifier of the item being purchased.
+        isPreOrder:
+          type: boolean
+          description: Gets or sets the flag indicating whether or not this item will be included in a preorder
+        releaseDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the date a preorder order will be shipped
+          format: date-time
+        isDeferred:
+          type: boolean
+          description: Gets or sets the flag indicating whether this line item is deferred.
+      additionalProperties: false
+      description: Encapsulates the items that comprise an order for a customer.
+    QuadPay.Gateway.Orders.Models.OrderAuthorizeOrder:
+      type: object
+      properties:
+        addOns:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.AddOnRequest'
+          description: Gets or sets the AddOnRequest that are apart of this order
+        firstName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's first name.
+        lastName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's last name.
+        email:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's email address.
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's phone number.
+        shippingAddress:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.Address'
+        billingAddress:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.Address'
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the currency the order amount is in (defaults to TerritorySettings).
+        amount:
+          type: number
+          description: Gets or sets the order amount.  This includes the tax and shipping amounts.
+          format: double
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets the optional tax amount.
+          format: double
+        shippingAmount:
+          type:
+          - number
+          - 'null'
+          description: Gets or sets the optional shipping amount.
+          format: double
+        lineItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.LineItem'
+          description: Gets or sets the optional line items of what the user is purchasing.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets a description for the order.
+        orderNumber:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the QuadPay order number.
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.AddOnRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        orderId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.AddOnType'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail_OrderAddress:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Commands.AssociateMerchantPlatformIdToOrder_Command:
+      type: object
+      properties:
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the merchant's reference number of the order.
+        merchantPlatformId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the ID to associate to the order.
+        orderId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the OrderId of the order to look up
+          format: uuid
+        lineItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.LineItem'
+          description: Gets or sets the line items to add to the order.
+        attemptRetries:
+          type: boolean
+          description: Gets or sets messaging library retries if the order is not found
+      additionalProperties: false
+      description: Command used to associated a merchant's platform ID to a previously completed order.
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail_OrderDetail_OrderCustomer:
+      type: object
+      properties:
+        customerId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.CallbackDomain:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        domain:
+          type:
+          - string
+          - 'null'
+        enabled:
+          type: boolean
+        id:
+          type: string
+          format: uuid
+        streamEventNumber:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        streamPosition:
+          maxLength: 150
+          type:
+          - string
+          - 'null'
+        hasStreamProcessingFaulted:
+          type: boolean
+      additionalProperties: false
+    QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters:
+      type: object
+      properties:
+        bypassOTPEmail:
+          type:
+          - string
+          - 'null'
+          description: This to bypass OTP by using the auth-mock token.
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Commands.CalculateMerchantFees_Command:
+      type: object
+      properties:
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the currency for Merchant Fee For Payment Plan
+        merchantId:
+          type: string
+          description: Gets or sets the Id of the merchant to calculate fees for
+          format: uuid
+        customerState:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's state for their shipping address.
+        customerCountry:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the customer's country for their shipping address.  Defaults to "US".
+        amount:
+          type: number
+          description: Gets or sets the amount of the order to calculate fees for.
+          format: double
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Models.AdditionalRiskData:
+      type: object
+      properties:
+        lastTransactionDate:
+          type:
+          - string
+          - 'null'
+          description: The date of the customer's last transaction on a merchant's site.
+          format: date-time
+        accountCreationDate:
+          type:
+          - string
+          - 'null'
+          description: The date the customer's account was created on a merchant's site.
+          format: date-time
+        customerLoggedIn:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether the customer is currently logged on a merchant's site.
+        customerIsMember:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether the customer is a member of the merchant's site.
+        merchantRiskAssessment:
+          type:
+          - string
+          - 'null'
+          description: The risk assessment score for the merchant.
+        sameDevice:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether the transaction was performed from the same device.
+        fulfillmentMethod:
+          type:
+          - string
+          - 'null'
+          description: The method used to fulfill the order on a merchant's site.
+        customerTransactionCount:
+          type:
+          - integer
+          - 'null'
+          description: The total number of transactions made by the customer on a merchant's site.
+          format: int32
+        customerAverageOrderValue:
+          type:
+          - string
+          - 'null'
+          description: 'The average order value of the customer''s transactions on a merchant''s site.
+
+            Example format: 123.45 or 123'
+        customerFraudIncidents:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether the customer has previous fraud incidents.
+      additionalProperties: false
+      description: Additional Data Fields Are optional customer info fields from merchant
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantType:
+      enum:
+      - main
+      - partner
+      - addOn
+      type: string
+    QuadPay.Gateway.Orders.Commands.AuthorizeOrder:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the unique ID to use for order creation
+          format: uuid
+        merchantId:
+          type: string
+          description: Gets or sets the merchant Id.
+          format: uuid
+        order:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderAuthorizeOrder'
+        shippingPreference:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.ShippingPreference'
+        test:
+          type: boolean
+          description: Gets or sets a value indicating whether this is a test order.
+        capture:
+          type: boolean
+          description: Gets or sets a value indicating whether this order should be immediately captured.
+        redirectCancelUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url that the user will be redirected to if they cancel the checkout.
+        redirectConfirmUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the url that the user will be redirected to after they have completed the checkout.
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Gets or sets optional metadata attached to the checkout.
+        checkoutFlow:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.CheckoutFlow'
+        entrySource:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.EntrySource'
+        merchantUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the merchant's url
+        returnToMerchant:
+          type: boolean
+          description: Gets or sets a boolean dictating if the Zip Checkout will redirect back to the merchant checkout on completion
+        tokenizerSubdomain:
+          type:
+          - string
+          - 'null'
+          description: 'Gets or sets a string assigning the tokenizer subdomain, if applicable. For merchants that use tokenizer gateways, such as CardConnect.com
+
+            will have a custom subdomain, i.e. http://{site}.cardconnect.com, that is used to perform callbacks and/or to tokenize the PAN data for the
+
+            virtual purchase. The tokenizer subdomain is set on the QuadPay button and retained through the callback so that virtual checkout can
+
+            formulate an API URL for the merchants tokenizer gateway.'
+        additionalData:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.AdditionalRiskData'
+        publicKey:
+          type:
+          - string
+          - 'null'
+        rememberMeKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the Remember Me JWE token for fetching a refresh token during checkout (CKO).
+        sdkSource:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the SDK source for this order, used to distinguish traffic origin in telemetry.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: 'Gets or sets the unique merchant reference for this authorization.
+
+            Placed after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null.'
+        brandName:
+          type:
+          - string
+          - 'null'
+          description: 'Gets or sets the brand name of the merchant for this order.
+
+            Placed after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null.'
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: 'Gets or sets the status callback url.
+
+            Placed after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null.'
+      additionalProperties: false
+      description: Authorizes the creation of an order in the QuadPay system.
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.PaymentSchedule:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        scheduleDescription:
+          type:
+          - string
+          - 'null'
+        installmentCount:
+          type: integer
+          format: int32
+        installmentIntervalDays:
+          type: integer
+          format: int32
+        minimumOrderAmount:
+          type: number
+          format: double
+        maximumOrderAmount:
+          type: number
+          format: double
+        merchantFee:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantFeeDetails'
+        customerServiceFeeTiers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleFeeTier'
+        enabled:
+          type: boolean
+        id:
+          type: string
+          format: uuid
+        streamEventNumber:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        streamPosition:
+          maxLength: 150
+          type:
+          - string
+          - 'null'
+        hasStreamProcessingFaulted:
+          type: boolean
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.BankPartner:
+      enum:
+      - None
+      - WebBank
+      type: string
+    QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions:
+      type: object
+      properties:
+        installmentFee:
+          type:
+          - number
+          - 'null'
+          format: double
+        isScheduleEnabled:
+          type: boolean
+      additionalProperties: false
+    QuadPay.Gateway.Checkout.Models.CheckoutType:
+      enum:
+      - standard
+      - virtual
+      - longDurationLending
+      type: string
+      description: Denotes the type of checkout the user is experiencing.
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

@@ -1,0 +1,389 @@
+openapi: 3.2.0
+info:
+  title: Gateway Checkouts API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: Checkouts
+paths:
+  /global/v1/checkouts:
+    post:
+      tags:
+      - Checkouts
+      summary: Creates a checkout session for a merchant
+      operationId: CreateCheckout
+      parameters:
+      - name: Referer
+        in: header
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/checkouts/{checkoutId}:
+    get:
+      tags:
+      - Checkouts
+      summary: Retrieves a checkout session by ID
+      operationId: GetCheckout
+      parameters:
+      - name: checkoutId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.GetCheckoutResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    Zip.Gateway.USPartnerPlatform.Models.GetCheckoutResponse:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        shopper:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeShopper'
+        order:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeOrder'
+        metadata: {}
+        config:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutConfig'
+        state:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CheckoutState'
+        created:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeAddress:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeShopper:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        middle_name:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        birthdate:
+          type:
+          - string
+          - 'null'
+        billing_address:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeBillingAddress'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeBillingAddress:
+      type: object
+      properties:
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeOrderItem:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        quantity:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        type:
+          type:
+          - string
+          - 'null'
+        reference:
+          type:
+          - string
+          - 'null'
+        item_uri:
+          type:
+          - string
+          - 'null'
+        image_uri:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.ChargeOrder:
+      type: object
+      properties:
+        reference:
+          type:
+          - string
+          - 'null'
+        merchant_fee_for_payment_plan:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type: number
+          format: double
+        currency:
+          type:
+          - string
+          - 'null'
+        shipping:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeShipping'
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeOrderItem'
+        platform_reference:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutResponse:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        uri:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        created:
+          type:
+          - string
+          - 'null'
+        state:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CheckoutState'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutRequest:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+        shopper:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeShopper'
+        order:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeOrder'
+        config:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutConfig'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.CreateCheckoutConfig:
+      type: object
+      properties:
+        redirect_uri:
+          type:
+          - string
+          - 'null'
+        expires_in:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Zip.Gateway.USPartnerPlatform.Models.ChargeShipping:
+      type: object
+      properties:
+        pickup:
+          type:
+          - boolean
+          - 'null'
+        address:
+          $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.ChargeAddress'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.CheckoutState:
+      enum:
+      - created
+      - approved
+      - completed
+      - expired
+      type: string
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

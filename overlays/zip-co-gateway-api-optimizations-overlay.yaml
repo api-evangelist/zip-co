@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: Zip gateway-api-optimizations enhancements
+  version: 1.0.0
+extends: openapi/zip-co-gateway-api-optimizations-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Zip
+    x-apisjson: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/apis.yml
+    x-llms-txt: https://docs.us.zip.co/llms.txt
+    x-docs: https://docs.us.zip.co/
+  description: API Evangelist provenance and discovery links

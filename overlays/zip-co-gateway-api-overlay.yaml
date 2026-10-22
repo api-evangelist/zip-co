@@ -1,0 +1,196 @@
+overlay: 1.0.0
+info:
+  title: Zip Gateway Api enhancements
+  version: 1.0.0
+extends: openapi/zip-co-gateway-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Zip
+    x-apisjson: https://raw.githubusercontent.com/api-evangelist/zip-co/refs/heads/main/apis.yml
+    x-llms-txt: https://docs.us.zip.co/llms.txt
+    x-docs: https://developers.zip.co/
+  description: API Evangelist provenance and discovery links
+- target: $.paths['/global/v1/charges'].post
+  update:
+    x-idempotency:
+      header: Idempotency-Key
+      required: false
+- target: $.paths['/global/v1/charges/{chargeId}/capture'].post
+  update:
+    x-idempotency:
+      header: Idempotency-Key
+      required: false
+- target: $.paths['/global/v1/charges/{chargeId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/global/v1/charges/{chargeId}/refund'].post
+  update:
+    x-idempotency:
+      header: Idempotency-Key
+      required: false
+- target: $.paths['/global/v1/charges/{chargeId}/cancel'].post
+  update:
+    x-idempotency:
+      header: Idempotency-Key
+      required: false
+- target: $.paths['/checkoutanywhere/testing/orders/authorize'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/internal/checkout'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/internal/checkout/virtual/complete'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/global/v1/checkouts/{checkoutId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/global/v1/disputes'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/global/v1/disputes/{disputeId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/global/v1/disputes/{disputeId}/files/{categoryOrFileId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/stripe-direct/v1/echo_test'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/internal/stripe-direct/echo'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/edge/shop'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/internal/merchants/payment-schedules'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/internal/pre-qualifications'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/internal/pre-qualifications/link'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/configuration/{merchantId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/configuration/validate'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/merchant-disputes/search'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/merchant-disputes'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/merchant-disputes/file'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/payments/{merchantId}/json'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/payments/{merchantId}/csv'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/transactions/{merchantId}/v3'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/transactions/{merchantId}/v3/csv'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/settlements/invoices'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/settlements/report'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/v2/settlements/invoices'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/v2/settlements/report'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/google/orders/authorize'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/orders/authorize'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/orders/{orderId}/status'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/orders/{orderId}/detail'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/google/testing/orders/authorize'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/Promotions/eligible'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/global/v1/report/{entityType}/{entityId}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/global/v1/report/{entityType}/{entityId}/{reportName}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/payments_apps/api/2022-04/graphql.json'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/shopifyPayments/testing/{requestType}/{key}'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/authorize'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/cancel'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/account_review'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/checkout/cancel'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/refund'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/capture'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/stripe-direct/v1/settle'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/checkoutanywhere/token/{sessionToken}'].get
+  update:
+    x-agent-safe: true
+- target: $.paths['/google/orders/{orderId}'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/google/customers/{customerId}/orders'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/api/v1/orders/search-by-order'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/api/v1/orders/search-by-customer'].post
+  update:
+    x-agent-exposed: false
+- target: $.paths['/google/testing/orders/{orderId}'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false
+- target: $.paths['/google/testing/customers/{customerId}/orders'].get
+  update:
+    x-agent-safe: true
+    x-agent-exposed: false

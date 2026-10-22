@@ -1,0 +1,100 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://docs.us.zip.co/docs/api-implementation
+- https://docs.us.zip.co/docs/api-javascript-sdk
+- https://developers.zip.co/reference/api-docs
+- https://developers.zip.co/page/charges-error-scenarios
+- openapi/zip-co-gateway-api-openapi.yml
+description: Cross-cutting conventions for Zip's two merchant API families - the US Gateway API (gateway.us.zip.co, /orders/*, ex-QuadPay) and
+  the Global (AU) Merchant API (/global/v1/charges, checkouts, disputes).
+base_url:
+  us_production: https://gateway.us.zip.co/
+  us_sandbox: https://gateway.sand.us.zip.co/
+api_style: REST, JSON request and response bodies ("The Zip API is organized around REST. Our API accepts JSON-encoded request bodies, returns
+  JSON-encoded responses, and uses standard HTTP response codes").
+authentication:
+  scheme: US Gateway - HMAC-SHA256 signature (X-QP-Signature) with a Zip-issued shared secret per environment; spec declares a Bearer JWT. Global
+    API - API key / access token.
+  docs: https://docs.us.zip.co/docs/api-implementation
+  detail: '"all operations are secured with an HMAC-SHA256 one-way hash that is performed using a shared secret key. The key is provided by Zip
+    and will differ depending on the environment used." Signature input: exclude X-QP-Signature, sort parameter names alphabetically, concatenate
+    keys and values with no separators. See authentication/zip-co-authentication.yml.'
+idempotency:
+  coverage: partial
+  scope:
+  - CaptureCharge
+  - CreateCharge
+  - RefundCharge
+  - VoidCharge
+  mechanism: request header / body token declared in the OpenAPI
+  applies_to: POST /global/v1/charges, /global/v1/charges/{chargeId}/capture, /refund, /cancel
+  retention: not documented
+  other: US Gateway refunds use the merchant reference as a dedupe key - "When processing partial refunds, ensure that each refund has a unique
+    reference" or the API returns "Can't process a refund with duplicated merchant reference."
+  docs: https://docs.us.zip.co/reference/ordersorderidrefund
+  header: Idempotency-Key
+  evidence: Idempotency-Key on 4 of 55 mutating operations
+  verified: derived
+pagination:
+  style: not documented
+versioning:
+  scheme: path (/global/v1/, /v1/zip.js); US Gateway paths are unversioned
+  detail: No published versioning or deprecation policy found.
+error_envelope:
+  rfc9457: false
+  detail: Error type string + HTTP status; see errors/zip-co-problem-types.yml and errors/zip-co-decline-codes.yml.
+  docs: https://developers.zip.co/page/charges-error-scenarios
+rate_limits:
+  detail: No rate limits or rate-limit headers documented; see rate-limits/zip-co-rate-limits.yml.
+webhooks:
+  detail: US Gateway writes (refund, capture, void, confirm) are asynchronous by default - "the initial HTTP request will receive a 204 response
+    with the request body being sent to the callbackUrl specified in the initial POST request"; a `sync` query parameter set to true replies synchronously
+    with the callback payload.
+  docs: https://docs.us.zip.co/docs/api-implementation
+other_conventions:
+- name: Order association
+  detail: POST /orders/associate ties the merchant's unique order ID to a Zip order after creation.
+reversibility:
+  docs:
+  - https://docs.us.zip.co/docs/api-implementation
+  - https://developers.zip.co/page/charges-error-scenarios
+  - https://docs.us.zip.co/docs/faq
+  surfaces:
+  - write: US order capture / confirm (CaptureOrder, ConfirmOrder)
+    reversal:
+    - operation: RefundOrder
+      path: POST /orders/{orderId}/refund
+      detail: Full or partial; partial refunds apply "to the total purchase amount, starting with the last installment."
+    - operation: VoidOrder
+      path: POST /orders/{orderId}/void
+      detail: '"Voids uncaptured funds for the specified order" - only for pay-on-ship/deferred-capture merchants.'
+    window: null
+    grade: documented
+    note: No refund window is stated in the docs.
+  - write: Global auth charge (CreateCharge)
+    reversal:
+    - operation: VoidCharge
+      path: POST /global/v1/charges/{chargeId}/cancel
+      detail: '"Cancel only applies to a Charge that has not been authorised. Refund is for a captured charge."'
+    window: '"the Auth Charge (charge id) is valid for 30 days. After 30 days, it will be automatically cancelled and a new charge request needs
+      to be initiated."'
+    window_source: https://developers.zip.co/page/charges-error-scenarios
+    grade: verified
+  - write: Global capture (CaptureCharge)
+    reversal:
+    - operation: RefundCharge
+      path: POST /global/v1/charges/{chargeId}/refund
+      detail: Partial refunds supported.
+    window: null
+    grade: documented
+  - write: Dispute accept / close (AcceptDispute)
+    reversal: []
+    grade: none
+    note: '"Accept losing the dispute and close the dispute" - no documented undo.'
+  - write: Dispute evidence file upload (UploadDisputeEvidenceFile)
+    reversal:
+    - operation: DeleteDisputeEvidenceFile
+      path: DELETE /merchant-disputes/file
+    window: null
+    grade: documented

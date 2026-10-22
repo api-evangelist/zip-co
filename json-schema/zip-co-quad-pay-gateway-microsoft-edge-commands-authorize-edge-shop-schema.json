@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zip-co/main/json-schema/zip-co-quad-pay-gateway-microsoft-edge-commands-authorize-edge-shop-schema.json",
+  "title": "QuadPay.Gateway.MicrosoftEdge.Commands.AuthorizeEdgeShop",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MicrosoftEdge.Commands.AuthorizeEdgeShop",
+  "required": [
+    "merchantId"
+  ],
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "string",
+      "description": "Gets the merchant id (Edge merchant id is configured in Nexus).",
+      "format": "uuid"
+    },
+    "merchantReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the merchant reference for this authorization.\r\nEdge does not always supply one; if missing, the handler will default it."
+    },
+    "amount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets the order amount. Nullable to support zero/no-amount orders.",
+      "format": "double"
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the order currency."
+    },
+    "redirectCancelUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the url that the user will be redirected to if they cancel the checkout."
+    },
+    "redirectConfirmUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the url that the user will be redirected to after they have completed the checkout."
+    },
+    "canLink": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "When true, Zip will return a refresh token to the merchant during the callback so the user can be linked across sessions."
+    },
+    "rememberMeKey": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the RememberMeKey used to fetch a refresh token from FEO."
+    },
+    "publicKey": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the merchant's public key used by the frontend to encrypt the exit payload\r\n(card details and refresh token) before posting back to the redirect confirm URL."
+    },
+    "skipEstimate": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "When true, the frontend will not prompt the customer for an order amount."
+    }
+  },
+  "additionalProperties": false
+}

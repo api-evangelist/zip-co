@@ -1,0 +1,125 @@
+openapi: 3.2.0
+info:
+  title: Gateway Echo Connectivity API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: EchoConnectivity
+paths:
+  /internal/stripe-direct/echo:
+    post:
+      tags:
+      - EchoConnectivity
+      summary: Posts an echo to Stripe and returns the round-trip diagnostic.
+      operationId: Echo
+      parameters:
+      - name: relay
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.StripeDirect.Models.EchoConnectivityResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.StripeDirect.Models.EchoConnectivityResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.StripeDirect.Models.EchoConnectivityResult'
+        '502':
+          description: Bad Gateway
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.StripeDirect.Models.EchoConnectivityFailure'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.StripeDirect.Models.EchoConnectivityFailure'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.StripeDirect.Models.EchoConnectivityFailure'
+components:
+  schemas:
+    QuadPay.Gateway.StripeDirect.Models.EchoConnectivityFailure:
+      type: object
+      properties:
+        relay:
+          type: boolean
+        stripeStatusCode:
+          type: integer
+          format: int32
+        stripeErrorCode:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        elapsedMs:
+          type: integer
+          format: int64
+      additionalProperties: false
+      description: 'Failure envelope for `POST /internal/stripe-direct/echo` when Stripe returns
+
+        a non-success status. Surfaces Stripe''s own status code + error code so failure
+
+        attribution is unambiguous — a bare gateway 500 would mask the upstream boundary
+
+        and send the on-call person down the wrong rabbit hole.'
+    QuadPay.Gateway.StripeDirect.Models.EchoConnectivityResult:
+      type: object
+      properties:
+        sent:
+          type: integer
+          format: int64
+        received:
+          type: integer
+          format: int64
+        matched:
+          type: boolean
+        relay:
+          type: boolean
+        elapsedMs:
+          type: integer
+          format: int64
+      additionalProperties: false
+      description: 'Success envelope for `POST /internal/stripe-direct/echo`. Carries both the
+
+        timestamp sent and the timestamp returned by Stripe so a runbook operator can see
+
+        the parity explicitly via QuadPay.Gateway.StripeDirect.Models.EchoConnectivityResult.Matched rather than having to compare two
+
+        numbers themselves.'
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

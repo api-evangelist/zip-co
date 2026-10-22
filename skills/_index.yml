@@ -1,0 +1,12 @@
+name: Zip agent skills
+description: Agent skills for the Zip BNPL merchant APIs, generated from the saved OpenAPI contracts. Zip publishes no skills or AGENTS.md (none in its llms.txt indexes).
+generated: '2026-10-20'
+method: generated
+source: openapi/
+skills:
+  - name: zip-co-us-order-lifecycle
+    file: zip-co-us-order-lifecycle.md
+  - name: zip-co-global-checkout-charge
+    file: zip-co-global-checkout-charge.md
+  - name: zip-co-dispute-response
+    file: zip-co-dispute-response.md

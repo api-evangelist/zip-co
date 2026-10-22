@@ -1,0 +1,412 @@
+openapi: 3.2.0
+info:
+  title: Gateway Transactions API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: Transactions
+paths:
+  /api/v1/orders/search-by-order:
+    post:
+      tags:
+      - Transactions
+      summary: Search for an order by merchant ID and order ID
+      operationId: SearchByOrder
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.GetOrderById_Query'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.GetOrderById_Result'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /api/v1/orders/search-by-customer:
+    post:
+      tags:
+      - Transactions
+      summary: Search for orders by merchant ID and customer ID
+      operationId: SearchByCustomer
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId_Query'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId_Result'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    QuadPay.Gateway.Orders.Queries.GetOrderById_Query:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Gets or sets the OrderId
+          format: uuid
+        merchantId:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the MerchantId - nullable for backward compatibility with Google
+          format: uuid
+        shouldEnforceMerchantIdValidation:
+          type: boolean
+          description: 'Gets or sets whether to enforce merchant ID validation
+
+            When true, MerchantId must be provided and will be passed to Customer Portal BFF
+
+            When false, requests work without MerchantId (Google compatibility)'
+      additionalProperties: false
+      description: Used to retrieve the details of an Order
+    QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId_Result:
+      type: object
+      properties:
+        moreInfoUrl:
+          type:
+          - string
+          - 'null'
+        orders:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderDetailSummary'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId_Query:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Gets or sets the CustomerId
+          format: uuid
+        merchantId:
+          type: string
+          description: Gets or sets the MerchantId
+          format: uuid
+      additionalProperties: false
+      description: Used to retrieve orders for a customer
+    QuadPay.Gateway.CustomerPortal.Models.OrderDetailStatus:
+      enum:
+      - Completed
+      - Refunded
+      type: string
+      description: 'Enum to represent an order status.
+
+        This is only used by Google for now (No other merchants are retrieving Order Details).'
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.CustomerPortal.Models.Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        refundDateTime:
+          type: string
+          format: date-time
+      additionalProperties: false
+    QuadPay.Domain.Core.Enums.CurrencyCode:
+      enum:
+      - usd
+      - cad
+      - aed
+      - afn
+      - all
+      - amd
+      - ang
+      - aoa
+      - ars
+      - aud
+      - awg
+      - azn
+      - bam
+      - bbd
+      - bdt
+      - bgn
+      - bif
+      - bmd
+      - bnd
+      - bob
+      - brl
+      - bsd
+      - bwp
+      - bzd
+      - cdf
+      - chf
+      - clp
+      - cny
+      - cop
+      - crc
+      - cve
+      - czk
+      - djf
+      - dkk
+      - dop
+      - dzd
+      - egp
+      - etb
+      - eur
+      - fjd
+      - fkp
+      - gbp
+      - gel
+      - ghs
+      - gip
+      - gmd
+      - gnf
+      - gtq
+      - gyd
+      - hkd
+      - hnl
+      - hrk
+      - htg
+      - huf
+      - idr
+      - ils
+      - inr
+      - isk
+      - jmd
+      - jpy
+      - kes
+      - kgs
+      - khr
+      - kmf
+      - krw
+      - kyd
+      - kzt
+      - lak
+      - lbp
+      - lkr
+      - lrd
+      - lsl
+      - mad
+      - mdl
+      - mga
+      - mkd
+      - mmk
+      - mnt
+      - mop
+      - mro
+      - mur
+      - mvr
+      - mwk
+      - mxn
+      - myr
+      - mzn
+      - nad
+      - ngn
+      - nio
+      - nok
+      - npr
+      - nzd
+      - pab
+      - pen
+      - pgk
+      - php
+      - pkr
+      - pln
+      - pyg
+      - qar
+      - ron
+      - rsd
+      - rub
+      - rwf
+      - sar
+      - sbd
+      - scr
+      - sek
+      - sgd
+      - shp
+      - sll
+      - sos
+      - srd
+      - std
+      - szl
+      - thb
+      - tjs
+      - top
+      - try
+      - ttd
+      - twd
+      - tzs
+      - uah
+      - ugx
+      - uyu
+      - uzs
+      - vnd
+      - vuv
+      - wst
+      - xaf
+      - xcd
+      - xof
+      - xpf
+      - yer
+      - zar
+      - zmw
+      type: string
+    QuadPay.Gateway.Orders.Models.OrderDetailSummary:
+      type: object
+      properties:
+        currency:
+          $ref: '#/components/schemas/QuadPay.Domain.Core.Enums.CurrencyCode'
+        customerId:
+          type: string
+          format: uuid
+        merchantName:
+          type:
+          - string
+          - 'null'
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        orderId:
+          type: string
+          format: uuid
+        orderDateTime:
+          type: string
+          format: date-time
+        orderAmount:
+          type: number
+          format: double
+        paymentScheduleType:
+          $ref: '#/components/schemas/QuadPay.Gateway.Google.Models.PaymentScheduleType'
+        refunds:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.CustomerPortal.Models.Refund'
+        status:
+          $ref: '#/components/schemas/QuadPay.Gateway.CustomerPortal.Models.OrderDetailStatus'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.Queries.GetOrderById_Result:
+      type: object
+      properties:
+        moreInfoUrl:
+          type:
+          - string
+          - 'null'
+        order:
+          $ref: '#/components/schemas/QuadPay.Gateway.Orders.Models.OrderDetailSummary'
+      additionalProperties: false
+    QuadPay.Gateway.Google.Models.PaymentScheduleType:
+      enum:
+      - PayInZ_Finance_Charge
+      type: string
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

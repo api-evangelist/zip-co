@@ -1,0 +1,427 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/zip-co-gateway-api-1-api-openapi.yml
+- openapi/zip-co-gateway-api-openapi.yml
+- openapi/zip-co-gateway-api-optimizations-api-openapi.yml
+vocabulary:
+  name: Zip Domain Vocabulary
+  description: 'Terms declared by Zip''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions. Derived,
+    not authored.'
+  version: '2026-10-20'
+  terms:
+  - term: Microsoft.AspNetCore.Mvc.ProblemDetails
+    definition: 'Object declared by the contract with fields: type, title, status, detail, instance.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails
+  - term: QuadPay.Domain.Core.Enums.BankPartner
+    definition: 'Enumeration declared by the contract with values: unknown, none, webBank.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Domain.Core.Enums.BankPartner
+  - term: QuadPay.Domain.Core.Enums.CurrencyCode
+    definition: 'Enumeration declared by the contract with values: usd, cad, aed, afn, all, amd, ang, aoa, ars, aud, awg, azn. (124 more)'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Domain.Core.Enums.CurrencyCode
+  - term: QuadPay.Domain.Core.Enums.ProductType
+    definition: 'Enumeration declared by the contract with values: none, quadPayClassic, quadPayAnywhere, quadPayVirtual, quadPayInStore, longDurationLending.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Domain.Core.Enums.ProductType
+  - term: QuadPay.Domain.Core.Enums.ScheduleType
+    definition: 'Enumeration declared by the contract with values: None, Classic, PayIn3Months, PayIn6Months, PayIn12Months.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Domain.Core.Enums.ScheduleType
+  - term: QuadPay.Domain.Core.Enums.TokenizationProvider
+    definition: 'Enumeration declared by the contract with values: none, gravy.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Domain.Core.Enums.TokenizationProvider
+  - term: QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command
+    definition: Command that completes the provided checkout session and creates the order.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command
+  - term: QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command+TestDataParameters
+    definition: 'Object declared by the contract with fields: releaseDelaySecondsOverride.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command+TestDataParameters
+  - term: QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Result
+    definition: 'Object declared by the contract with fields: redirectTo.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Result
+  - term: QuadPay.Gateway.Checkout.Commands.CompleteVirtualPurchase
+    definition: 'Object declared by the contract with fields: callbackToken, rememberMeKey.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Commands.CompleteVirtualPurchase
+  - term: QuadPay.Gateway.Checkout.Models.CheckoutContext
+    definition: 'Object declared by the contract with fields: id, type, checkoutFlow, entrySource, expiration, startDateTime, merchant, merchantReference,
+      originalOrderAmount, order, isDefaultCurrency, origin. (31 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.CheckoutContext
+  - term: QuadPay.Gateway.Checkout.Models.CheckoutError
+    definition: 'Enumeration declared by the contract with values: noAmount, lessThanMinimumAmount, greaterThanMaximumAmount.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.CheckoutError
+  - term: QuadPay.Gateway.Checkout.Models.CheckoutType
+    definition: Denotes the type of checkout the user is experiencing.
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.CheckoutType
+  - term: QuadPay.Gateway.Checkout.Models.CustomerPersonalInfo
+    definition: Encapsulates customer information to be used within the checkout for pre-filling data.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.CustomerPersonalInfo
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee
+    definition: DE uses the class below so we need to replicate it.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee+CustomerFeeTier
+    definition: DE uses the class below so we need to replicate it.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee+CustomerFeeTier
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.AprTargetFee
+    definition: 'Object declared by the contract with fields: aprTarget, maximumApr.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.AprTargetFee
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment
+    definition: Encapsulates an installment the customer will pay in their payment plan.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment+AmountBreakdown
+    definition: 'Object declared by the contract with fields: baseAmount, downPaymentAmount, feeAmount.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment+AmountBreakdown
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedPaymentPlan
+    definition: Represents a calculated and approved payment plan
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedPaymentPlan
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.CreditPolicy
+    definition: 'Object declared by the contract with fields: jurisdiction, rules, version.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.CreditPolicy
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.CreditRule
+    definition: 'Object declared by the contract with fields: ruleType, ruleTarget, properties.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.CreditRule
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.DecisionEngineContext
+    definition: Encapsulates a risk assessment result from the DE.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.DecisionEngineContext
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.Fee
+    definition: Encapsulates a fee that would apply to an installment.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.Fee
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.FeeModel
+    definition: DE uses the enum below so we need to replicate it.
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.FeeModel
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.FeeType
+    definition: Encapsulates the type of fees QuadPay supports.
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.FeeType
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions
+    definition: 'Object declared by the contract with fields: productType, scheduleType, numberOfInstallments, firstInstallmentPercentage, installmentFrequency,
+      installmentFrequencyType, installmentServiceFee, feeStructure, creditPolicy.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions+FrequencyType
+    definition: 'Enumeration declared by the contract with values: days, months.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions+FrequencyType
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure
+    definition: 'Object declared by the contract with fields: type, tiers, aprTargetFee.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure
+  - term: QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure+FeeTier
+    definition: 'Object declared by the contract with fields: minimum, maximum, feePerInstallment, totalFee.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure+FeeTier
+  - term: QuadPay.Gateway.Checkout.Models.MerchantInfo
+    definition: Encapsulates basic merchant details for the checkout.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.MerchantInfo
+  - term: QuadPay.Gateway.Checkout.Models.PaymentSchedulePolicy
+    definition: 'Enumeration declared by the contract with values: legacy, merchantConfigurationIsAuthoritative.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Models.PaymentSchedulePolicy
+  - term: QuadPay.Gateway.Checkout.Results.CompleteVirtualPurchaseResult
+    definition: 'Object declared by the contract with fields: virtualCardToken, confirmRedirectUrl.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Checkout.Results.CompleteVirtualPurchaseResult
+  - term: QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere
+    definition: 'Object declared by the contract with fields: publicKey, merchantId, metadata, order, customer, redirectCancelUrl, redirectConfirmUrl,
+      merchantReference, testData, rememberMeKey.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere
+  - term: QuadPay.Gateway.CheckoutAnywhere.Models.Customer
+    definition: 'Object declared by the contract with fields: firstName, lastName, email, phone, dateOfBirth, billingAddress, canLink.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.Customer
+  - term: QuadPay.Gateway.CheckoutAnywhere.Models.Order
+    definition: 'Object declared by the contract with fields: amount, currency, skipEstimate.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.Order
+  - term: QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters
+    definition: 'Object declared by the contract with fields: bypassOTPEmail.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters
+  - term: QuadPay.Gateway.CheckoutAnywhere.Queries.GetCheckoutAnywhereToken+Result
+    definition: 'Object declared by the contract with fields: checkoutAnywhereToken.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Queries.GetCheckoutAnywhereToken+Result
+  - term: QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult
+    definition: 'Object declared by the contract with fields: merchantReference, redirectTo.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult
+  - term: QuadPay.Gateway.CustomerPortal.Models.OrderDetailStatus
+    definition: Enum to represent an order status. This is only used by Google for now (No other merchants are retrieving Order Details).
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CustomerPortal.Models.OrderDetailStatus
+  - term: QuadPay.Gateway.CustomerPortal.Models.Refund
+    definition: 'Object declared by the contract with fields: id, amount, refundDateTime.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.CustomerPortal.Models.Refund
+  - term: QuadPay.Gateway.GlobalGateway.Commands.UploadDisputeFile+Command
+    definition: 'Object declared by the contract with fields: merchantId, disputeId, category, blob, fileName, contentType.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.GlobalGateway.Commands.UploadDisputeFile+Command
+  - term: QuadPay.Gateway.Google.Models.PaymentScheduleType
+    definition: 'Enumeration declared by the contract with values: PayInZ_Finance_Charge.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Google.Models.PaymentScheduleType
+  - term: QuadPay.Gateway.MerchantDisputes.Commands.AcceptDispute+Command
+    definition: 'Object declared by the contract with fields: merchantId, disputeId.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.AcceptDispute+Command
+  - term: QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence+Command
+    definition: 'Object declared by the contract with fields: merchantId, disputeId, receipt, refundPolicy, refundPolicyDisclosure, refundRefusalExplanation,
+      serviceDate, serviceDocumentation, shippingAddress, shippingCarrier, shippingDate, shippingDocumentation. (17 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence+Command
+  - term: QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command
+    definition: 'Object declared by the contract with fields: merchantId, disputeId, files.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command
+  - term: QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command+File
+    definition: 'Object declared by the contract with fields: category, blob, fileName, contentType.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command+File
+  - term: QuadPay.Gateway.MerchantDisputes.MerchantDisputesController+UploadDisputeEvidenceFileRequest
+    definition: 'Object declared by the contract with fields: merchantId, disputeId, category, blob, fileName, contentType.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.MerchantDisputesController+UploadDisputeEvidenceFileRequest
+  - term: QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail
+    definition: 'Object declared by the contract with fields: id, externalDisputeId, disputedAmount, currency, isChargeRefundable, evidenceDueOn,
+      disputedOn, status, reason, evidence, orderId, orderNumber. (13 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail
+  - term: QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidence
+    definition: 'Object declared by the contract with fields: receipt, refundPolicy, refundPolicyDisclosure, refundRefusalExplanation, serviceDate,
+      serviceDocumentation, shippingAddress, shippingCarrier, shippingDate, shippingDocumentation, shippingTrackingNumber, uncategorizedFile.
+      (15 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidence
+  - term: QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile
+    definition: 'Object declared by the contract with fields: id, created, expiresAt, filename, category, size, title, type.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile
+  - term: QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeIssuerEvidence
+    definition: 'Object declared by the contract with fields: evidenceType, textEvidence, fileEvidence.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeIssuerEvidence
+  - term: QuadPay.Gateway.MerchantDisputes.Models.DisputeResult
+    definition: 'Object declared by the contract with fields: disputeDetail.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.DisputeResult
+  - term: QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult
+    definition: 'Object declared by the contract with fields: value, total.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult
+  - term: QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult+DisputeItem
+    definition: 'Object declared by the contract with fields: id, externalDisputeId, customerFirstName, customerLastName, paymentPlanId, orderNumber,
+      status, reason, disputedOn, evidenceDueOn, settledOn, disputedAmount. (2 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult+DisputeItem
+  - term: QuadPay.Gateway.MerchantSettlements.Models.InvoicesSearchResult
+    definition: 'Object declared by the contract with fields: transactions, totalCount.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.InvoicesSearchResult
+  - term: QuadPay.Gateway.MerchantSettlements.Models.SettlementReportInvoice
+    definition: 'Object declared by the contract with fields: invoiceNumber, status, openDate, closeDate, amountSigned, currencyCode, transferStatus,
+      disbursementDateUtc, transferReference, transferProcessor.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.SettlementReportInvoice
+  - term: QuadPay.Gateway.MerchantSettlements.Models.SettlementReportTransaction
+    definition: 'Object declared by the contract with fields: merchantId, merchantName, transactionType, amountSigned, taxAmountSigned, currency,
+      disbursementDateUtc, orderDateTimeUtc, merchantOrderReference, orderId, transactionDateTimeUtc, product. (2 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.SettlementReportTransaction
+  - term: QuadPay.Gateway.MerchantSettlements.Models.TransactionsSearchResult
+    definition: 'Object declared by the contract with fields: invoices, totalCount.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MerchantSettlements.Models.TransactionsSearchResult
+  - term: QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Query
+    definition: 'Object declared by the contract with fields: merchantId, orderAmount, isZeroOrderAmount, paymentSchedulePolicy.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Query
+  - term: QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Result
+    definition: 'Object declared by the contract with fields: availablePaymentSchedules, paymentSchedules, isPi4Configured, isLegacyPayIn4Fallback.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Result
+  - term: QuadPay.Gateway.MicrosoftEdge.Commands.AuthorizeEdgeShop
+    definition: 'Object declared by the contract with fields: merchantId, merchantReference, amount, currency, redirectCancelUrl, redirectConfirmUrl,
+      canLink, rememberMeKey, publicKey, skipEstimate.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.MicrosoftEdge.Commands.AuthorizeEdgeShop
+  - term: QuadPay.Gateway.Orders.Commands.AssociateMerchantPlatformIdToOrder+Command
+    definition: Command used to associated a merchant's platform ID to a previously completed order.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.AssociateMerchantPlatformIdToOrder+Command
+  - term: QuadPay.Gateway.Orders.Commands.AuthorizeOrder
+    definition: Authorizes the creation of an order in the QuadPay system.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.AuthorizeOrder
+  - term: QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Command
+    definition: 'Object declared by the contract with fields: currency, merchantId, customerState, customerCountry, amount.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Command
+  - term: QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Result
+    definition: 'Object declared by the contract with fields: merchantFeeForPaymentPlan, adjustedOrderAmount, currency.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Result
+  - term: QuadPay.Gateway.Orders.Commands.CaptureOrder+Command
+    definition: Used to capture the funds on an order that is denoted as deferred fund capture/pay-on-ship.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.CaptureOrder+Command
+  - term: QuadPay.Gateway.Orders.Commands.ConfirmOrder+Command
+    definition: Used to confirm a previously authorized order and start the payment plan.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.ConfirmOrder+Command
+  - term: QuadPay.Gateway.Orders.Commands.RefundOrder+Command
+    definition: Used to refund the uncaptured funds on an order that is denoted as deferred fund capture/pay-on-ship.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.RefundOrder+Command
+  - term: QuadPay.Gateway.Orders.Commands.VoidOrder+Command
+    definition: 'Object declared by the contract with fields: orderId, merchantId, currency, amount, merchantReference, callbackUrl, test, metadata,
+      isSync, isAmountInCommand, merchantPlatformId.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.VoidOrder+Command
+  - term: QuadPay.Gateway.Orders.Models.AddOn
+    definition: 'Object declared by the contract with fields: merchant, chargeId, orderId, amount, merchantReference, type.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.AddOn
+  - term: QuadPay.Gateway.Orders.Models.AddOnMerchant
+    definition: 'Object declared by the contract with fields: merchantId, merchantName, bankPartner, merchantNameRegex, merchantNetworkRegex.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.AddOnMerchant
+  - term: QuadPay.Gateway.Orders.Models.AddOnRequest
+    definition: 'Object declared by the contract with fields: merchantId, orderId, amount, merchantReference, type.'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.AddOnRequest
+  - term: QuadPay.Gateway.Orders.Models.AddOnType
+    definition: 'Enumeration declared by the contract with values: ticketInsurance.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.AddOnType
+  - term: QuadPay.Gateway.Orders.Models.AdditionalRiskData
+    definition: Additional Data Fields Are optional customer info fields from merchant
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.AdditionalRiskData
+  - term: QuadPay.Gateway.Orders.Models.Address
+    definition: Encapsulates a physical address.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.Address
+  - term: QuadPay.Gateway.Orders.Models.CheckoutFlow
+    definition: 'Enumeration declared by the contract with values: standard, express, longDurationLending.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.CheckoutFlow
+  - term: QuadPay.Gateway.Orders.Models.EntrySource
+    definition: 'Enumeration declared by the contract with values: unknown, secondChance, zipButton, merchantButton, googlePayOnline, googlePayApp,
+      checkoutAnywhereApi, usPartnerPlatform, microsoftEdge, stripeDirect.'
+    tags:
+    - Enumeration
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.EntrySource
+  - term: QuadPay.Gateway.Orders.Models.LineItem
+    definition: Encapsulates the items that comprise an order for a customer.
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.LineItem
+  - term: QuadPay.Gateway.Orders.Models.Order
+    definition: 'Object declared by the contract with fields: addOns, firstName, lastName, email, phone, shippingAddress, billingAddress, currency,
+      amount, taxAmount, shippingAmount, lineItems. (2 more)'
+    tags:
+    - Object
+    source: openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Models.Order

@@ -1,0 +1,235 @@
+openapi: 3.2.0
+info:
+  title: Gateway Orders Testing API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: OrdersTesting
+paths:
+  /google/testing/orders/authorize:
+    get:
+      tags:
+      - OrdersTesting
+      summary: Creates a new context for the QPAW rails on Checkout Anywhere.
+      operationId: AuthorizeGoogleOrder
+      parameters:
+      - name: MerchantId
+        in: query
+        description: Gets or sets the merchant ID.
+        schema:
+          type: string
+          format: uuid
+      - name: Metadata
+        in: query
+        description: 'Gets or sets optional metadata attached to the checkout.
+
+          Possible values
+
+          1) Apk (If the order was initiated from an app)
+
+          2) Url (If the order was initiated from a merchant website)
+
+          3) Id (If google pay order)'
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Order.Amount
+        in: query
+        description: Gets or sets the order amount (Includes tax + shipping).
+        schema:
+          type: number
+          format: double
+      - name: Order.Currency
+        in: query
+        description: Gets or sets the currency of the order amount (defaults to TerritorySettings).
+        schema:
+          type: string
+      - name: Order.SkipEstimate
+        in: query
+        description: 'If this is true and order amount is not null, we will not prompt the customer for an amount in CKOA.
+
+          If this is true and order amount is null, we need to prompt the user for an amount in CKOA.
+
+          If this is false, we need to prompt the user for an amount in CKOA.
+
+          Used by Edge for now / Chrome Autofill will eventually use this.
+
+          Nullable because not all merchants are using this.'
+        schema:
+          type: boolean
+      - name: Customer.FirstName
+        in: query
+        description: Gets or sets the customer's first name.
+        schema:
+          type: string
+      - name: Customer.LastName
+        in: query
+        description: Gets or sets the customer's last name.
+        schema:
+          type: string
+      - name: Customer.Email
+        in: query
+        description: Gets or sets the customer's email address.
+        schema:
+          type: string
+      - name: Customer.Phone
+        in: query
+        description: Gets or sets the customer's phone number.
+        schema:
+          type: string
+      - name: Customer.DateOfBirth
+        in: query
+        description: Gets or sets the customer's date of birth.
+        schema:
+          type: string
+          format: date-time
+      - name: Customer.BillingAddress.Line1
+        in: query
+        description: Gets or sets the first address line.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.Line2
+        in: query
+        description: Gets or sets the second address line.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.City
+        in: query
+        description: Gets or sets the city.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.State
+        in: query
+        description: Gets or sets the state or province.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.PostalCode
+        in: query
+        description: Gets or sets the postal code.
+        schema:
+          type: string
+      - name: Customer.BillingAddress.Country
+        in: query
+        description: Gets or sets the country.
+        schema:
+          type: string
+      - name: Customer.CanLink
+        in: query
+        description: 'If this property is set to true, Zip will return a refreshToken/expiresIn value to the merchant during the callback
+
+          Used by Edge for now.'
+        schema:
+          type: boolean
+      - name: RedirectCancelUrl
+        in: query
+        description: Gets or sets the url that the user will be redirected to if they cancel the checkout.
+        schema:
+          type: string
+      - name: RedirectConfirmUrl
+        in: query
+        description: Gets or sets the url that the user will be redirected to after they have completed the checkout.
+        schema:
+          type: string
+      - name: MerchantReference
+        in: query
+        description: Gets or sets the merchant reference of the checkout.
+        schema:
+          type: string
+      - name: TestData.BypassOTPEmail
+        in: query
+        description: This to bypass OTP by using the auth-mock token.
+        schema:
+          type: string
+      - name: RememberMeKey
+        in: query
+        description: Gets or sets jwtToken RememberMeKey for fetching RefreshToken from FEO.
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult:
+      type: object
+      properties:
+        merchantReference:
+          type:
+          - string
+          - 'null'
+        redirectTo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

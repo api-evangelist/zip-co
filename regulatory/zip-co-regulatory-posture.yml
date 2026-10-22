@@ -1,0 +1,75 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://zip.co/au/page/privacy
+pages_read:
+- url: https://zip.co/au/page/privacy
+  http_status: 200
+  fetched: '2026-10-20'
+  title: Privacy Policy | Zip
+- url: https://zip.co/au/security
+  http_status: 200
+  fetched: '2026-10-20'
+  title: Zip Security Centre
+  note: Consumer scam/phishing guidance only; no regulatory signal (no breach-notification or disclosure-program language).
+- url: https://zip.co/au/page/important-information
+  http_status: 200
+  fetched: '2026-10-20'
+  title: Zip's Important Information | Zip
+  note: No candidate language for any posture signal.
+signals:
+  data_subject_request:
+    url: https://zip.co/au/page/privacy
+    section: How can I access or correct my personal information or credit-related information?
+    rights_named: [access, correction, statement of disagreement attached to record]
+    channel: Zip's Privacy Officer
+    evidence:
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "You can request access or correction to your personal information or credit-related information at any time by contacting Zip’s Privacy Officer using the details below."
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "There may be times where we charge a small fee to cover our costs of providing you with access to, or supplying, your information."
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "In some cases where we refuse to correct your information, you can ask us to include a statement attached to your personal information that says you believe it is inaccurate, incomplete, misleading or out of date."
+    note: >-
+      Australian Privacy Act rights of access and correction, exercised via the Privacy Officer. Access may
+      carry a small fee; correction is free. Response time "will depend on the type of access or correction
+      request". No deletion or portability right is named.
+  data_residency:
+    url: https://zip.co/au/page/privacy
+    section: Sending information overseas
+    evidence:
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "Your personal information and credit-related information is stored in secure data centres located in Australia."
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "Your personal information and credit-related information may also be disclosed to: Zip Group companies located in New Zealand, the United States and the other countries that the Zip Group operates in, as set out on www.zip.co , or notified to you; and Third party service providers (including cloud service providers) located in Canada, Germany, India, Ireland, Latvia, The Netherlands, New Zealand, The Philippines, Portugal, Thailand, Turkey, the United Kingdom, the United States or as notified to you from time to time."
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "Zip will only transfer and store information in countries where there are reciprocal or substantially similar privacy and data security laws, or where Zip has taken reasonable steps to ensure that the information is handled in accordance with this policy and the APPs."
+    note: >-
+      Primary storage in Australia, with disclosed onward transfer countries for group companies and
+      third-party (including cloud) service providers. This is a list of countries, not a named
+      subprocessor list, so no subprocessors signal is recorded.
+  data_retention:
+    url: https://zip.co/au/page/privacy
+    section: How long do we keep your information for?
+    evidence:
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "Zip is generally required to retain your information for a period of up to seven (7) years to comply with our legal obligations."
+    - source: https://zip.co/au/page/privacy
+      http_status: 200
+      fetched: '2026-10-20'
+      quote: "Your personal information may be kept after your account is closed in order to carry out certain activities, such as: collecting outstanding balances owed; to conduct investigations or resolve disputes; account maintenance or troubleshooting; preventing or detecting fraud or unauthorised activity; or where otherwise permitted by law."
+    note: States a retention period of up to seven years, and that data may be kept after the account closes.

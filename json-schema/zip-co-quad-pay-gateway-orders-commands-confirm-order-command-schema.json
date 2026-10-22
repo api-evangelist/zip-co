@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zip-co/main/json-schema/zip-co-quad-pay-gateway-orders-commands-confirm-order-command-schema.json",
+  "title": "QuadPay.Gateway.Orders.Commands.ConfirmOrder+Command",
+  "description": "Used to confirm a previously authorized order and start the payment plan.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.ConfirmOrder+Command",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Gets or sets the Id of the Order.",
+      "format": "uuid"
+    },
+    "merchantId": {
+      "type": "string",
+      "description": "Gets or sets the MerchantId.",
+      "format": "uuid"
+    },
+    "amount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or sets an optional final amount, including tax and shipping, of the order to be confirmed.\r\nIf not supplied, the original order amount will be used.",
+      "format": "double"
+    },
+    "shippingAmount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or sets the optional shipping amount associated with the order.",
+      "format": "double"
+    },
+    "taxAmount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or sets? the optional tax amount associated with the order.",
+      "format": "double"
+    },
+    "merchantReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the Merchant Reference of the confirmation."
+    },
+    "callbackUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the url to callback with the confirm result."
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Gets or sets a value indicating whether this is a test order."
+    },
+    "capture": {
+      "type": "boolean",
+      "description": "Gets or sets a value indicating whether or not the order should be captured immediately after confirmation"
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "Gets or sets optional metadata associated with this confirmation."
+    },
+    "isSync": {
+      "type": "boolean",
+      "description": "Get or sets a flag indicating whether or not to invoke this operation synchronously. Set to false by default."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,278 @@
+openapi: 3.2.0
+info:
+  title: Gateway Internal Pre Qualifications API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: InternalPreQualifications
+paths:
+  /internal/pre-qualifications:
+    get:
+      tags:
+      - InternalPreQualifications
+      summary: Retrieves the latest pre-qualification for the customer
+      operationId: GetPreQualification
+      parameters:
+      - name: MerchantId
+        in: query
+        description: Gets or sets the Id of the merchant.
+        schema:
+          type: string
+          format: uuid
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Queries.GetPreQualification_Result'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Queries.GetPreQualification_Result'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Queries.GetPreQualification_Result'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /internal/pre-qualifications/link:
+    get:
+      tags:
+      - InternalPreQualifications
+      summary: Retrieves the latest pre-qualification for the customer
+      operationId: LinkOrderWithPreQualification
+      parameters:
+      - name: MerchantId
+        in: query
+        description: Gets or sets the Id of the merchant.
+        schema:
+          type: string
+          format: uuid
+      - name: OrderId
+        in: query
+        description: Gets or sets the Id of the order.
+        schema:
+          type: string
+          format: uuid
+      - name: OrderAmount
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: OrderCreatedDateTime
+        in: query
+        description: When the order was created (Classic) or when the PL was created (Virtual)
+        schema:
+          type: string
+          format: date-time
+      - name: ProductType
+        in: query
+        schema:
+          $ref: '#/components/schemas/QuadPay.Domain.Core.Enums.ProductType'
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Results.LinkPreQualificationResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Results.LinkPreQualificationResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuadPay.Gateway.Orders.PreQualifications.Results.LinkPreQualificationResult'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    QuadPay.Domain.Core.Enums.ProductType:
+      enum:
+      - none
+      - quadPayClassic
+      - quadPayAnywhere
+      - quadPayVirtual
+      - quadPayInStore
+      - longDurationLending
+      type: string
+    QuadPay.Gateway.Orders.PreQualifications.Results.LinkPreQualificationResult:
+      type: object
+      properties:
+        preQualificationId:
+          type: string
+          format: uuid
+        rulesPassed:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationRule'
+      additionalProperties: false
+    QuadPay.Gateway.Orders.PreQualifications.Queries.GetPreQualification_Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationStatus'
+        customer:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.PreQualifications.Models.Customer'
+        shouldBypassSignup:
+          type: boolean
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationStatus:
+      enum:
+      - approved
+      - declined
+      - continue
+      - limitExceeded
+      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    QuadPay.Gateway.Persistence.PreQualifications.Models.Customer:
+      required:
+      - address
+      type: object
+      properties:
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        dateOfBirth:
+          type: string
+          format: date-time
+        email:
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+        address:
+          $ref: '#/components/schemas/QuadPay.Gateway.Persistence.PreQualifications.Models.Address'
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.PreQualifications.Models.Address:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationRule:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

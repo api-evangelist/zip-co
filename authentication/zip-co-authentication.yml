@@ -1,0 +1,47 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://docs.us.zip.co/docs/api-implementation
+- https://docs.us.zip.co/docs/api-javascript-sdk
+- https://developers.zip.co/page/charges-error-scenarios
+- openapi/zip-co-gateway-api-1-api-openapi.yml
+- openapi/zip-co-gateway-api-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+  - implicit
+schemes:
+- name: sec0
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://example.com/oauth2/token
+    scopes: 0
+  sources:
+  - openapi/zip-co-gateway-api-1-api-openapi.yml
+- name: Bearer
+  type: oauth2
+  flows:
+  - flow: implicit
+    authorizationUrl: https://login-dev.quadpay.com/authorize
+    scopes: 0
+  description: Please insert JWT with Bearer into field
+  sources:
+  - openapi/zip-co-gateway-api-openapi.yml
+docs: https://docs.us.zip.co/docs/api-implementation
+documented:
+- name: X-QP-Signature (HMAC-SHA256)
+  type: signature
+  applies_to: US Gateway API and JavaScript SDK
+  detail: '"all operations are secured with an HMAC-SHA256 one-way hash that is performed using a shared secret key. The key is provided by Zip and will differ depending on the environment used." Signature
+    string = parameter names sorted alphabetically, keys and values concatenated with no separators, X-QP-Signature excluded.'
+  docs: https://docs.us.zip.co/docs/api-javascript-sdk
+- name: API key or access token
+  type: bearer
+  applies_to: Global (AU) Merchant API
+  detail: Invalid credentials return 401 "API key or access token is invalid"; separate sandbox and production credentials.
+  docs: https://developers.zip.co/page/charges-error-scenarios
+note: 'The spec securitySchemes are placeholders: sec0 tokenUrl is https://example.com/oauth2/token (ReadMe default) and Bearer points at login-dev.quadpay.com; the docs describe HMAC signing for the US
+  Gateway, not an OAuth flow.'

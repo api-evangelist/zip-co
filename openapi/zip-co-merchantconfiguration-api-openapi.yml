@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Gateway Merchant Configuration API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: MerchantConfiguration
+paths:
+  /configuration/{merchantId}:
+    get:
+      tags:
+      - MerchantConfiguration
+      summary: Allows a merchant to see their checkout configuration
+      operationId: GetConfiguration
+      parameters:
+      - name: MerchantId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+  /configuration/validate:
+    get:
+      tags:
+      - MerchantConfiguration
+      summary: Takes a merchant's id and its signed hash and returns the merchant id if valid…
+      operationId: ValidateConfigurationGet
+      parameters:
+      - name: MerchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - MerchantConfiguration
+      summary: Takes a merchant's id and its signed hash and returns the merchant id if valid…
+      operationId: ValidateConfigurationPost
+      parameters:
+      - name: MerchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

@@ -1,0 +1,1435 @@
+{
+  "@context": {
+    "@vocab": "https://zip.co/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "zip": "https://zip.co/schema#",
+    "Microsoft.AspNetCore.Mvc.ProblemDetails": "zip:Microsoft.AspNetCore.Mvc.ProblemDetails",
+    "type": {
+      "@id": "zip:type",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "zip:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "zip:status",
+      "@type": "xsd:integer"
+    },
+    "detail": {
+      "@id": "zip:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "zip:instance",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Domain.Core.Enums.BankPartner": "zip:QuadPay.Domain.Core.Enums.BankPartner",
+    "QuadPay.Domain.Core.Enums.CurrencyCode": "zip:QuadPay.Domain.Core.Enums.CurrencyCode",
+    "QuadPay.Domain.Core.Enums.ProductType": "zip:QuadPay.Domain.Core.Enums.ProductType",
+    "QuadPay.Domain.Core.Enums.ScheduleType": "zip:QuadPay.Domain.Core.Enums.ScheduleType",
+    "QuadPay.Domain.Core.Enums.TokenizationProvider": "zip:QuadPay.Domain.Core.Enums.TokenizationProvider",
+    "QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command": "zip:QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command",
+    "chargeId": {
+      "@id": "zip:chargeId",
+      "@type": "xsd:string"
+    },
+    "checkoutContext": {
+      "@id": "zip:checkoutContext",
+      "@type": "@id"
+    },
+    "customerPersonalInfo": {
+      "@id": "zip:customerPersonalInfo",
+      "@type": "@id"
+    },
+    "paymentOptionsToken": {
+      "@id": "zip:paymentOptionsToken",
+      "@type": "xsd:string"
+    },
+    "paymentSourceId": {
+      "@id": "zip:paymentSourceId",
+      "@type": "xsd:string"
+    },
+    "promotionContext": {
+      "@id": "zip:promotionContext",
+      "@type": "@id"
+    },
+    "riskApprovalContext": {
+      "@id": "zip:riskApprovalContext",
+      "@type": "@id"
+    },
+    "riskApprovalToken": {
+      "@id": "zip:riskApprovalToken",
+      "@type": "xsd:string"
+    },
+    "selectedPaymentSchedule": {
+      "@id": "zip:selectedPaymentSchedule",
+      "@type": "@id"
+    },
+    "authorizationAmount": {
+      "@id": "zip:authorizationAmount",
+      "@type": "xsd:decimal"
+    },
+    "productOptions": {
+      "@id": "zip:productOptions",
+      "@type": "@id"
+    },
+    "testData": {
+      "@id": "zip:testData",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command+TestDataParameters": "zip:QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Command+TestDataParameters",
+    "releaseDelaySecondsOverride": {
+      "@id": "zip:releaseDelaySecondsOverride",
+      "@type": "xsd:integer"
+    },
+    "QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Result": "zip:QuadPay.Gateway.Checkout.Commands.CompleteCheckoutInternal+Result",
+    "redirectTo": {
+      "@id": "zip:redirectTo",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Checkout.Commands.CompleteVirtualPurchase": "zip:QuadPay.Gateway.Checkout.Commands.CompleteVirtualPurchase",
+    "callbackToken": {
+      "@id": "zip:callbackToken",
+      "@type": "xsd:string"
+    },
+    "rememberMeKey": {
+      "@id": "zip:rememberMeKey",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Checkout.Models.CheckoutContext": "zip:QuadPay.Gateway.Checkout.Models.CheckoutContext",
+    "id": {
+      "@id": "zip:id",
+      "@type": "xsd:string"
+    },
+    "checkoutFlow": {
+      "@id": "zip:checkoutFlow",
+      "@type": "@id"
+    },
+    "entrySource": {
+      "@id": "zip:entrySource",
+      "@type": "@id"
+    },
+    "expiration": {
+      "@id": "zip:expiration",
+      "@type": "xsd:integer"
+    },
+    "startDateTime": {
+      "@id": "zip:startDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "merchant": {
+      "@id": "zip:merchant",
+      "@type": "@id"
+    },
+    "merchantReference": {
+      "@id": "zip:merchantReference",
+      "@type": "xsd:string"
+    },
+    "originalOrderAmount": {
+      "@id": "zip:originalOrderAmount",
+      "@type": "xsd:decimal"
+    },
+    "order": {
+      "@id": "zip:order",
+      "@type": "@id"
+    },
+    "isDefaultCurrency": {
+      "@id": "zip:isDefaultCurrency",
+      "@type": "xsd:boolean"
+    },
+    "origin": {
+      "@id": "zip:origin",
+      "@type": "xsd:string"
+    },
+    "test": {
+      "@id": "zip:test",
+      "@type": "xsd:boolean"
+    },
+    "capture": {
+      "@id": "zip:capture",
+      "@type": "xsd:boolean"
+    },
+    "callbackUrl": {
+      "@id": "zip:callbackUrl",
+      "@type": "xsd:string"
+    },
+    "redirectCancelUrl": {
+      "@id": "zip:redirectCancelUrl",
+      "@type": "xsd:string"
+    },
+    "redirectConfirmUrl": {
+      "@id": "zip:redirectConfirmUrl",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "zip:error",
+      "@type": "@id"
+    },
+    "metadata": {
+      "@id": "zip:metadata"
+    },
+    "gatewayHost": {
+      "@id": "zip:gatewayHost",
+      "@type": "xsd:string"
+    },
+    "expirationInMinutes": {
+      "@id": "zip:expirationInMinutes",
+      "@type": "xsd:integer"
+    },
+    "territory": {
+      "@id": "zip:territory",
+      "@type": "xsd:string"
+    },
+    "isPreOrder": {
+      "@id": "zip:isPreOrder",
+      "@type": "xsd:boolean"
+    },
+    "preOrderAmount": {
+      "@id": "zip:preOrderAmount",
+      "@type": "xsd:decimal"
+    },
+    "deferredOrderAmount": {
+      "@id": "zip:deferredOrderAmount",
+      "@type": "xsd:decimal"
+    },
+    "brandName": {
+      "@id": "zip:brandName",
+      "@type": "xsd:string"
+    },
+    "merchantUrl": {
+      "@id": "zip:merchantUrl",
+      "@type": "xsd:string"
+    },
+    "returnToMerchant": {
+      "@id": "zip:returnToMerchant",
+      "@type": "xsd:boolean"
+    },
+    "isShippingEstimated": {
+      "@id": "zip:isShippingEstimated",
+      "@type": "xsd:boolean"
+    },
+    "isTaxEstimated": {
+      "@id": "zip:isTaxEstimated",
+      "@type": "xsd:boolean"
+    },
+    "shippingPreference": {
+      "@id": "zip:shippingPreference",
+      "@type": "@id"
+    },
+    "additionalData": {
+      "@id": "zip:additionalData",
+      "@type": "@id"
+    },
+    "isPreQualification": {
+      "@id": "zip:isPreQualification",
+      "@type": "xsd:boolean"
+    },
+    "availablePaymentSchedules": {
+      "@id": "zip:availablePaymentSchedules",
+      "@container": "@list"
+    },
+    "paymentSchedules": {
+      "@id": "zip:paymentSchedules",
+      "@container": "@list"
+    },
+    "paymentSchedulePolicy": {
+      "@id": "zip:paymentSchedulePolicy",
+      "@type": "@id"
+    },
+    "merchantFeeForPaymentPlan": {
+      "@id": "zip:merchantFeeForPaymentPlan",
+      "@type": "xsd:decimal"
+    },
+    "promotionInfo": {
+      "@id": "zip:promotionInfo",
+      "@type": "@id"
+    },
+    "cardDeliveryMethod": {
+      "@id": "zip:cardDeliveryMethod",
+      "@type": "@id"
+    },
+    "publicKey": {
+      "@id": "zip:publicKey",
+      "@type": "xsd:string"
+    },
+    "refreshToken": {
+      "@id": "zip:refreshToken",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Checkout.Models.CheckoutError": "zip:QuadPay.Gateway.Checkout.Models.CheckoutError",
+    "QuadPay.Gateway.Checkout.Models.CheckoutType": "zip:QuadPay.Gateway.Checkout.Models.CheckoutType",
+    "QuadPay.Gateway.Checkout.Models.CustomerPersonalInfo": "zip:QuadPay.Gateway.Checkout.Models.CustomerPersonalInfo",
+    "addressLine1": {
+      "@id": "zip:addressLine1",
+      "@type": "xsd:string"
+    },
+    "addressLine2": {
+      "@id": "zip:addressLine2",
+      "@type": "xsd:string"
+    },
+    "addressCity": {
+      "@id": "zip:addressCity",
+      "@type": "xsd:string"
+    },
+    "addressState": {
+      "@id": "zip:addressState",
+      "@type": "xsd:string"
+    },
+    "addressPostalCode": {
+      "@id": "zip:addressPostalCode",
+      "@type": "xsd:string"
+    },
+    "addressCountry": {
+      "@id": "zip:addressCountry",
+      "@type": "xsd:string"
+    },
+    "dateOfBirth": {
+      "@id": "zip:dateOfBirth",
+      "@type": "xsd:dateTime"
+    },
+    "email": {
+      "@id": "zip:email",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "zip:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "zip:lastName",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "zip:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "customerTerritory": {
+      "@id": "zip:customerTerritory",
+      "@type": "xsd:string"
+    },
+    "phoneNumberCountry": {
+      "@id": "zip:phoneNumberCountry",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee",
+    "feeModel": {
+      "@id": "zip:feeModel",
+      "@type": "@id"
+    },
+    "amount": {
+      "@id": "zip:amount",
+      "@type": "xsd:decimal"
+    },
+    "hasStateOverride": {
+      "@id": "zip:hasStateOverride",
+      "@type": "xsd:boolean"
+    },
+    "customerFeeTiers": {
+      "@id": "zip:customerFeeTiers",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee+CustomerFeeTier": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.AppliedOrderFee+CustomerFeeTier",
+    "feeStartsAt": {
+      "@id": "zip:feeStartsAt",
+      "@type": "xsd:decimal"
+    },
+    "totalFeePerOrder": {
+      "@id": "zip:totalFeePerOrder",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.AprTargetFee": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.AprTargetFee",
+    "aprTarget": {
+      "@id": "zip:aprTarget",
+      "@type": "xsd:decimal"
+    },
+    "maximumApr": {
+      "@id": "zip:maximumApr",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment",
+    "sequenceNumber": {
+      "@id": "zip:sequenceNumber",
+      "@type": "xsd:integer"
+    },
+    "date": {
+      "@id": "zip:date",
+      "@type": "xsd:dateTime"
+    },
+    "totalAmountIncludingFees": {
+      "@id": "zip:totalAmountIncludingFees",
+      "@type": "xsd:decimal"
+    },
+    "fees": {
+      "@id": "zip:fees",
+      "@container": "@list"
+    },
+    "totalAmountBreakdown": {
+      "@id": "zip:totalAmountBreakdown",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment+AmountBreakdown": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedInstallment+AmountBreakdown",
+    "baseAmount": {
+      "@id": "zip:baseAmount",
+      "@type": "xsd:decimal"
+    },
+    "downPaymentAmount": {
+      "@id": "zip:downPaymentAmount",
+      "@type": "xsd:decimal"
+    },
+    "feeAmount": {
+      "@id": "zip:feeAmount",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedPaymentPlan": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.CalculatedPaymentPlan",
+    "installments": {
+      "@id": "zip:installments",
+      "@container": "@list"
+    },
+    "requestedAmount": {
+      "@id": "zip:requestedAmount",
+      "@type": "xsd:decimal"
+    },
+    "approvedAmount": {
+      "@id": "zip:approvedAmount",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "zip:currency",
+      "@type": "xsd:string"
+    },
+    "dateOfFinalInstallment": {
+      "@id": "zip:dateOfFinalInstallment",
+      "@type": "xsd:dateTime"
+    },
+    "installmentCount": {
+      "@id": "zip:installmentCount",
+      "@type": "xsd:integer"
+    },
+    "installmentIntervalDays": {
+      "@id": "zip:installmentIntervalDays",
+      "@type": "xsd:integer"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.CreditPolicy": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.CreditPolicy",
+    "jurisdiction": {
+      "@id": "zip:jurisdiction",
+      "@type": "xsd:string"
+    },
+    "rules": {
+      "@id": "zip:rules",
+      "@container": "@list"
+    },
+    "version": {
+      "@id": "zip:version",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.CreditRule": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.CreditRule",
+    "ruleType": {
+      "@id": "zip:ruleType",
+      "@type": "xsd:string"
+    },
+    "ruleTarget": {
+      "@id": "zip:ruleTarget",
+      "@type": "xsd:string"
+    },
+    "properties": {
+      "@id": "zip:properties"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.DecisionEngineContext": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.DecisionEngineContext",
+    "requestId": {
+      "@id": "zip:requestId",
+      "@type": "xsd:string"
+    },
+    "productType": {
+      "@id": "zip:productType",
+      "@type": "@id"
+    },
+    "customerId": {
+      "@id": "zip:customerId",
+      "@type": "xsd:string"
+    },
+    "merchantId": {
+      "@id": "zip:merchantId",
+      "@type": "xsd:string"
+    },
+    "merchantName": {
+      "@id": "zip:merchantName",
+      "@type": "xsd:string"
+    },
+    "orderAmount": {
+      "@id": "zip:orderAmount",
+      "@type": "xsd:decimal"
+    },
+    "availablePaymentPlans": {
+      "@id": "zip:availablePaymentPlans",
+      "@container": "@list"
+    },
+    "appliedOrderFee": {
+      "@id": "zip:appliedOrderFee",
+      "@type": "@id"
+    },
+    "bankPartner": {
+      "@id": "zip:bankPartner",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.Fee": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.Fee",
+    "feeType": {
+      "@id": "zip:feeType",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.FeeModel": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.FeeModel",
+    "QuadPay.Gateway.Checkout.Models.Decisioning.FeeType": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.FeeType",
+    "QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions",
+    "scheduleType": {
+      "@id": "zip:scheduleType",
+      "@type": "@id"
+    },
+    "numberOfInstallments": {
+      "@id": "zip:numberOfInstallments",
+      "@type": "xsd:integer"
+    },
+    "firstInstallmentPercentage": {
+      "@id": "zip:firstInstallmentPercentage",
+      "@type": "xsd:decimal"
+    },
+    "installmentFrequency": {
+      "@id": "zip:installmentFrequency",
+      "@type": "xsd:integer"
+    },
+    "installmentFrequencyType": {
+      "@id": "zip:installmentFrequencyType",
+      "@type": "@id"
+    },
+    "installmentServiceFee": {
+      "@id": "zip:installmentServiceFee",
+      "@type": "xsd:decimal"
+    },
+    "feeStructure": {
+      "@id": "zip:feeStructure",
+      "@type": "@id"
+    },
+    "creditPolicy": {
+      "@id": "zip:creditPolicy",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions+FrequencyType": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.ProductOptions+FrequencyType",
+    "QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure",
+    "tiers": {
+      "@id": "zip:tiers",
+      "@container": "@list"
+    },
+    "aprTargetFee": {
+      "@id": "zip:aprTargetFee",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure+FeeTier": "zip:QuadPay.Gateway.Checkout.Models.Decisioning.ServiceFeeStructure+FeeTier",
+    "minimum": {
+      "@id": "zip:minimum",
+      "@type": "xsd:decimal"
+    },
+    "maximum": {
+      "@id": "zip:maximum",
+      "@type": "xsd:decimal"
+    },
+    "feePerInstallment": {
+      "@id": "zip:feePerInstallment",
+      "@type": "xsd:decimal"
+    },
+    "totalFee": {
+      "@id": "zip:totalFee",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Checkout.Models.MerchantInfo": "zip:QuadPay.Gateway.Checkout.Models.MerchantInfo",
+    "name": {
+      "@id": "zip:name",
+      "@type": "xsd:string"
+    },
+    "merchantDisplayName": {
+      "@id": "zip:merchantDisplayName",
+      "@type": "xsd:string"
+    },
+    "minimumOrderAmount": {
+      "@id": "zip:minimumOrderAmount",
+      "@type": "xsd:integer"
+    },
+    "maximumOrderAmount": {
+      "@id": "zip:maximumOrderAmount",
+      "@type": "xsd:integer"
+    },
+    "productScheduleOptions": {
+      "@id": "zip:productScheduleOptions"
+    },
+    "isCustomerFeesConfigured": {
+      "@id": "zip:isCustomerFeesConfigured",
+      "@type": "xsd:boolean"
+    },
+    "isPreQualificationsEnabled": {
+      "@id": "zip:isPreQualificationsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "isBackOrdersEnabled": {
+      "@id": "zip:isBackOrdersEnabled",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Checkout.Models.PaymentSchedulePolicy": "zip:QuadPay.Gateway.Checkout.Models.PaymentSchedulePolicy",
+    "QuadPay.Gateway.Checkout.Results.CompleteVirtualPurchaseResult": "zip:QuadPay.Gateway.Checkout.Results.CompleteVirtualPurchaseResult",
+    "virtualCardToken": {
+      "@id": "zip:virtualCardToken",
+      "@type": "xsd:string"
+    },
+    "confirmRedirectUrl": {
+      "@id": "zip:confirmRedirectUrl",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere": "zip:QuadPay.Gateway.CheckoutAnywhere.Commands.AuthorizeCheckoutAnywhere",
+    "customer": {
+      "@id": "zip:customer",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.CheckoutAnywhere.Models.Customer": "zip:QuadPay.Gateway.CheckoutAnywhere.Models.Customer",
+    "phone": {
+      "@id": "zip:phone",
+      "@type": "xsd:string"
+    },
+    "billingAddress": {
+      "@id": "zip:billingAddress",
+      "@type": "@id"
+    },
+    "canLink": {
+      "@id": "zip:canLink",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.CheckoutAnywhere.Models.Order": "zip:QuadPay.Gateway.CheckoutAnywhere.Models.Order",
+    "skipEstimate": {
+      "@id": "zip:skipEstimate",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters": "zip:QuadPay.Gateway.CheckoutAnywhere.Models.TestDataParameters",
+    "bypassOTPEmail": {
+      "@id": "zip:bypassOTPEmail",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.CheckoutAnywhere.Queries.GetCheckoutAnywhereToken+Result": "zip:QuadPay.Gateway.CheckoutAnywhere.Queries.GetCheckoutAnywhereToken+Result",
+    "checkoutAnywhereToken": {
+      "@id": "zip:checkoutAnywhereToken",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult": "zip:QuadPay.Gateway.CheckoutAnywhere.Results.AuthorizeCheckoutAnywhereResult",
+    "QuadPay.Gateway.CustomerPortal.Models.OrderDetailStatus": "zip:QuadPay.Gateway.CustomerPortal.Models.OrderDetailStatus",
+    "QuadPay.Gateway.CustomerPortal.Models.Refund": "zip:QuadPay.Gateway.CustomerPortal.Models.Refund",
+    "refundDateTime": {
+      "@id": "zip:refundDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "QuadPay.Gateway.GlobalGateway.Commands.UploadDisputeFile+Command": "zip:QuadPay.Gateway.GlobalGateway.Commands.UploadDisputeFile+Command",
+    "disputeId": {
+      "@id": "zip:disputeId",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "zip:category",
+      "@type": "xsd:string"
+    },
+    "blob": {
+      "@id": "zip:blob",
+      "@type": "@id"
+    },
+    "fileName": {
+      "@id": "zip:fileName",
+      "@type": "xsd:string"
+    },
+    "contentType": {
+      "@id": "zip:contentType",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Google.Models.PaymentScheduleType": "zip:QuadPay.Gateway.Google.Models.PaymentScheduleType",
+    "QuadPay.Gateway.MerchantDisputes.Commands.AcceptDispute+Command": "zip:QuadPay.Gateway.MerchantDisputes.Commands.AcceptDispute+Command",
+    "QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence+Command": "zip:QuadPay.Gateway.MerchantDisputes.Commands.SubmitDisputeEvidence+Command",
+    "receipt": {
+      "@id": "zip:receipt",
+      "@type": "@id"
+    },
+    "refundPolicy": {
+      "@id": "zip:refundPolicy",
+      "@type": "@id"
+    },
+    "refundPolicyDisclosure": {
+      "@id": "zip:refundPolicyDisclosure",
+      "@type": "xsd:string"
+    },
+    "refundRefusalExplanation": {
+      "@id": "zip:refundRefusalExplanation",
+      "@type": "xsd:string"
+    },
+    "serviceDate": {
+      "@id": "zip:serviceDate",
+      "@type": "xsd:string"
+    },
+    "serviceDocumentation": {
+      "@id": "zip:serviceDocumentation",
+      "@type": "@id"
+    },
+    "shippingAddress": {
+      "@id": "zip:shippingAddress",
+      "@type": "xsd:string"
+    },
+    "shippingCarrier": {
+      "@id": "zip:shippingCarrier",
+      "@type": "xsd:string"
+    },
+    "shippingDate": {
+      "@id": "zip:shippingDate",
+      "@type": "xsd:string"
+    },
+    "shippingDocumentation": {
+      "@id": "zip:shippingDocumentation",
+      "@type": "@id"
+    },
+    "shippingTrackingNumber": {
+      "@id": "zip:shippingTrackingNumber",
+      "@type": "xsd:string"
+    },
+    "uncategorizedFile": {
+      "@id": "zip:uncategorizedFile",
+      "@type": "@id"
+    },
+    "productDescription": {
+      "@id": "zip:productDescription",
+      "@type": "xsd:string"
+    },
+    "duplicateChargeExplanation": {
+      "@id": "zip:duplicateChargeExplanation",
+      "@type": "xsd:string"
+    },
+    "accessActivityLog": {
+      "@id": "zip:accessActivityLog",
+      "@type": "xsd:string"
+    },
+    "cancellationPolicy": {
+      "@id": "zip:cancellationPolicy",
+      "@type": "@id"
+    },
+    "cancellationPolicyDisclosure": {
+      "@id": "zip:cancellationPolicyDisclosure",
+      "@type": "xsd:string"
+    },
+    "cancellationRebuttal": {
+      "@id": "zip:cancellationRebuttal",
+      "@type": "xsd:string"
+    },
+    "customerCommunication": {
+      "@id": "zip:customerCommunication",
+      "@type": "@id"
+    },
+    "customerEmailAddress": {
+      "@id": "zip:customerEmailAddress",
+      "@type": "xsd:string"
+    },
+    "customerName": {
+      "@id": "zip:customerName",
+      "@type": "xsd:string"
+    },
+    "customerPurchaseIp": {
+      "@id": "zip:customerPurchaseIp",
+      "@type": "xsd:string"
+    },
+    "customerSignature": {
+      "@id": "zip:customerSignature",
+      "@type": "@id"
+    },
+    "duplicateChargeDocumentation": {
+      "@id": "zip:duplicateChargeDocumentation",
+      "@type": "@id"
+    },
+    "duplicateChargeId": {
+      "@id": "zip:duplicateChargeId",
+      "@type": "xsd:string"
+    },
+    "uncategorizedText": {
+      "@id": "zip:uncategorizedText",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command": "zip:QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command",
+    "files": {
+      "@id": "zip:files",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command+File": "zip:QuadPay.Gateway.MerchantDisputes.Commands.UploadDisputeEvidenceFilesFromBlob+Command+File",
+    "QuadPay.Gateway.MerchantDisputes.MerchantDisputesController+UploadDisputeEvidenceFileRequest": "zip:QuadPay.Gateway.MerchantDisputes.MerchantDisputesController+UploadDisputeEvidenceFileRequest",
+    "QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail": "zip:QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail",
+    "externalDisputeId": {
+      "@id": "zip:externalDisputeId",
+      "@type": "xsd:string"
+    },
+    "disputedAmount": {
+      "@id": "zip:disputedAmount",
+      "@type": "xsd:decimal"
+    },
+    "isChargeRefundable": {
+      "@id": "zip:isChargeRefundable",
+      "@type": "xsd:boolean"
+    },
+    "evidenceDueOn": {
+      "@id": "zip:evidenceDueOn",
+      "@type": "xsd:dateTime"
+    },
+    "disputedOn": {
+      "@id": "zip:disputedOn",
+      "@type": "xsd:dateTime"
+    },
+    "reason": {
+      "@id": "zip:reason",
+      "@type": "xsd:string"
+    },
+    "evidence": {
+      "@id": "zip:evidence",
+      "@type": "@id"
+    },
+    "orderId": {
+      "@id": "zip:orderId",
+      "@type": "xsd:string"
+    },
+    "orderNumber": {
+      "@id": "zip:orderNumber",
+      "@type": "xsd:string"
+    },
+    "customerFirstName": {
+      "@id": "zip:customerFirstName",
+      "@type": "xsd:string"
+    },
+    "customerLastName": {
+      "@id": "zip:customerLastName",
+      "@type": "xsd:string"
+    },
+    "customerEmail": {
+      "@id": "zip:customerEmail",
+      "@type": "xsd:string"
+    },
+    "issuerEvidence": {
+      "@id": "zip:issuerEvidence",
+      "@container": "@list"
+    },
+    "orderDate": {
+      "@id": "zip:orderDate",
+      "@type": "xsd:dateTime"
+    },
+    "disputeFeeAmount": {
+      "@id": "zip:disputeFeeAmount",
+      "@type": "xsd:decimal"
+    },
+    "reinstatedAmount": {
+      "@id": "zip:reinstatedAmount",
+      "@type": "xsd:decimal"
+    },
+    "settledOn": {
+      "@id": "zip:settledOn",
+      "@type": "xsd:dateTime"
+    },
+    "evidenceSubmittedOn": {
+      "@id": "zip:evidenceSubmittedOn",
+      "@type": "xsd:dateTime"
+    },
+    "acceptedOn": {
+      "@id": "zip:acceptedOn",
+      "@type": "xsd:dateTime"
+    },
+    "paymentProcessorUnavailable": {
+      "@id": "zip:paymentProcessorUnavailable",
+      "@type": "xsd:boolean"
+    },
+    "orderMerchantReference": {
+      "@id": "zip:orderMerchantReference",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidence": "zip:QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidence",
+    "QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile": "zip:QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeEvidenceFile",
+    "created": {
+      "@id": "zip:created",
+      "@type": "xsd:dateTime"
+    },
+    "expiresAt": {
+      "@id": "zip:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "filename": {
+      "@id": "zip:filename",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "zip:size",
+      "@type": "xsd:integer"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeIssuerEvidence": "zip:QuadPay.Gateway.MerchantDisputes.Models.DisputeDetail+DisputeIssuerEvidence",
+    "evidenceType": {
+      "@id": "zip:evidenceType",
+      "@type": "xsd:string"
+    },
+    "textEvidence": {
+      "@id": "zip:textEvidence",
+      "@type": "xsd:string"
+    },
+    "fileEvidence": {
+      "@id": "zip:fileEvidence",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Models.DisputeResult": "zip:QuadPay.Gateway.MerchantDisputes.Models.DisputeResult",
+    "disputeDetail": {
+      "@id": "zip:disputeDetail",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult": "zip:QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult",
+    "value": {
+      "@id": "zip:value",
+      "@container": "@list"
+    },
+    "total": {
+      "@id": "zip:total",
+      "@type": "xsd:integer"
+    },
+    "QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult+DisputeItem": "zip:QuadPay.Gateway.MerchantDisputes.Models.SearchDisputeResult+DisputeItem",
+    "paymentPlanId": {
+      "@id": "zip:paymentPlanId",
+      "@type": "xsd:string"
+    },
+    "currencyCode": {
+      "@id": "zip:currencyCode",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.MerchantSettlements.Models.InvoicesSearchResult": "zip:QuadPay.Gateway.MerchantSettlements.Models.InvoicesSearchResult",
+    "transactions": {
+      "@id": "zip:transactions",
+      "@container": "@list"
+    },
+    "totalCount": {
+      "@id": "zip:totalCount",
+      "@type": "xsd:integer"
+    },
+    "QuadPay.Gateway.MerchantSettlements.Models.SettlementReportInvoice": "zip:QuadPay.Gateway.MerchantSettlements.Models.SettlementReportInvoice",
+    "invoiceNumber": {
+      "@id": "zip:invoiceNumber",
+      "@type": "xsd:string"
+    },
+    "openDate": {
+      "@id": "zip:openDate",
+      "@type": "xsd:dateTime"
+    },
+    "closeDate": {
+      "@id": "zip:closeDate",
+      "@type": "xsd:dateTime"
+    },
+    "amountSigned": {
+      "@id": "zip:amountSigned",
+      "@type": "xsd:decimal"
+    },
+    "transferStatus": {
+      "@id": "zip:transferStatus",
+      "@type": "xsd:string"
+    },
+    "disbursementDateUtc": {
+      "@id": "zip:disbursementDateUtc",
+      "@type": "xsd:dateTime"
+    },
+    "transferReference": {
+      "@id": "zip:transferReference",
+      "@type": "xsd:string"
+    },
+    "transferProcessor": {
+      "@id": "zip:transferProcessor",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.MerchantSettlements.Models.SettlementReportTransaction": "zip:QuadPay.Gateway.MerchantSettlements.Models.SettlementReportTransaction",
+    "transactionType": {
+      "@id": "zip:transactionType",
+      "@type": "xsd:string"
+    },
+    "taxAmountSigned": {
+      "@id": "zip:taxAmountSigned",
+      "@type": "xsd:decimal"
+    },
+    "orderDateTimeUtc": {
+      "@id": "zip:orderDateTimeUtc",
+      "@type": "xsd:dateTime"
+    },
+    "merchantOrderReference": {
+      "@id": "zip:merchantOrderReference",
+      "@type": "xsd:string"
+    },
+    "transactionDateTimeUtc": {
+      "@id": "zip:transactionDateTimeUtc",
+      "@type": "xsd:dateTime"
+    },
+    "product": {
+      "@id": "zip:product",
+      "@type": "xsd:string"
+    },
+    "merchantTransactionReference": {
+      "@id": "zip:merchantTransactionReference",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.MerchantSettlements.Models.TransactionsSearchResult": "zip:QuadPay.Gateway.MerchantSettlements.Models.TransactionsSearchResult",
+    "invoices": {
+      "@id": "zip:invoices",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Query": "zip:QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Query",
+    "isZeroOrderAmount": {
+      "@id": "zip:isZeroOrderAmount",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Result": "zip:QuadPay.Gateway.Merchants.Queries.GetPaymentSchedules+Result",
+    "isPi4Configured": {
+      "@id": "zip:isPi4Configured",
+      "@type": "xsd:boolean"
+    },
+    "isLegacyPayIn4Fallback": {
+      "@id": "zip:isLegacyPayIn4Fallback",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.MicrosoftEdge.Commands.AuthorizeEdgeShop": "zip:QuadPay.Gateway.MicrosoftEdge.Commands.AuthorizeEdgeShop",
+    "QuadPay.Gateway.Orders.Commands.AssociateMerchantPlatformIdToOrder+Command": "zip:QuadPay.Gateway.Orders.Commands.AssociateMerchantPlatformIdToOrder+Command",
+    "merchantPlatformId": {
+      "@id": "zip:merchantPlatformId",
+      "@type": "xsd:string"
+    },
+    "lineItems": {
+      "@id": "zip:lineItems",
+      "@container": "@list"
+    },
+    "attemptRetries": {
+      "@id": "zip:attemptRetries",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Commands.AuthorizeOrder": "zip:QuadPay.Gateway.Orders.Commands.AuthorizeOrder",
+    "tokenizerSubdomain": {
+      "@id": "zip:tokenizerSubdomain",
+      "@type": "xsd:string"
+    },
+    "sdkSource": {
+      "@id": "zip:sdkSource",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Command": "zip:QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Command",
+    "customerState": {
+      "@id": "zip:customerState",
+      "@type": "xsd:string"
+    },
+    "customerCountry": {
+      "@id": "zip:customerCountry",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Result": "zip:QuadPay.Gateway.Orders.Commands.CalculateMerchantFees+Result",
+    "adjustedOrderAmount": {
+      "@id": "zip:adjustedOrderAmount",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Orders.Commands.CaptureOrder+Command": "zip:QuadPay.Gateway.Orders.Commands.CaptureOrder+Command",
+    "singleCapture": {
+      "@id": "zip:singleCapture",
+      "@type": "xsd:boolean"
+    },
+    "isSync": {
+      "@id": "zip:isSync",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Commands.ConfirmOrder+Command": "zip:QuadPay.Gateway.Orders.Commands.ConfirmOrder+Command",
+    "shippingAmount": {
+      "@id": "zip:shippingAmount",
+      "@type": "xsd:decimal"
+    },
+    "taxAmount": {
+      "@id": "zip:taxAmount",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Orders.Commands.RefundOrder+Command": "zip:QuadPay.Gateway.Orders.Commands.RefundOrder+Command",
+    "QuadPay.Gateway.Orders.Commands.VoidOrder+Command": "zip:QuadPay.Gateway.Orders.Commands.VoidOrder+Command",
+    "isAmountInCommand": {
+      "@id": "zip:isAmountInCommand",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Models.AddOn": "zip:QuadPay.Gateway.Orders.Models.AddOn",
+    "QuadPay.Gateway.Orders.Models.AddOnMerchant": "zip:QuadPay.Gateway.Orders.Models.AddOnMerchant",
+    "merchantNameRegex": {
+      "@id": "zip:merchantNameRegex",
+      "@type": "xsd:string"
+    },
+    "merchantNetworkRegex": {
+      "@id": "zip:merchantNetworkRegex",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Models.AddOnRequest": "zip:QuadPay.Gateway.Orders.Models.AddOnRequest",
+    "QuadPay.Gateway.Orders.Models.AddOnType": "zip:QuadPay.Gateway.Orders.Models.AddOnType",
+    "QuadPay.Gateway.Orders.Models.AdditionalRiskData": "zip:QuadPay.Gateway.Orders.Models.AdditionalRiskData",
+    "lastTransactionDate": {
+      "@id": "zip:lastTransactionDate",
+      "@type": "xsd:dateTime"
+    },
+    "accountCreationDate": {
+      "@id": "zip:accountCreationDate",
+      "@type": "xsd:dateTime"
+    },
+    "customerLoggedIn": {
+      "@id": "zip:customerLoggedIn",
+      "@type": "xsd:boolean"
+    },
+    "customerIsMember": {
+      "@id": "zip:customerIsMember",
+      "@type": "xsd:boolean"
+    },
+    "merchantRiskAssessment": {
+      "@id": "zip:merchantRiskAssessment",
+      "@type": "xsd:string"
+    },
+    "sameDevice": {
+      "@id": "zip:sameDevice",
+      "@type": "xsd:boolean"
+    },
+    "fulfillmentMethod": {
+      "@id": "zip:fulfillmentMethod",
+      "@type": "xsd:string"
+    },
+    "customerTransactionCount": {
+      "@id": "zip:customerTransactionCount",
+      "@type": "xsd:integer"
+    },
+    "customerAverageOrderValue": {
+      "@id": "zip:customerAverageOrderValue",
+      "@type": "xsd:string"
+    },
+    "customerFraudIncidents": {
+      "@id": "zip:customerFraudIncidents",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Models.Address": "zip:QuadPay.Gateway.Orders.Models.Address",
+    "line1": {
+      "@id": "zip:line1",
+      "@type": "xsd:string"
+    },
+    "line2": {
+      "@id": "zip:line2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "zip:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "zip:state",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "zip:postalCode",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "zip:country",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Models.CheckoutFlow": "zip:QuadPay.Gateway.Orders.Models.CheckoutFlow",
+    "QuadPay.Gateway.Orders.Models.EntrySource": "zip:QuadPay.Gateway.Orders.Models.EntrySource",
+    "QuadPay.Gateway.Orders.Models.LineItem": "zip:QuadPay.Gateway.Orders.Models.LineItem",
+    "description": {
+      "@id": "zip:description",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "zip:quantity",
+      "@type": "xsd:integer"
+    },
+    "price": {
+      "@id": "zip:price",
+      "@type": "xsd:decimal"
+    },
+    "sku": {
+      "@id": "zip:sku",
+      "@type": "xsd:string"
+    },
+    "releaseDate": {
+      "@id": "zip:releaseDate",
+      "@type": "xsd:dateTime"
+    },
+    "isDeferred": {
+      "@id": "zip:isDeferred",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Models.Order": "zip:QuadPay.Gateway.Orders.Models.Order",
+    "addOns": {
+      "@id": "zip:addOns",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Orders.Models.OrderAuthorizeOrder": "zip:QuadPay.Gateway.Orders.Models.OrderAuthorizeOrder",
+    "QuadPay.Gateway.Orders.Models.OrderDetailSummary": "zip:QuadPay.Gateway.Orders.Models.OrderDetailSummary",
+    "orderDateTime": {
+      "@id": "zip:orderDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "paymentScheduleType": {
+      "@id": "zip:paymentScheduleType",
+      "@type": "@id"
+    },
+    "refunds": {
+      "@id": "zip:refunds",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Orders.Models.OrderOperationResponse": "zip:QuadPay.Gateway.Orders.Models.OrderOperationResponse",
+    "timestamp": {
+      "@id": "zip:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "success": {
+      "@id": "zip:success",
+      "@type": "xsd:boolean"
+    },
+    "message": {
+      "@id": "zip:message",
+      "@type": "xsd:string"
+    },
+    "operation": {
+      "@id": "zip:operation",
+      "@type": "xsd:string"
+    },
+    "errorCode": {
+      "@id": "zip:errorCode",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Models.PaymentScheduleSummary": "zip:QuadPay.Gateway.Orders.Models.PaymentScheduleSummary",
+    "QuadPay.Gateway.Orders.Models.ShippingPreference": "zip:QuadPay.Gateway.Orders.Models.ShippingPreference",
+    "allowedShippingLocations": {
+      "@id": "zip:allowedShippingLocations",
+      "@container": "@list"
+    },
+    "deniedShippingLocations": {
+      "@id": "zip:deniedShippingLocations",
+      "@container": "@list"
+    },
+    "deniedPOBoxShippingLocations": {
+      "@id": "zip:deniedPOBoxShippingLocations",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Orders.Models.ShippingPreference+ShippingLocation": "zip:QuadPay.Gateway.Orders.Models.ShippingPreference+ShippingLocation",
+    "QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+Command": "zip:QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+Command",
+    "consentTimestamp": {
+      "@id": "zip:consentTimestamp",
+      "@type": "xsd:dateTime"
+    },
+    "forceNewCustomer": {
+      "@id": "zip:forceNewCustomer",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+InstallmentResult": "zip:QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+InstallmentResult",
+    "QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+PaymentPlanResult": "zip:QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+PaymentPlanResult",
+    "QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+Result": "zip:QuadPay.Gateway.Orders.PreQualifications.Commands.AssessPreQualification+Result",
+    "customerPortalUrl": {
+      "@id": "zip:customerPortalUrl",
+      "@type": "xsd:string"
+    },
+    "maxApprovedAmount": {
+      "@id": "zip:maxApprovedAmount",
+      "@type": "xsd:decimal"
+    },
+    "disclosure": {
+      "@id": "zip:disclosure",
+      "@type": "xsd:string"
+    },
+    "preQualificationStatus": {
+      "@id": "zip:preQualificationStatus",
+      "@type": "@id"
+    },
+    "QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification": "zip:QuadPay.Gateway.Orders.PreQualifications.Commands.InitializePreQualification",
+    "preQualificationId": {
+      "@id": "zip:preQualificationId",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.PreQualifications.Models.CustomerDetails": "zip:QuadPay.Gateway.Orders.PreQualifications.Models.CustomerDetails",
+    "address": {
+      "@id": "zip:address",
+      "@type": "@id"
+    },
+    "ipAddress": {
+      "@id": "zip:ipAddress",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.PreQualifications.Models.OrderDetails": "zip:QuadPay.Gateway.Orders.PreQualifications.Models.OrderDetails",
+    "QuadPay.Gateway.Orders.PreQualifications.Queries.GetPreQualification+Result": "zip:QuadPay.Gateway.Orders.PreQualifications.Queries.GetPreQualification+Result",
+    "shouldBypassSignup": {
+      "@id": "zip:shouldBypassSignup",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.PreQualifications.Results.InitializePreQualificationResult": "zip:QuadPay.Gateway.Orders.PreQualifications.Results.InitializePreQualificationResult",
+    "QuadPay.Gateway.Orders.PreQualifications.Results.LinkPreQualificationResult": "zip:QuadPay.Gateway.Orders.PreQualifications.Results.LinkPreQualificationResult",
+    "rulesPassed": {
+      "@id": "zip:rulesPassed",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Orders.Queries.GetOrderById+Query": "zip:QuadPay.Gateway.Orders.Queries.GetOrderById+Query",
+    "shouldEnforceMerchantIdValidation": {
+      "@id": "zip:shouldEnforceMerchantIdValidation",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Queries.GetOrderById+Result": "zip:QuadPay.Gateway.Orders.Queries.GetOrderById+Result",
+    "moreInfoUrl": {
+      "@id": "zip:moreInfoUrl",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId+Query": "zip:QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId+Query",
+    "QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId+Result": "zip:QuadPay.Gateway.Orders.Queries.GetOrdersByCustomerId+Result",
+    "orders": {
+      "@id": "zip:orders",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail+OrderDetail": "zip:QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail+OrderDetail",
+    "orderStatus": {
+      "@id": "zip:orderStatus",
+      "@type": "xsd:string"
+    },
+    "customerAuthorizationStatus": {
+      "@id": "zip:customerAuthorizationStatus",
+      "@type": "xsd:string"
+    },
+    "totalFundsCaptured": {
+      "@id": "zip:totalFundsCaptured",
+      "@type": "xsd:decimal"
+    },
+    "totalFundsVoided": {
+      "@id": "zip:totalFundsVoided",
+      "@type": "xsd:decimal"
+    },
+    "totalFundsRefunded": {
+      "@id": "zip:totalFundsRefunded",
+      "@type": "xsd:decimal"
+    },
+    "createdDateTime": {
+      "@id": "zip:createdDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "customerContribution": {
+      "@id": "zip:customerContribution",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail+OrderDetail+OrderAddress": "zip:QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail+OrderDetail+OrderAddress",
+    "postCode": {
+      "@id": "zip:postCode",
+      "@type": "xsd:string"
+    },
+    "QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail+OrderDetail+OrderCustomer": "zip:QuadPay.Gateway.Orders.Queries.RetrieveOrderDetail+OrderDetail+OrderCustomer",
+    "QuadPay.Gateway.Orders.Queries.RetrieveOrderStatus+Result": "zip:QuadPay.Gateway.Orders.Queries.RetrieveOrderStatus+Result",
+    "QuadPay.Gateway.Payments.Queries.GetMerchantPaymentsExport+Query`1+OrderByEnum[[System.IO.Stream, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": "zip:QuadPay.Gateway.Payments.Queries.GetMerchantPaymentsExport+Query`1+OrderByEnum[[System.IO.Stream, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.AssociationType": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.AssociationType",
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.BankPartner": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.BankPartner",
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.CallbackDomain": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.CallbackDomain",
+    "domain": {
+      "@id": "zip:domain",
+      "@type": "xsd:string"
+    },
+    "enabled": {
+      "@id": "zip:enabled",
+      "@type": "xsd:boolean"
+    },
+    "streamEventNumber": {
+      "@id": "zip:streamEventNumber",
+      "@type": "xsd:integer"
+    },
+    "streamPosition": {
+      "@id": "zip:streamPosition",
+      "@type": "xsd:string"
+    },
+    "hasStreamProcessingFaulted": {
+      "@id": "zip:hasStreamProcessingFaulted",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.FeeTier": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.FeeTier",
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantAssociation": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantAssociation",
+    "parentMerchantId": {
+      "@id": "zip:parentMerchantId",
+      "@type": "xsd:string"
+    },
+    "childMerchantId": {
+      "@id": "zip:childMerchantId",
+      "@type": "xsd:string"
+    },
+    "isEnabled": {
+      "@id": "zip:isEnabled",
+      "@type": "xsd:boolean"
+    },
+    "lastUpdated": {
+      "@id": "zip:lastUpdated",
+      "@type": "xsd:dateTime"
+    },
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantFeeDetails": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantFeeDetails",
+    "feePercent": {
+      "@id": "zip:feePercent",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantType": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.MerchantType",
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.PaymentSchedule": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.PaymentSchedule",
+    "scheduleDescription": {
+      "@id": "zip:scheduleDescription",
+      "@type": "xsd:string"
+    },
+    "merchantFee": {
+      "@id": "zip:merchantFee",
+      "@type": "@id"
+    },
+    "customerServiceFeeTiers": {
+      "@id": "zip:customerServiceFeeTiers",
+      "@container": "@list"
+    },
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleFeeTier": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleFeeTier",
+    "feePerOrder": {
+      "@id": "zip:feePerOrder",
+      "@type": "xsd:decimal"
+    },
+    "QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions": "zip:QuadPay.Gateway.Persistence.Merchants.ReadModel.Models.ScheduleOptions",
+    "installmentFee": {
+      "@id": "zip:installmentFee",
+      "@type": "xsd:decimal"
+    },
+    "isScheduleEnabled": {
+      "@id": "zip:isScheduleEnabled",
+      "@type": "xsd:boolean"
+    },
+    "QuadPay.Gateway.Persistence.PreQualifications.Models.Address": "zip:QuadPay.Gateway.Persistence.PreQualifications.Models.Address",
+    "QuadPay.Gateway.Persistence.PreQualifications.Models.Customer": "zip:QuadPay.Gateway.Persistence.PreQualifications.Models.Customer",
+    "QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationRule": "zip:QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationRule",
+    "QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationStatus": "zip:QuadPay.Gateway.Persistence.PreQualifications.Models.PreQualificationStatus",
+    "QuadPay.Gateway.Promotions.Models.PromotionBanner": "zip:QuadPay.Gateway.Promotions.Models.PromotionBanner",
+    "promoAvailableHeader": {
+      "@id": "zip:promoAvailableHeader",
+      "@type": "xsd:string"
+    },
+    "promoAvailableSubtitle": {
+      "@id": "zip:promoAvailableSubtitle",
+      "@type": "xsd:string"
+    },
+    "promoAppliedHeader": {
+      "@id": "zip:promoAppliedHeader",
+      "@type": "xsd:string"
+    },
+    "promoAppliedSubtitle": {
+      "@id": "zip:promoAppliedSubtitle",
+      "@type": "xsd:string"
+    },
+    "displayMoreInfoButtonText": {
+      "@id": "zip:displayMoreInfoButtonText",
+      "@type": "xsd:string"
+    },
+    "hideMoreInfoButtonText": {
+      "@id": "zip:hideMoreInfoButtonText",
+      "@type": "xsd:string"
+    },
+    "termsAndConditionsUs": {
+      "@id": "zip:termsAndConditionsUs",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Zip API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Zip's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/zip-co-gateway-api-1-api-openapi.yml, openapi/zip-co-gateway-api-openapi.yml, openapi/zip-co-gateway-api-optimizations-api-openapi.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/zip-co-gateway-api-1-api-openapi.yml",
+    "openapi/zip-co-gateway-api-openapi.yml",
+    "openapi/zip-co-gateway-api-optimizations-api-openapi.yml"
+  ]
+}

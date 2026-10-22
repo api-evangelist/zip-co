@@ -1,0 +1,537 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zip-co/main/json-schema/zip-co-quad-pay-gateway-orders-commands-authorize-order-schema.json",
+  "title": "QuadPay.Gateway.Orders.Commands.AuthorizeOrder",
+  "description": "Authorizes the creation of an order in the QuadPay system.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/zip-co-gateway-api-openapi.yml#/components/schemas/QuadPay.Gateway.Orders.Commands.AuthorizeOrder",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Gets or sets the unique ID to use for order creation",
+      "format": "uuid"
+    },
+    "merchantId": {
+      "type": "string",
+      "description": "Gets or sets the merchant Id.",
+      "format": "uuid"
+    },
+    "order": {
+      "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.OrderAuthorizeOrder"
+    },
+    "shippingPreference": {
+      "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.ShippingPreference"
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Gets or sets a value indicating whether this is a test order."
+    },
+    "capture": {
+      "type": "boolean",
+      "description": "Gets or sets a value indicating whether this order should be immediately captured."
+    },
+    "redirectCancelUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the url that the user will be redirected to if they cancel the checkout."
+    },
+    "redirectConfirmUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the url that the user will be redirected to after they have completed the checkout."
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": "Gets or sets optional metadata attached to the checkout."
+    },
+    "checkoutFlow": {
+      "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.CheckoutFlow"
+    },
+    "entrySource": {
+      "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.EntrySource"
+    },
+    "merchantUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the merchant's url"
+    },
+    "returnToMerchant": {
+      "type": "boolean",
+      "description": "Gets or sets a boolean dictating if the Zip Checkout will redirect back to the merchant checkout on completion"
+    },
+    "tokenizerSubdomain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets a string assigning the tokenizer subdomain, if applicable. For merchants that use tokenizer gateways, such as CardConnect.com\r\nwill have a custom subdomain, i.e. http://{site}.cardconnect.com, that is used to perform callbacks and/or to tokenize the PAN data for the\r\nvirtual purchase. The tokenizer subdomain is set on the QuadPay button and retained through the callback so that virtual checkout can\r\nformulate an API URL for the merchants tokenizer gateway."
+    },
+    "additionalData": {
+      "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.AdditionalRiskData"
+    },
+    "publicKey": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rememberMeKey": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the Remember Me JWE token for fetching a refresh token during checkout (CKO)."
+    },
+    "sdkSource": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the SDK source for this order, used to distinguish traffic origin in telemetry."
+    },
+    "merchantReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the unique merchant reference for this authorization.\r\nPlaced after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null."
+    },
+    "brandName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the brand name of the merchant for this order.\r\nPlaced after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null."
+    },
+    "callbackUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or sets the status callback url.\r\nPlaced after SdkSource to avoid blocking TelemetryTracingBehavior iteration when null."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "QuadPay.Gateway.Orders.Models.AddOnRequest": {
+      "type": "object",
+      "properties": {
+        "merchantId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "orderId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "merchantReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.AddOnType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "QuadPay.Gateway.Orders.Models.AddOnType": {
+      "enum": [
+        "ticketInsurance"
+      ],
+      "type": "string"
+    },
+    "QuadPay.Gateway.Orders.Models.AdditionalRiskData": {
+      "type": "object",
+      "properties": {
+        "lastTransactionDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The date of the customer's last transaction on a merchant's site.",
+          "format": "date-time"
+        },
+        "accountCreationDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The date the customer's account was created on a merchant's site.",
+          "format": "date-time"
+        },
+        "customerLoggedIn": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Indicates whether the customer is currently logged on a merchant's site."
+        },
+        "customerIsMember": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Indicates whether the customer is a member of the merchant's site."
+        },
+        "merchantRiskAssessment": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The risk assessment score for the merchant."
+        },
+        "sameDevice": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Indicates whether the transaction was performed from the same device."
+        },
+        "fulfillmentMethod": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The method used to fulfill the order on a merchant's site."
+        },
+        "customerTransactionCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The total number of transactions made by the customer on a merchant's site.",
+          "format": "int32"
+        },
+        "customerAverageOrderValue": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The average order value of the customer's transactions on a merchant's site.\r\nExample format: 123.45 or 123"
+        },
+        "customerFraudIncidents": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Indicates whether the customer has previous fraud incidents."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Additional Data Fields Are optional customer info fields from merchant"
+    },
+    "QuadPay.Gateway.Orders.Models.Address": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the first address line."
+        },
+        "line2": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the second address line."
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the city."
+        },
+        "state": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the state or province."
+        },
+        "postalCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the postal code."
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the country."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Encapsulates a physical address."
+    },
+    "QuadPay.Gateway.Orders.Models.CheckoutFlow": {
+      "enum": [
+        "standard",
+        "express",
+        "longDurationLending"
+      ],
+      "type": "string"
+    },
+    "QuadPay.Gateway.Orders.Models.EntrySource": {
+      "enum": [
+        "unknown",
+        "secondChance",
+        "zipButton",
+        "merchantButton",
+        "googlePayOnline",
+        "googlePayApp",
+        "checkoutAnywhereApi",
+        "usPartnerPlatform",
+        "microsoftEdge",
+        "stripeDirect"
+      ],
+      "type": "string"
+    },
+    "QuadPay.Gateway.Orders.Models.LineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets a description about the item being purchased."
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the name of the item being purchased."
+        },
+        "quantity": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or sets the quantity of the items being purchased.",
+          "format": "int32"
+        },
+        "price": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or sets the price of a single item.",
+          "format": "double"
+        },
+        "sku": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the SKU identifier of the item being purchased."
+        },
+        "isPreOrder": {
+          "type": "boolean",
+          "description": "Gets or sets the flag indicating whether or not this item will be included in a preorder"
+        },
+        "releaseDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the date a preorder order will be shipped",
+          "format": "date-time"
+        },
+        "isDeferred": {
+          "type": "boolean",
+          "description": "Gets or sets the flag indicating whether this line item is deferred."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Encapsulates the items that comprise an order for a customer."
+    },
+    "QuadPay.Gateway.Orders.Models.OrderAuthorizeOrder": {
+      "type": "object",
+      "properties": {
+        "addOns": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.AddOnRequest"
+          },
+          "description": "Gets or sets the AddOnRequest that are apart of this order"
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the customer's first name."
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the customer's last name."
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the customer's email address."
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the customer's phone number."
+        },
+        "shippingAddress": {
+          "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.Address"
+        },
+        "billingAddress": {
+          "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.Address"
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the currency the order amount is in (defaults to TerritorySettings)."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Gets or sets the order amount.  This includes the tax and shipping amounts.",
+          "format": "double"
+        },
+        "taxAmount": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or sets the optional tax amount.",
+          "format": "double"
+        },
+        "shippingAmount": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or sets the optional shipping amount.",
+          "format": "double"
+        },
+        "lineItems": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.LineItem"
+          },
+          "description": "Gets or sets the optional line items of what the user is purchasing."
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets a description for the order."
+        },
+        "orderNumber": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or sets the QuadPay order number."
+        }
+      },
+      "additionalProperties": false
+    },
+    "QuadPay.Gateway.Orders.Models.ShippingPreference": {
+      "type": "object",
+      "properties": {
+        "allowedShippingLocations": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.ShippingPreference+ShippingLocation"
+          },
+          "description": "List of states/countries the merchant will ship to."
+        },
+        "deniedShippingLocations": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.ShippingPreference+ShippingLocation"
+          },
+          "description": "List of states/countries the merchant will not ship to."
+        },
+        "deniedPOBoxShippingLocations": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/QuadPay.Gateway.Orders.Models.ShippingPreference+ShippingLocation"
+          },
+          "description": "List of states/countries with PO Boxes the merchant will not ship to"
+        }
+      },
+      "additionalProperties": false
+    },
+    "QuadPay.Gateway.Orders.Models.ShippingPreference+ShippingLocation": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Will help us identify if merchants want to ship or not ship to a location."
+    }
+  }
+}

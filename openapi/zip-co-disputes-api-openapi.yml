@@ -1,0 +1,638 @@
+openapi: 3.2.0
+info:
+  title: Gateway Disputes API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: Disputes
+paths:
+  /global/v1/disputes:
+    get:
+      tags:
+      - Disputes
+      summary: Lists disputes for a merchant, with optional filters for date range, status…
+      operationId: ListDisputes
+      parameters:
+      - name: MerchantId
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: StartingAfter
+        in: query
+        schema:
+          type: string
+      - name: Status
+        in: query
+        schema:
+          type: string
+      - name: OpenedAfter
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: OpenedBefore
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: Payment
+        in: query
+        schema:
+          type: string
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.ListDisputesResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/disputes/{disputeId}:
+    get:
+      tags:
+      - Disputes
+      summary: Retrieves a single dispute by its identifier
+      operationId: GetDispute
+      parameters:
+      - name: disputeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.GlobalDisputeDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/disputes/{disputeId}/accept:
+    post:
+      tags:
+      - Disputes
+      summary: Accepts a dispute, transitioning it to a lost status
+      operationId: AcceptDispute
+      parameters:
+      - name: disputeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/disputes/{disputeId}/evidence:
+    post:
+      tags:
+      - Disputes
+      summary: Submits evidence for a dispute to support the merchant's case
+      operationId: SubmitEvidence
+      parameters:
+      - name: disputeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.SubmitEvidenceRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/disputes/{disputeId}/files/{category}:
+    post:
+      tags:
+      - Disputes
+      summary: Uploads an evidence file to a dispute from a blob URL
+      operationId: UploadFile
+      parameters:
+      - name: disputeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuadPay.Gateway.GlobalGateway.Commands.UploadDisputeFile_Command'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.UploadFileResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+    delete:
+      tags:
+      - Disputes
+      summary: Deletes an evidence file from a dispute by category
+      operationId: DeleteFile
+      parameters:
+      - name: disputeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /global/v1/disputes/{disputeId}/files/{categoryOrFileId}:
+    get:
+      tags:
+      - Disputes
+      summary: Downloads an evidence file by category or file ID
+      operationId: DownloadFile
+      parameters:
+      - name: disputeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: categoryOrFileId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: merchantId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '404':
+          description: Not Found
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    Zip.Gateway.USPartnerPlatform.Models.Disputes.GlobalDisputeDto:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        merchant_id:
+          type:
+          - string
+          - 'null'
+        payment:
+          type:
+          - string
+          - 'null'
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        transaction_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currency:
+          type:
+          - string
+          - 'null'
+        reason:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        open:
+          type: boolean
+        response_due_by:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        opened_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        opening_note:
+          type:
+          - string
+          - 'null'
+        customer_attachments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.DisputeAttachment'
+        merchant_attachments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.DisputeAttachment'
+        closed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        closing_reason:
+          type:
+          - string
+          - 'null'
+        closing_note:
+          type:
+          - string
+          - 'null'
+        transition_logs:
+          type:
+          - array
+          - 'null'
+          items: {}
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.Disputes.DisputeAttachment:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.Disputes.UploadFileResponse:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.Disputes.SubmitEvidenceRequest:
+      type: object
+      properties:
+        shipping_carrier:
+          type:
+          - string
+          - 'null'
+        shipping_tracking_number:
+          type:
+          - string
+          - 'null'
+        billing_address:
+          type:
+          - string
+          - 'null'
+        customer_name:
+          type:
+          - string
+          - 'null'
+        customer_email_address:
+          type:
+          - string
+          - 'null'
+        customer_purchase_ip:
+          type:
+          - string
+          - 'null'
+        product_description:
+          type:
+          - string
+          - 'null'
+        shipping_address:
+          type:
+          - string
+          - 'null'
+        shipping_date:
+          type:
+          - string
+          - 'null'
+        service_date:
+          type:
+          - string
+          - 'null'
+        service_description:
+          type:
+          - string
+          - 'null'
+        access_activity_logs:
+          type:
+          - string
+          - 'null'
+        cancellation_policy_disclosure:
+          type:
+          - string
+          - 'null'
+        cancellation_rebuttal:
+          type:
+          - string
+          - 'null'
+        refund_policy_disclosure:
+          type:
+          - string
+          - 'null'
+        refund_refusal_explanation:
+          type:
+          - string
+          - 'null'
+        duplicate_charge_id:
+          type:
+          - string
+          - 'null'
+        duplicate_charge_explanation:
+          type:
+          - string
+          - 'null'
+        uncategorized_text:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.USPartnerPlatform.Models.Disputes.ListDisputesResponse:
+      type: object
+      properties:
+        dispute:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Zip.Gateway.USPartnerPlatform.Models.Disputes.GlobalDisputeDto'
+        has_more:
+          type: boolean
+        starting_after:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuadPay.Gateway.GlobalGateway.Commands.UploadDisputeFile_Command:
+      required:
+      - merchantId
+      type: object
+      properties:
+        merchantId:
+          type: string
+          format: uuid
+        disputeId:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+        blob:
+          type:
+          - string
+          - 'null'
+          format: uri
+        fileName:
+          type:
+          - string
+          - 'null'
+        contentType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}

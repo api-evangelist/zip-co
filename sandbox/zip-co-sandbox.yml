@@ -1,0 +1,62 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://docs.us.zip.co/docs/testing
+- https://docs.us.zip.co/docs/bypassing-otp-code-in-sandbox
+- https://docs.us.zip.co/docs/sandbox-testing
+- https://developers.zip.co/reference/api-docs
+description: Zip issues separate sandbox and production credentials. "You will be given unique credentials for the sandbox and production environments. It is best to build your integration against the sandbox
+  environment and enable in production upon successful certification." The Global (AU) API "can use the Zip API in test mode, which does not affect your live data" via the sandbox endpoint and sandbox credentials.
+docs: https://docs.us.zip.co/docs/testing
+environments:
+- name: Sandbox (Test) - US
+  base_url: https://gateway.sand.us.zip.co/
+  js_sdk: https://cdn.sand.us.zip.co/v1/zip.js
+- name: Production - US
+  base_url: https://gateway.us.zip.co/
+  js_sdk: https://cdn.us.zip.co/v1/zip.js
+modes:
+- name: sandbox
+  selected_by: host (.sand) and separate sandbox credentials
+- name: production
+  selected_by: production host and production credentials
+test_values:
+- field: Social Security Number
+  value: 123-45-6789
+- field: Birthdate
+  value: Anything 18+ years old
+- field: Email
+  value: Can be real or fake valid email address (‘@example.com’ for fake)
+- field: CVC
+  value: '222'
+- field: Expiration Date
+  value: Any future date
+- field: OTP code (sandbox bypass, test="true")
+  value: Enter in any OTP code, except `00000`.
+- field: OTP decline
+  value: 0
+  outcome: general "incorrect OTP code" decline message
+test_cards:
+- number: 4242 4242 4242 4242
+  type: Credit Card Number
+  source: https://docs.us.zip.co/docs/testing
+- number: 4000 0566 5566 5556
+  type: Debit Card Number
+  source: https://docs.us.zip.co/docs/testing
+- number: '4000000000002685'
+  type: Not Received
+  outcome: With default account settings, transactions made using this card will initially succeed but will later be disputed as 'Product Not Received'.
+  source: https://docs.us.zip.co/docs/sandbox-testing
+triggers:
+- name: OTP bypass
+  detail: Call the sandbox environment (.sand), set test="true", and pass a non-null customer email (Virtual Checkout customerEmail / API order.email). A unique email tests the new-customer flow; a reused
+    one the existing-customer flow.
+  docs: https://docs.us.zip.co/docs/bypassing-otp-code-in-sandbox
+- name: Dispute simulation
+  detail: Create an API order (e.g. Authorize), fund it with card 4000000000002685, confirm and capture; the order is later disputed as Product Not Received. Virtual Checkout cannot be used for dispute
+    testing.
+  docs: https://docs.us.zip.co/docs/sandbox-testing
+time_simulation: null
+gaps:
+- No test clock / time simulation is documented.
+- Merchant Portal is available in staging; credentials come from Zip.

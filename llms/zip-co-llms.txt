@@ -1,0 +1,83 @@
+# Zip Documentation
+
+> Zip’s payment platform gives shoppers the choice to pay for their purchases via 4 simple, interest-free installments. Zip is a platform built for shoppers, that empowers you to buy now, pay over-time and avoid interest repayments.
+
+## Guides: Overview
+- [Introduction](https://docs.us.zip.co/docs/introduction.md): Get started with Zip's easy integrations designed for growth.
+
+## Guides: Integrate With Zip
+- [Virtual Card Checkout](https://docs.us.zip.co/docs/virtual-checkout.md)
+  - [Implementing Virtual Card Checkout](https://docs.us.zip.co/docs/implementing-virtual-card-checkout.md)
+  - [Express Checkout for Virtual Card](https://docs.us.zip.co/docs/express-virtual-checkout.md)
+  - [Tokenization](https://docs.us.zip.co/docs/tokenization.md)
+- [API Integration](https://docs.us.zip.co/docs/api-integration.md)
+  - [API Implementation](https://docs.us.zip.co/docs/api-implementation.md)
+  - [API Javascript SDK Implementation](https://docs.us.zip.co/docs/api-javascript-sdk.md): The JavaScript SDK is a client-side initiated version of our [Gateway API](https://docs.us.zip.co/docs/custom-integration-guide#gateway-api) integration. It removes the need for a full-page redirect…
+  - [Express Checkout for API](https://docs.us.zip.co/docs/express-checkout.md)
+  - [Postman Guide](https://docs.us.zip.co/docs/postman-guide.md): Use Postman to explore the Zip US APIs without writing any code. You can test endpoints right away by importing Zip’s Postman collection and plugging in your credentials.
+- [Mobile SDKs](https://docs.us.zip.co/docs/mobile-sdks.md): Integrate your native mobile app with Zip to create a seamless Zip checkout experience for your customer! Available on iOS, Android, and React Native.
+  - [iOS](https://docs.us.zip.co/docs/ios-sdk.md)
+  - [Android](https://docs.us.zip.co/docs/android-sdk.md)
+  - [React Native](https://docs.us.zip.co/docs/react-native-sdk.md)
+- [Ecommerce Platforms](https://docs.us.zip.co/docs/ecommerce-platforms.md): Zip provides easy integrations with a variety of ecommerce platforms
+  - [BigCommerce](https://docs.us.zip.co/docs/bigcommerce.md): Configure the Zip payment option in your BigCommerce store.
+    - [Enable Zip as a payment method](https://docs.us.zip.co/docs/bigcommerce-add-payment-option.md)
+    - [Activate Zip on-site messaging](https://docs.us.zip.co/docs/bigcommerce-enable-the-zip-on-site-messaging.md)
+  - [Magento 2](https://docs.us.zip.co/docs/magento-2.md)
+  - [Salesforce Commerce Cloud](https://docs.us.zip.co/docs/salesforce.md)
+  - [Shopify](https://docs.us.zip.co/docs/shopify.md)
+    - [Installing the Zip on-site messaging app](https://docs.us.zip.co/docs/installing-the-zip-on-site-messaging-app.md)
+    - [Adding the Zip payment gateway for Shopify](https://docs.us.zip.co/docs/adding-the-zip-payment-gateway-for-shopify.md)
+    - [Zip Widget for Shopify](https://docs.us.zip.co/docs/integrate-the-classic-widget-new.md)
+  - [WooCommerce](https://docs.us.zip.co/docs/woocommerce.md)
+- [Testing & QA](https://docs.us.zip.co/docs/testing.md)
+  - [Bypassing OTP Code in Sandbox](https://docs.us.zip.co/docs/bypassing-otp-code-in-sandbox.md)
+- [Pre-Qualification](https://docs.us.zip.co/docs/pre-qualification.md)
+- [Payment Platforms](https://docs.us.zip.co/docs/payment-platforms.md)
+- [Disputes API](https://docs.us.zip.co/docs/disputes.md)
+  - [Sandbox Testing](https://docs.us.zip.co/docs/sandbox-testing.md)
+
+## Guides: In-Store
+- [In-Store Offering](https://docs.us.zip.co/docs/in-store-offering.md): Accept Zip in your physical store.
+
+## Guides: MARKETING & Widgets
+- [Style Guide & Assets](https://docs.us.zip.co/docs/style-guide-assets.md)
+- [Messaging & Widgets Overview](https://docs.us.zip.co/docs/widget-integration-v3.md): Improve conversion and average order value with easy-to-install widgets
+  - [Zip Widget](https://docs.us.zip.co/docs/zip-widget.md)
+  - [Payment Widget](https://docs.us.zip.co/docs/payment-widget.md)
+  - [Second Chance Widget](https://docs.us.zip.co/docs/second-chance-widget.md)
+  - [Lightweight JavaScript Widgets](https://docs.us.zip.co/docs/lightweight-javascript-widgets.md): Zip Messaging component. Simplified.
+    - [Lightweight PDP/Cart Widget](https://docs.us.zip.co/docs/lightweight-pdp-cart-widget.md)
+    - [Lightweight Second Chance Widget](https://docs.us.zip.co/docs/lightweight-javascript-widget-second-chance.md)
+
+## Guides: SUPPORT
+- [Merchant Portal](https://docs.us.zip.co/docs/merchant-portal.md): Use the Zip Merchant Portal to manage your orders, download reports, uncover insights, and more.
+- [Customer Support FAQ](https://docs.us.zip.co/docs/faq.md)
+
+## API Reference: Gateway API
+- [Orders](https://docs.us.zip.co/reference/orders.md)
+  - [/orders/{orderId}/status](https://docs.us.zip.co/reference/ordersorderidstatus.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/{orderId}/status  Returns an orderStatus field that can be used to confirm payment via Zip.
+  - [/orders/authorize](https://docs.us.zip.co/reference/ordersauthorize.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/authorize  Creates a new checkout context and redirects to the checkout website using details from the request body.  Sent from the user's…
+  - [/orders/authorize (for Advanced Approvals merchants)](https://docs.us.zip.co/reference/orders-authorize-advanced-approvals.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/authorize  Creates a new checkout context and redirects to the checkout website using details from the request body. Sent from the user's…
+  - [/orders/{orderId}/capture](https://docs.us.zip.co/reference/ordersorderidcapture.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/{orderId}/capture  Captures funds for the specified order. Only applicable to pay-on-ship/deferred fund capture merchants. If sync query…
+  - [/orders/{orderId}/refund](https://docs.us.zip.co/reference/ordersorderidrefund.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/{orderId}/refund  Refunds funds for the specified order and allocates them to the payment plan to apply it to the customer. If sync query…
+  - [/orders/{orderId}/void](https://docs.us.zip.co/reference/ordersorderidvoid.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/{orderId}/void  Voids uncaptured funds for the specified order and allocates them to the payment plan to apply it to the customer. Only…
+  - [/orders/{orderId}/confirm](https://docs.us.zip.co/reference/ordersorderidconfirm.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/{orderId}/confirm  Confirms the supplied authorized order and initiates the payment plan for the customer. If sync query parameter is set to…
+  - [/orders/associate](https://docs.us.zip.co/reference/ordersassociate.md): Sandbox (Testing): https://gateway.sand.us.zip.co/orders/associate  Associates a merchant's unique order ID with an order after creation.  This endpoint can be used to tie the Merchant Reference that…
+- [Configuration](https://docs.us.zip.co/reference/configuration-1.md)
+  - [/configuration/{merchantId}](https://docs.us.zip.co/reference/configurationmerchantid.md): Sandbox (Testing): https://gateway.sand.us.zip.co/configuration/{merchantId}  Allows a merchant to see their checkout configuration
+- [Merchant Disputes](https://docs.us.zip.co/reference/merchant-disputes.md)
+  - [/merchant-disputes/search](https://docs.us.zip.co/reference/merchant-disputessearch.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes/search<br><br>Search merchant disputes.
+  - [/merchant-disputes](https://docs.us.zip.co/reference/merchant-disputes-1.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes<br><br>Get Merchant dispute by ID.
+  - [/merchant-disputes/file](https://docs.us.zip.co/reference/merchant-disputesfile-2.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes/file <br><br>  Download dispute evidence file by category or file id.
+  - [/merchant-disputes/close](https://docs.us.zip.co/reference/merchant-resources.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes/close<br><br>Accept losing the dispute and close the dispute.
+  - [/merchant-disputes/submit-evidence](https://docs.us.zip.co/reference/merchant-disputessubmit-evidence.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes/submit-evidence  <br><br>  Merchant submit all evidence for the dispute. Not all parameters need to be submitted — just evidence…
+  - [/merchant-disputes/file](https://docs.us.zip.co/reference/merchant-disputesfile.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes/file<br><br> Upload an evidence file using a blob. Note all blobs provided must not assume containers or implicit security. (e.g.…
+  - [/merchant-disputes/file](https://docs.us.zip.co/reference/merchant-disputesfile-1.md): Sandbox (Testing): https://gateway.sand.us.zip.co/merchant-disputes/file <br><br>  Delete dispute evidence file.
+- [Reporting](https://docs.us.zip.co/reference/merchant-reporting.md)
+  - [/transactions/{merchantId}/v3](https://docs.us.zip.co/reference/transactionsmerchantidv3.md): Sandbox (Testing): https://gateway.sand.us.zip.co/transactions/{merchantId}/v3 An abbreviated list of transactions in JSON format.
+  - [/transactions/{merchantId}/v3/csv](https://docs.us.zip.co/reference/transactionsmerchantidv3csv.md): Sandbox (Testing): https://gateway.sand.us.zip.co/transactions/{merchantId}/v3/csv An abbreviated list of transactions in CSV format.
+  - [/payments/{merchantId}/json](https://docs.us.zip.co/reference/merchantidjson.md): Sandbox (Testing): https://gateway.sand.us.zip.co/payments/{merchantId}/json  An abbreviated list of payments in JSON format.
+  - [/payments/{merchantId}/csv](https://docs.us.zip.co/reference/merchantidcsv.md): Sandbox (Testing): https://gateway.sand.us.zip.co/payments/{merchantId}/csv  An abbreviated list of payments in a CSV.
+  - [/settlements/invoices](https://docs.us.zip.co/reference/settlementsinvoices.md): Sandbox (Testing): https://gateway.sand.us.zip.co/settlements/invoices An abbreviated list of settled invoices in JSON format.
+  - [/settlements/report](https://docs.us.zip.co/reference/settlementsreport.md): Sandbox (Testing): https://gateway.sand.us.zip.co/settlements/report An abbreviated list of settled transactions in JSON format.

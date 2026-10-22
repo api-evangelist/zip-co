@@ -1,0 +1,11 @@
+name: Zip rate limits
+generated: '2026-10-20'
+method: none
+source:
+- https://docs.us.zip.co/llms.txt
+- https://developers.zip.co/llms.txt
+- https://docs.us.zip.co/docs/api-implementation
+- https://developers.zip.co/reference/api-docs
+limit_count: 0
+note: Neither Zip docs site (US or Global) publishes request rate limits, a 429 behaviour or rate-limit response headers; searched both llms.txt indexes and the API implementation pages on 2026-10-20.
+limits: []

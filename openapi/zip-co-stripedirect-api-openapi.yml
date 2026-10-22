@@ -1,0 +1,799 @@
+openapi: 3.2.0
+info:
+  title: Gateway Stripe Direct API
+  version: '1.0'
+servers:
+- url: https://gateway.sand.us.zip.co
+  description: Sandbox
+tags:
+- name: StripeDirect
+paths:
+  /stripe-direct/v1/authorize:
+    post:
+      tags:
+      - StripeDirect
+      summary: Handles the Stripe SPI `authorize` request.
+      operationId: Authorize
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderResponseBody'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /stripe-direct/v1/cancel:
+    post:
+      tags:
+      - StripeDirect
+      summary: Handles the Stripe SPI `cancel` request.
+      operationId: Cancel
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.VoidStripeOrderRequest'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /stripe-direct/v1/account_review:
+    post:
+      tags:
+      - StripeDirect
+      summary: Handles the Stripe SPI `account_review` request sent during merchant onboarding…
+      operationId: AccountReview
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AccountReviewRequest'
+      responses:
+        '204':
+          description: No Content
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /stripe-direct/v1/checkout/cancel:
+    get:
+      tags:
+      - StripeDirect
+      summary: Browser-facing customer-cancel intercept (UMPS-353).
+      operationId: CheckoutCancel
+      parameters:
+      - name: orderId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      responses:
+        '302':
+          description: Found
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /stripe-direct/v1/refund:
+    post:
+      tags:
+      - StripeDirect
+      summary: Handles the Stripe SPI `refund` request (UMPS-354 decline + UMPS-355 approve).
+      operationId: Refund
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.RefundStripeOrderRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.RefundStripeOrderResponseBody'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /stripe-direct/v1/capture:
+    post:
+      tags:
+      - StripeDirect
+      summary: Handles the Stripe SPI `capture` notification.
+      operationId: Capture
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Capture.Models.StripeCaptureRequest'
+      responses:
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+  /stripe-direct/v1/settle:
+    post:
+      tags:
+      - StripeDirect
+      summary: Handles the Stripe SPI `settle` request (UMPS-628).
+      operationId: Settle
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        schema:
+          type: string
+          default: '1.0'
+      - name: QP-Territory
+        in: header
+        description: Territory of the request
+        required: true
+        schema:
+          enum:
+          - US
+          - CA
+          - GB
+          type: string
+          default: US
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.SettleStripeInvoiceRequest'
+      responses:
+        '204':
+          description: No Content
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+components:
+  schemas:
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        payment_method_type:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        amount:
+          type: integer
+          format: int64
+        currency:
+          type:
+          - string
+          - 'null'
+        return_url:
+          type:
+          - string
+          - 'null'
+        merchant_data:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderMerchantData'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.SettleStripeInvoiceRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        settlement_reference:
+          type:
+          - string
+          - 'null'
+        livemode:
+          type: boolean
+        amount_due:
+          type: integer
+          format: int64
+        currency:
+          type:
+          - string
+          - 'null'
+        settlement_file_id:
+          type:
+          - string
+          - 'null'
+        fee_file_id:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        expected_payment_initiation_time:
+          type: integer
+          format: int64
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AccountReviewBusinessProfile:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.VoidStripeOrderRequest:
+      required:
+      - created_at
+      - livemode
+      - partner_transaction_id
+      - timestamp
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        payment_method_type:
+          type:
+          - string
+          - 'null'
+        partner_transaction_id:
+          type: string
+          format: uuid
+        void_reason:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Capture.Models.StripeCaptureRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        payment_method_type:
+          type:
+          - string
+          - 'null'
+        partner_transaction_id:
+          type: string
+          format: uuid
+        created_at:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        capture_id:
+          type:
+          - string
+          - 'null'
+        amount_to_capture:
+          type: integer
+          format: int64
+        currency:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.RefundStripeOrderResult:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        declined:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.RefundStripeOrderDeclined'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderBuyerSelection:
+      type: object
+      properties:
+        installment:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderInstallment'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.RefundStripeOrderRequest:
+      required:
+      - partner_transaction_id
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        payment_method_type:
+          type:
+          - string
+          - 'null'
+        livemode:
+          type: boolean
+        created_at:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        payment_authorization_id:
+          type:
+          - string
+          - 'null'
+        partner_transaction_id:
+          type: string
+          format: uuid
+        amount:
+          type: integer
+          format: int64
+        currency:
+          type:
+          - string
+          - 'null'
+        reason:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.RefundStripeOrderDeclined:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AccountReviewCompany:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        address:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AccountReviewAddress'
+        tax_id:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderRedirectToUrl:
+      type: object
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderResponseBody:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        payment_method_type:
+          type:
+          - string
+          - 'null'
+        partner_transaction_id:
+          type:
+          - string
+          - 'null'
+        result:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderResult'
+        buyer_selection:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderBuyerSelection'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderDeclined:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.RefundStripeOrderResponseBody:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        result:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.RefundStripeOrderResult'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AccountReviewRequest:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        payment_method_type:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        account:
+          type:
+          - string
+          - 'null'
+        company:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AccountReviewCompany'
+        business_profile:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AccountReviewBusinessProfile'
+        capability:
+          type:
+          - string
+          - 'null'
+        capability_name:
+          type:
+          - string
+          - 'null'
+        capability_status:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderMerchantData:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        category_code:
+          type:
+          - string
+          - 'null'
+        support_email:
+          type:
+          - string
+          - 'null'
+        support_phone_number:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderResult:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        redirect_to_url:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderRedirectToUrl'
+        declined:
+          $ref: '#/components/schemas/Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderDeclined'
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AuthorizeStripeOrderInstallment:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Zip.Gateway.StripeDirect.Models.AccountReviewAddress:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: oauth2
+      description: Please insert JWT with Bearer into field
+      flows:
+        implicit:
+          authorizationUrl: https://login-dev.quadpay.com/authorize
+          scopes: {}
