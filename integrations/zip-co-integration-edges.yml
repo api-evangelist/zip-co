@@ -23,6 +23,7 @@ checked:
 - https://zapier.com/apps/zip-co/integrations
 - https://zapier.com/apps/zip/integrations
 - salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+- adobe-commerce/integrations/adobe-commerce-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -121,6 +122,24 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: paymentsProcessing
+- partner_name: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://commercemarketplace.adobe.com/zip-magento2.html
+  mirror_of: adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+  apps:
+  - Zip
+  - Zip North America
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Commerce Marketplace extension
 templates: []
 skips:
 - label: zapier/n8n marketplace
